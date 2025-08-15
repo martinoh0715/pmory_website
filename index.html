@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PMory - Product Management Hub for Emory Students</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #fafafa;
+            color: #2d3748;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        .header {
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2563eb;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            margin-right: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: #64748b;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+            cursor: pointer;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: #2563eb;
+        }
+
+        /* Main Content Styles */
+        .main {
+            min-height: calc(100vh - 80px);
+            padding: 2rem 0;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            margin-bottom: 3rem;
+            border-radius: 12px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            background: #dbeafe;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            color: #2563eb;
+            font-size: 1.5rem;
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #1e293b;
+        }
+
+        .card p {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        /* Section Styles */
+        .section {
+            margin: 4rem 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #1e293b;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: #64748b;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Content Styles */
+        .content-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 1px solid #e2e8f0;
+        }
+
+        .content-card h3 {
+            color: #2563eb;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .content-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .content-card li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .content-card li:last-child {
+            border-bottom: none;
+        }
+
+        /* Links */
+        .external-link {
+            color: #2563eb;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .external-link:hover {
+            text-decoration: underline;
+        }
+
+        /* AI Assistant Styles */
+        .chat-container {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .chat-header {
+            background: #f8fafc;
+            padding: 1rem;
+            border-bottom: 1px solid #e2e8f0;
+            font-weight: 600;
+        }
+
+        .chat-messages {
+            height: 400px;
+            overflow-y: auto;
+            padding: 1rem;
+        }
+
+        .message {
+            margin: 1rem 0;
+            padding: 1rem;
+            border-radius: 8px;
+        }
+
+        .message.user {
+            background: #dbeafe;
+            margin-left: 2rem;
+        }
+
+        .message.ai {
+            background: #f1f5f9;
+            margin-right: 2rem;
+        }
+
+        .chat-input-container {
+            padding: 1rem;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            outline: none;
+        }
+
+        .chat-input:focus {
+            border-color: #2563eb;
+        }
+
+        /* Button Styles */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+
+        .btn-secondary {
+            background: #f1f5f9;
+            color: #475569;
+        }
+
+        .btn-secondary:hover {
+            background: #e2e8f0;
+        }
+
+        /* Job Alert Styles */
+        .job-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .job-info h4 {
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+        }
+
+        .job-info p {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .job-status {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .job-status.open {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .job-status.closed {
+            background: #fef2f2;
+            color: #991b1b;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin: 1rem 0;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            outline: none;
+        }
+
+        .form-input:focus {
+            border-color: #2563eb;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1e293b;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #2563eb;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .alert {
+            padding: 1rem;
+            border-radius: 6px;
+            margin: 1rem 0;
+        }
+
+        .alert-success {
+            background: #dcfce7;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+        }
+
+        .alert-error {
+            background: #fef2f2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // Logo Component
+        const Logo = () => (
+            <svg className="logo-icon" viewBox="0 0 100 100">
+                <circle cx="30" cy="35" r="20" fill="none" stroke="#2563eb" strokeWidth="4" />
+                <circle cx="50" cy="35" r="20" fill="none" stroke="#2563eb" strokeWidth="4" />
+                <circle cx="40" cy="55" r="20" fill="none" stroke="#2563eb" strokeWidth="4" />
+            </svg>
+        );
+
+        // Header Component
+        const Header = ({ currentPage, setCurrentPage }) => (
+            <header className="header">
+                <div className="container">
+                    <nav className="nav">
+                        <div className="logo">
+                            <Logo />
+                            PMory
+                        </div>
+                        <ul className="nav-links">
+                            <li><a className={`nav-link ${currentPage === 'home' ? 'active' : ''}`} onClick={() => setCurrentPage('home')}>Home</a></li>
+                            <li><a className={`nav-link ${currentPage === 'what-is-pm' ? 'active' : ''}`} onClick={() => setCurrentPage('what-is-pm')}>What is PM</a></li>
+                            <li><a className={`nav-link ${currentPage === 'skillsets' ? 'active' : ''}`} onClick={() => setCurrentPage('skillsets')}>Skillsets</a></li>
+                            <li><a className={`nav-link ${currentPage === 'ai-assistant' ? 'active' : ''}`} onClick={() => setCurrentPage('ai-assistant')}>AI Assistant</a></li>
+                            <li><a className={`nav-link ${currentPage === 'job-alert' ? 'active' : ''}`} onClick={() => setCurrentPage('job-alert')}>Job Alert</a></li>
+                            <li><a className={`nav-link ${currentPage === 'about' ? 'active' : ''}`} onClick={() => setCurrentPage('about')}>About</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </header>
+        );
+
+        // HomePage Component
+        const HomePage = ({ setCurrentPage }) => (
+            <div className="main">
+                <div className="container">
+                    <div className="hero">
+                        <h1>Welcome to PMory</h1>
+                        <p>Your comprehensive hub for Product Management fundamentals, tailored specifically for Emory University students.</p>
+                    </div>
+
+                    <div className="card-grid">
+                        <div className="card" onClick={() => setCurrentPage('what-is-pm')}>
+                            <div className="card-icon">📚</div>
+                            <h3>What is PM?</h3>
+                            <p>Learn the fundamentals of Product Management, essential skills, and discover valuable learning resources to get started.</p>
+                        </div>
+
+                        <div className="card" onClick={() => setCurrentPage('skillsets')}>
+                            <div className="card-icon">🎯</div>
+                            <h3>Skillsets</h3>
+                            <p>Explore both soft and hard skills that are crucial for becoming a successful Product Manager in today's market.</p>
+                        </div>
+
+                        <div className="card" onClick={() => setCurrentPage('ai-assistant')}>
+                            <div className="card-icon">🤖</div>
+                            <h3>AI Assistant</h3>
+                            <p>Get personalized help with interview preparation, resume tips, and general Product Management guidance.</p>
+                        </div>
+
+                        <div className="card" onClick={() => setCurrentPage('job-alert')}>
+                            <div className="card-icon">💼</div>
+                            <h3>Job Alert</h3>
+                            <p>Stay updated with the latest Product Management job openings and get notified when new opportunities arise.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+
+        // What is PM Component
+        const WhatIsPM = () => (
+            <div className="main">
+                <div className="container">
+                    <div className="section-header">
+                        <h1 className="section-title">What is Product Management?</h1>
+                        <p className="section-subtitle">Understanding the role, responsibilities, and path to becoming a successful Product Manager</p>
+                    </div>
+
+                    <div className="content-card">
+                        <h3>Definition of Product Management</h3>
+                        <p>Product Management is the practice of strategically driving the development, market launch, and continual support and improvement of a company's products. Product Managers act as the bridge between business, technology, and user experience, ensuring that products meet market needs while achieving business objectives.</p>
+                    </div>
+
+                    <div className="content-card">
+                        <h3>What Product Managers Do</h3>
+                        <ul>
+                            <li><strong>Strategic Planning:</strong> Define product vision, strategy, and roadmap</li>
+                            <li><strong>Market Research:</strong> Analyze market trends, competition, and user needs</li>
+                            <li><strong>Feature Prioritization:</strong> Decide what features to build and when</li>
+                            <li><strong>Cross-functional Collaboration:</strong> Work with engineering, design, marketing, and sales teams</li>
+                            <li><strong>Data Analysis:</strong> Make data-driven decisions to improve product performance</li>
+                            <li><strong>User Advocacy:</strong> Ensure the product meets user needs and expectations</li>
+                            <li><strong>Stakeholder Communication:</strong> Present updates and gather feedback from stakeholders</li>
+                        </ul>
+                    </div>
+
+                    <div className="content-card">
+                        <h3>Essential PM Skills</h3>
+                        <ul>
+                            <li><strong>Analytical Thinking:</strong> Ability to analyze data and make informed decisions</li>
+                            <li><strong>Communication:</strong> Clear and effective communication with diverse teams</li>
+                            <li><strong>Leadership:</strong> Influence without authority and guide teams toward goals</li>
+                            <li><strong>Technical Understanding:</strong> Basic understanding of technology and development processes</li>
+                            <li><strong>User Empathy:</strong> Understanding user needs and pain points</li>
+                            <li><strong>Business Acumen:</strong> Understanding of business models and market dynamics</li>
+                        </ul>
+                    </div>
+
+                    <div className="content-card">
+                        <h3>Learning Sources</h3>
+                        <ul>
+                            <li><a href="https://www.youtube.com/watch?v=huTsEWt6T6c" className="external-link" target="_blank">Product Management 101 - YouTube 📺</a></li>
+                            <li><a href="https://www.youtube.com/channel/UC6hlQ0x6kPbAGjYkoz53cvA" className="external-link" target="_blank">Product School - YouTube Channel 📺</a></li>
+                            <li><a href="https://medium.com/the-product-person" className="external-link" target="_blank">The Product Person - Medium Blog 📖</a></li>
+                            <li><a href="https://www.productplan.com/learn/" className="external-link" target="_blank">ProductPlan Learning Center 📚</a></li>
+                            <li><a href="https://www.lennyspodcast.com/" className="external-link" target="_blank">Lenny's Podcast 🎧</a></li>
+                            <li><a href="https://www.coursera.org/learn/uva-darden-digital-product-management" className="external-link" target="_blank">Coursera - Digital Product Management 🎓</a></li>
+                            <li><a href="https://www.udemy.com/course/become-a-product-manager-learn-the-skills-get-a-job/" className="external-link" target="_blank">Udemy - Become a Product Manager 🎓</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        );
+
+        // Skillsets Component
+        const Skillsets = () => (
+            <div className="main">
+                <div className="container">
+                    <div className="section-header">
+                        <h1 className="section-title">Essential PM Skillsets</h1>
+                        <p className="section-subtitle">Master these skills to become a successful Product Manager</p>
+                    </div>
+
+                    <div className="content-card">
+                        <h3>Soft Skills</h3>
+                        <ul>
+                            <li><strong>Leadership & Influence:</strong> Ability to lead cross-functional teams without direct authority</li>
+                            <li><strong>Communication:</strong> Clear, concise, and persuasive communication across all levels</li>
+                            <li><strong>Empathy:</strong> Understanding user needs and team perspectives</li>
+                            <li><strong>Problem-Solving:</strong> Creative and analytical approach to solving complex problems</li>
+                            <li><strong>Adaptability:</strong> Flexibility to pivot and adapt to changing market conditions</li>
+                            <li><strong>Negotiation:</strong> Balancing competing priorities and stakeholder interests</li>
+                            <li><strong>Time Management:</strong> Efficiently managing multiple priorities and deadlines</li>
+                            <li><strong>Curiosity:</strong> Continuous learning and questioning assumptions</li>
+                            <li><strong>Storytelling:</strong> Crafting compelling narratives around product vision</li>
+                            <li><strong>Emotional Intelligence:</strong> Managing relationships and team dynamics effectively</li>
+                        </ul>
+                    </div>
+
+                    <div className="content-card">
+                        <h3>Hard Skills</h3>
+                        <ul>
+                            <li><strong>Data Analysis:</strong> SQL, Excel/Google Sheets, data interpretation, and metrics analysis</li>
+                            <li><strong>Market Research:</strong> User research methodologies, surveys, interviews, and competitive analysis</li>
+                            <li><strong>Technical Understanding:</strong> Basic knowledge of software development, APIs, and system architecture</li>
+                            <li><strong>Design Thinking:</strong> UX/UI principles, wireframing, and user experience design</li>
+                            <li><strong>Project Management:</strong> Agile/Scrum methodologies, roadmap planning, and resource allocation</li>
+                            <li><strong>Business Strategy:</strong> Business model analysis, pricing strategies, and P&L understanding</li>
+                            <li><strong>Analytics Tools:</strong> Google Analytics, Mixpanel, Amplitude, Tableau, or similar</li>
+                            <li><strong>Prototyping:</strong> Creating mockups and prototypes using tools like Figma, Sketch, or InVision</li>
+                            <li><strong>A/B Testing:</strong> Designing and analyzing experiments to validate hypotheses</li>
+                            <li><strong>Financial Modeling:</strong> ROI calculations, forecasting, and budget management</li>
+                        </ul>
+                    </div>
+
+                    <div className="content-card">
+                        <h3>Tools & Technologies</h3>
+                        <ul>
+                            <li><strong>Product Management:</strong> Jira, Asana, Trello, ProductPlan, Aha!</li>
+                            <li><strong>Analytics:</strong> Google Analytics, Mixpanel, Amplitude, Hotjar</li>
+                            <li><strong>Design:</strong> Figma, Sketch, Adobe Creative Suite, InVision</li>
+                            <li><strong>Data Analysis:</strong> Excel, Google Sheets, SQL, Tableau, Power BI</li>
+                            <li><strong>Communication:</strong> Slack, Microsoft Teams, Notion, Confluence</li>
+                            <li><strong>User Research:</strong> UserTesting.com, SurveyMonkey, Typeform</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        );
+
+        // AI Assistant Component
+        const AIAssistant = () => {
+            const [messages, setMessages] = useState([
+                {
+                    type: 'ai',
+                    content: 'Hello! I\'m your PM Assistant. I can help you with interview preparation, resume tips, and general Product Management guidance for Emory students. How can I assist you today?'
+                }
+            ]);
+            const [inputValue, setInputValue] = useState('');
+            const [isLoading, setIsLoading] = useState(false);
+
+            const handleSendMessage = async () => {
+                if (!inputValue.trim()) return;
+
+                const userMessage = { type: 'user', content: inputValue };
+                setMessages(prev => [...prev, userMessage]);
+                setInputValue('');
+                setIsLoading(true);
+
+                // Simulate AI response (replace with actual API call)
+                setTimeout(() => {
+                    const responses = [
+                        "For interview preparation, I recommend practicing the STAR method (Situation, Task, Action, Result) for behavioral questions. Focus on demonstrating your analytical thinking and user empathy.",
+                        "When crafting your PM resume, highlight quantifiable achievements, technical projects, and leadership experiences. Include any data analysis, user research, or cross-functional collaboration experiences.",
+                        "As an Emory student, leverage your business school resources, case competition experiences, and any consulting or analytics coursework to demonstrate PM skills.",
+                        "Key PM interview topics include: product design questions, analytical problems, behavioral scenarios, and technical understanding. Practice with frameworks like CIRCLES for product design."
+                    ];
+                    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                    
+                    setMessages(prev => [...prev, { type: 'ai', content: randomResponse }]);
+                    setIsLoading(false);
+                }, 1500);
+            };
+
+            return (
+                <div className="main">
+                    <div className="container">
+                        <div className="section-header">
+                            <h1 className="section-title">AI Assistant</h1>
+                            <p className="section-subtitle">Get personalized help with PM career guidance</p>
+                        </div>
+
+                        <div className="chat-container">
+                            <div className="chat-header">
+                                PM Assistant - Powered by Claude Sonnet 4
+                            </div>
+                            
+                            <div className="chat-messages">
+                                {messages.map((message, index) => (
+                                    <div key={index} className={`message ${message.type}`}>
+                                        <strong>{message.type === 'user' ? 'You' : 'Assistant'}:</strong>
+                                        <div>{message.content}</div>
+                                    </div>
+                                ))}
+                                {isLoading && (
+                                    <div className="message ai">
+                                        <strong>Assistant:</strong>
+                                        <div><span className="loading"></span> Thinking...</div>
+                                    </div>
+                                )}
+                            </div>
+
+                            <div className="chat-input-container">
+                                <input
+                                    type="text"
+                                    className="chat-input"
+                                    placeholder="Ask about interview prep, resume tips, or PM guidance..."
+                                    value={inputValue}
+                                    onChange={(e) => setInputValue(e.target.value)}
+                                    onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+                                />
+                                <button className="btn btn-primary" onClick={handleSendMessage} disabled={isLoading}>
+                                    Send
+                                </button>
+                            </div>
+                        </div>
+
+                        <div className="content-card" style={{marginTop: '2rem'}}>
+                            <h3>How the AI Assistant Can Help</h3>
+                            <ul>
+                                <li><strong>Interview Preparation:</strong> Practice behavioral and case questions, learn frameworks</li>
+                                <li><strong>Resume Tips:</strong> Optimize your resume for PM roles, highlight relevant experiences</li>
+                                <li><strong>General PM Help:</strong> Learn about PM processes, tools, and best practices</li>
+                                <li><strong>Emory-Specific Guidance:</strong> Leverage your Emory background and resources effectively</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        // Job Alert Component
+        const JobAlert = () => {
+            const [email, setEmail] = useState('');
+            const [alertStatus, setAlertStatus] = useState('');
+
+            const jobOpenings = [
+                { company: 'Microsoft', title: 'Associate Product Manager', status: 'open', link: 'https://careers.microsoft.com' },
+                { company: 'Google', title: 'Product Manager Intern', status: 'open', link: 'https://careers.google.com' },
+                { company: 'Amazon', title: 'Technical Product Manager', status: 'closed', link: 'https://amazon.jobs' },
+                { company: 'Meta', title: 'Product Manager, Growth', status: 'open', link: 'https://www.metacareers.com' },
+                { company: 'Apple', title: 'Product Marketing Manager', status: 'open', link: 'https://jobs.apple.com' },
+                { company: 'Salesforce', title: 'Associate Product Manager', status: 'closed', link: 'https://salesforce.wd1.myworkdayjobs.com' }
+            ];
+
+            const handleEmailSubmit = (e) => {
+                e.preventDefault();
+                if (email) {
+                    setAlertStatus('success');
+                    setEmail('');
+                    setTimeout(() => setAlertStatus(''), 3000);
+                }
+            };
+
+            return (
+                <div className="main">
+                    <div className="container">
+                        <div className="section-header">
+                            <h1 className="section-title">Job Alerts</h1>
+                            <p className="section-subtitle">Stay updated with the latest PM job openings</p>
+                        </div>
+
+                        <div className="section">
+                            <h3 style={{marginBottom: '2rem', color: '#2563eb'}}>Current Job Openings</h3>
+                            {jobOpenings.map((job, index) => (
+                                <div key={index} className="job-card">
+                                    <div className="job-info">
+                                        <h4>{job.title}</h4>
+                                        <p>{job.company}</p>
+                                    </div>
+                                    <div style={{display: 'flex', alignItems: 'center', gap: '1rem'}}>
+                                        <span className={`job-status ${job.status}`}>
+                                            {job.status.charAt(0).toUpperCase() + job.status.slice(1)}
+                                        </span>
+                                        <a href={job.link} target="_blank" className="btn btn-secondary" style={{textDecoration: 'none'}}>
+                                            View Job
+                                        </a>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className="content-card">
+                            <h3>Get Job Status Notifications</h3>
+                            <p>Register your email to receive notifications when job openings status change or new opportunities are posted.</p>
+                            
+                            {alertStatus === 'success' && (
+                                <div className="alert alert-success">
+                                    ✅ Successfully registered for job alerts!
+                                </div>
+                            )}
+
+                            <form onSubmit={handleEmailSubmit}>
+                                <div className="form-group">
+                                    <label className="form-label">Email Address</label>
+                                    <input
+                                        type="email"
+                                        className="form-input"
+                                        placeholder="your.email@emory.edu"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        required
+                                    />
+                                </div>
+                                <button type="submit" className="btn btn-primary">
+                                    Subscribe to Alerts
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        // About Component
+        const About = () => (
+            <div className="main">
+                <div className="container">
+                    <div className="section-header">
+                        <h1 className="section-title">About PMory</h1>
+                        <p className="section-subtitle">Our mission and vision for Product Management education</p>
+                    </div>
+
+                    <div className="content-card">
+                        <h3>Our Mission</h3>
+                        <p>
+                            PMory is dedicated to empowering Emory University students with comprehensive Product Management knowledge and resources. 
+                            We believe that every student should have access to high-quality PM education, practical guidance, and career support 
+                            to succeed in the rapidly evolving technology industry.
+                        </p>
+                        
+                        <p style={{marginTop: '1rem'}}>
+                            Our platform serves as a centralized hub where students can learn fundamental PM concepts, develop essential skills, 
+                            get personalized career guidance through our AI assistant, and stay updated with the latest job opportunities in the field.
+                        </p>
+                    </div>
+
+                    <div className="content-card">
+                        <h3>What We Offer</h3>
+                        <ul>
+                            <li><strong>Comprehensive Learning Resources:</strong> From basic PM concepts to advanced strategies</li>
+                            <li><strong>Skill Development Guidance:</strong> Both soft and hard skills essential for PM success</li>
+                            <li><strong>AI-Powered Career Support:</strong> Personalized interview prep and resume guidance</li>
+                            <li><strong>Job Opportunities:</strong> Curated PM job listings with real-time updates</li>
+                            <li><strong>Emory-Specific Content:</strong> Tailored resources leveraging Emory's academic strengths</li>
+                        </ul>
+                    </div>
+
+                    <div className="content-card">
+                        <h3>Why Choose PMory?</h3>
+                        <p>
+                            As Emory students, you have unique advantages in the business world through your rigorous academic training. 
+                            PMory helps you translate that knowledge into Product Management success by providing:
+                        </p>
+                        <ul>
+                            <li>Curated content specifically designed for business-minded students</li>
+                            <li>Real-world applications of your analytical and strategic thinking skills</li>
+                            <li>Networking opportunities within the Emory PM community</li>
+                            <li>Career guidance that understands the competitive landscape</li>
+                        </ul>
+                    </div>
+
+                    <div className="content-card">
+                        <h3>Contact & Support</h3>
+                        <p>
+                            Have questions or suggestions? We'd love to hear from you. PMory is continuously evolving based on 
+                            student feedback and industry trends.
+                        </p>
+                        <p>
+                            <strong>Email:</strong> info@pmory.com<br/>
+                            <strong>Community:</strong> Join our Slack workspace for peer discussions<br/>
+                            <strong>Updates:</strong> Follow us for the latest PM insights and opportunities
+                        </p>
+                    </div>
+                </div>
+            </div>
+        );
+
+        // Footer Component
+        const Footer = () => (
+            <footer className="footer">
+                <div className="container">
+                    <p>&copy; 2025 PMory - Product Management Hub for Emory Students</p>
+                    <p>Empowering the next generation of Product Managers</p>
+                </div>
+            </footer>
+        );
+
+        // Main App Component
+        const App = () => {
+            const [currentPage, setCurrentPage] = useState('home');
+
+            const renderPage = () => {
+                switch(currentPage) {
+                    case 'home':
+                        return <HomePage setCurrentPage={setCurrentPage} />;
+                    case 'what-is-pm':
+                        return <WhatIsPM />;
+                    case 'skillsets':
+                        return <Skillsets />;
+                    case 'ai-assistant':
+                        return <AIAssistant />;
+                    case 'job-alert':
+                        return <JobAlert />;
+                    case 'about':
+                        return <About />;
+                    default:
+                        return <HomePage setCurrentPage={setCurrentPage} />;
+                }
+            };
+
+            return (
+                <div>
+                    <Header currentPage={currentPage} setCurrentPage={setCurrentPage} />
+                    {renderPage()}
+                    <Footer />
+                </div>
+            );
+        };
+
+        // Render the app
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
