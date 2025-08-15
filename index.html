@@ -620,7 +620,7 @@
             const [messages, setMessages] = useState([
                 {
                     type: 'ai',
-                    content: 'Hello! I\'m your PM Assistant. I can help you with interview preparation, resume tips, and general Product Management guidance for Emory students. How can I assist you today?'
+                    content: 'Hello! I\'m your PM Assistant powered by Claude Sonnet 4 with RAG architecture. I can help you with interview preparation, resume tips, current PM trends, and career guidance specifically tailored for Emory students. What would you like to explore today?'
                 }
             ]);
             const [inputValue, setInputValue] = useState('');
@@ -636,6 +636,8 @@
     setIsLoading(true);
 
     try {
+        console.log('Sending message to AI:', currentInput);
+        
         const response = await fetch('https://fvntrkaqek.execute-api.us-east-1.amazonaws.com/prod/api/chat', {
             method: 'POST',
             headers: {
@@ -646,20 +648,30 @@
             })
         });
 
+        console.log('Response status:', response.status);
+
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
 
         const data = await response.json();
+        console.log('AI Response:', data);
+        
         setMessages(prev => [...prev, { 
             type: 'ai', 
-            content: data.response || 'Sorry, I encountered an error. Please try again.' 
+            content: data.response || 'Sorry, I encountered an error. Please try again.',
+            metadata: {
+                model: data.ai_model || 'PMory AI',
+                knowledgeUsed: data.knowledge_used || false,
+                system: data.system || 'AI Assistant'
+            }
         }]);
+        
     } catch (error) {
-        console.error('Error calling API:', error);
+        console.error('Error calling AI:', error);
         setMessages(prev => [...prev, { 
             type: 'ai', 
-            content: 'Sorry, I encountered an error connecting to the AI. Please try again.' 
+            content: 'Sorry, I encountered an error connecting to the AI. Please try again in a moment.'
         }]);
     }
     
