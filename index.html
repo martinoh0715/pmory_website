@@ -99,11 +99,22 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .hero-background::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background-image: 
-                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>'),
-                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
-            background-size: 50px 50px, 100% 100%, 100% 100%;
+                linear-gradient(45deg, rgba(255,255,255,0.1) 25%, transparent 25%),
+                linear-gradient(-45deg, rgba(255,255,255,0.1) 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.1) 75%),
+                linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.1) 75%);
+            background-size: 30px 30px;
+            background-position: 0 0, 0 15px, 15px -15px, -15px 0px;
         }
 
         .hero-overlay {
@@ -201,34 +212,74 @@
 
         .feature-image {
             height: 180px;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
             position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feature-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 30% 30%, rgba(255,255,255,0.2) 2px, transparent 2px),
+                radial-gradient(circle at 70% 70%, rgba(255,255,255,0.3) 1px, transparent 1px);
+            background-size: 40px 40px, 25px 25px;
+        }
+
+        .feature-image::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            border: 3px solid rgba(255,255,255,0.8);
+            border-radius: 12px;
         }
 
         .feature-image.fundamentals {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            background-image: 
-                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle cx="60" cy="60" r="20" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"/><circle cx="140" cy="60" r="25" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2"/><circle cx="100" cy="140" r="30" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2"/></svg>');
+        }
+
+        .feature-image.fundamentals::after {
+            border-radius: 50%;
         }
 
         .feature-image.skills {
             background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
-            background-image: 
-                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect x="50" y="50" width="30" height="30" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2" rx="4"/><rect x="120" y="50" width="30" height="30" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2" rx="4"/><rect x="85" y="120" width="30" height="30" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2" rx="4"/></svg>');
+        }
+
+        .feature-image.skills::after {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
         }
 
         .feature-image.ai {
             background: linear-gradient(135deg, #0891b2 0%, #0284c7 100%);
-            background-image: 
-                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><path d="M100 50 L130 80 L100 110 L70 80 Z" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2"/><circle cx="100" cy="150" r="15" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"/></svg>');
+        }
+
+        .feature-image.ai::after {
+            width: 55px;
+            height: 55px;
+            border-radius: 15px;
+            transform: translate(-50%, -50%) rotate(45deg);
         }
 
         .feature-image.jobs {
             background: linear-gradient(135deg, #059669 0%, #047857 100%);
-            background-image: 
-                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect x="70" y="70" width="60" height="40" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2" rx="4"/><path d="M85 70 L85 60 Q85 55 90 55 L110 55 Q115 55 115 60 L115 70" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"/></svg>');
+        }
+
+        .feature-image.jobs::after {
+            width: 50px;
+            height: 35px;
+            border-radius: 6px;
         }
 
         .feature-content {
