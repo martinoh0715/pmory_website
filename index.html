@@ -82,26 +82,171 @@
         }
 
         /* Hero Section */
-        .hero {
-            text-align: center;
-            padding: 4rem 0;
+        .hero-modern {
+            position: relative;
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin-bottom: 4rem;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-image: 
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>'),
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            background-size: 50px 50px, 100% 100%, 100% 100%;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
             color: white;
-            margin-bottom: 3rem;
-            border-radius: 12px;
+            max-width: 800px;
+            padding: 0 2rem;
         }
 
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+        .hero-text h1 {
+            font-size: 4rem;
             font-weight: 800;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
 
-        .hero p {
-            font-size: 1.2rem;
+        .hero-text h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+            opacity: 0.95;
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
             opacity: 0.9;
-            max-width: 600px;
+        }
+
+        .hero-cta {
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(37, 99, 235, 0.4);
+        }
+
+        /* Features Section */
+        .features-section {
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .features-section h3 {
+            font-size: 2.5rem;
+            color: #1e293b;
+            margin-bottom: 3rem;
+            font-weight: 700;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            max-width: 900px;
             margin: 0 auto;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid #f1f5f9;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-image {
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+
+        .feature-image.fundamentals {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-image: 
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle cx="60" cy="60" r="20" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"/><circle cx="140" cy="60" r="25" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2"/><circle cx="100" cy="140" r="30" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2"/></svg>');
+        }
+
+        .feature-image.skills {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            background-image: 
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect x="50" y="50" width="30" height="30" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2" rx="4"/><rect x="120" y="50" width="30" height="30" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2" rx="4"/><rect x="85" y="120" width="30" height="30" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2" rx="4"/></svg>');
+        }
+
+        .feature-image.ai {
+            background: linear-gradient(135deg, #0891b2 0%, #0284c7 100%);
+            background-image: 
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><path d="M100 50 L130 80 L100 110 L70 80 Z" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2"/><circle cx="100" cy="150" r="15" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"/></svg>');
+        }
+
+        .feature-image.jobs {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            background-image: 
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect x="70" y="70" width="60" height="40" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2" rx="4"/><path d="M85 70 L85 60 Q85 55 90 55 L110 55 Q115 55 115 60 L115 70" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"/></svg>');
+        }
+
+        .feature-content {
+            padding: 1.5rem;
+            text-align: left;
+        }
+
+        .feature-content h4 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-content p {
+            color: #64748b;
+            font-size: 0.95rem;
+            line-height: 1.5;
         }
 
         /* Cards */
@@ -382,16 +527,25 @@
                 display: none;
             }
             
-            .hero h1 {
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-text h2 {
+                font-size: 1.2rem;
+            }
+            
+            .features-section h3 {
                 font-size: 2rem;
             }
             
-            .section-title {
-                font-size: 2rem;
-            }
-            
-            .card-grid {
+            .feature-grid {
                 grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .feature-image {
+                height: 140px;
             }
         }
 
@@ -469,35 +623,58 @@
         // HomePage Component
         const HomePage = ({ setCurrentPage }) => (
             <div className="main">
-                <div className="container">
-                    <div className="hero">
-                        <h1>Welcome to PMory</h1>
-                        <p>Your comprehensive hub for Product Management fundamentals, tailored specifically for Emory University students.</p>
+                {/* Hero Section with Background Image */}
+                <div className="hero-modern">
+                    <div className="hero-background"></div>
+                    <div className="hero-overlay"></div>
+                    <div className="hero-content">
+                        <div className="hero-text">
+                            <h1>PMory</h1>
+                            <h2>Product Management Hub for Emory Students</h2>
+                            <p>Master PM fundamentals, develop essential skills, and accelerate your career with AI-powered guidance tailored specifically for Emory University students.</p>
+                            <button className="hero-cta" onClick={() => setCurrentPage('ai-assistant')}>
+                                Start Your PM Journey
+                            </button>
+                        </div>
                     </div>
+                </div>
 
-                    <div className="card-grid">
-                        <div className="card" onClick={() => setCurrentPage('what-is-pm')}>
-                            <div className="card-icon">📚</div>
-                            <h3>What is PM?</h3>
-                            <p>Learn the fundamentals of Product Management, essential skills, and discover valuable learning resources to get started.</p>
-                        </div>
+                {/* Navigation Cards Grid */}
+                <div className="container">
+                    <div className="features-section">
+                        <h3>Explore PMory's Features</h3>
+                        <div className="feature-grid">
+                            <div className="feature-card" onClick={() => setCurrentPage('what-is-pm')}>
+                                <div className="feature-image fundamentals"></div>
+                                <div className="feature-content">
+                                    <h4>What is PM?</h4>
+                                    <p>Learn fundamentals & essential skills</p>
+                                </div>
+                            </div>
 
-                        <div className="card" onClick={() => setCurrentPage('skillsets')}>
-                            <div className="card-icon">🎯</div>
-                            <h3>Skillsets</h3>
-                            <p>Explore both soft and hard skills that are crucial for becoming a successful Product Manager in today's market.</p>
-                        </div>
+                            <div className="feature-card" onClick={() => setCurrentPage('skillsets')}>
+                                <div className="feature-image skills"></div>
+                                <div className="feature-content">
+                                    <h4>Skillsets</h4>
+                                    <p>Master soft & hard skills for PM success</p>
+                                </div>
+                            </div>
 
-                        <div className="card" onClick={() => setCurrentPage('ai-assistant')}>
-                            <div className="card-icon">🤖</div>
-                            <h3>AI Assistant</h3>
-                            <p>Get personalized help with interview preparation, resume tips, and general Product Management guidance.</p>
-                        </div>
+                            <div className="feature-card" onClick={() => setCurrentPage('ai-assistant')}>
+                                <div className="feature-image ai"></div>
+                                <div className="feature-content">
+                                    <h4>AI Assistant</h4>
+                                    <p>Personalized career guidance & interview prep</p>
+                                </div>
+                            </div>
 
-                        <div className="card" onClick={() => setCurrentPage('job-alert')}>
-                            <div className="card-icon">💼</div>
-                            <h3>Job Alert</h3>
-                            <p>Stay updated with the latest Product Management job openings and get notified when new opportunities arise.</p>
+                            <div className="feature-card" onClick={() => setCurrentPage('job-alert')}>
+                                <div className="feature-image jobs"></div>
+                                <div className="feature-content">
+                                    <h4>Job Alert</h4>
+                                    <p>Latest PM opportunities & notifications</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -620,63 +797,34 @@
             const [messages, setMessages] = useState([
                 {
                     type: 'ai',
-                    content: 'Hello! I\'m your PM Assistant powered by Claude Sonnet 4 with RAG architecture. I can help you with interview preparation, resume tips, current PM trends, and career guidance specifically tailored for Emory students. What would you like to explore today?'
+                    content: 'Hello! I\'m your PM Assistant. I can help you with interview preparation, resume tips, and general Product Management guidance for Emory students. How can I assist you today?'
                 }
             ]);
             const [inputValue, setInputValue] = useState('');
             const [isLoading, setIsLoading] = useState(false);
 
             const handleSendMessage = async () => {
-    if (!inputValue.trim()) return;
+                if (!inputValue.trim()) return;
 
-    const userMessage = { type: 'user', content: inputValue };
-    setMessages(prev => [...prev, userMessage]);
-    const currentInput = inputValue;
-    setInputValue('');
-    setIsLoading(true);
+                const userMessage = { type: 'user', content: inputValue };
+                setMessages(prev => [...prev, userMessage]);
+                setInputValue('');
+                setIsLoading(true);
 
-    try {
-        console.log('Sending message to AI:', currentInput);
-        
-        const response = await fetch('https://fvntrkaqek.execute-api.us-east-1.amazonaws.com/prod/api/chat', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                message: currentInput
-            })
-        });
-
-        console.log('Response status:', response.status);
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        console.log('AI Response:', data);
-        
-        setMessages(prev => [...prev, { 
-            type: 'ai', 
-            content: data.response || 'Sorry, I encountered an error. Please try again.',
-            metadata: {
-                model: data.ai_model || 'PMory AI',
-                knowledgeUsed: data.knowledge_used || false,
-                system: data.system || 'AI Assistant'
-            }
-        }]);
-        
-    } catch (error) {
-        console.error('Error calling AI:', error);
-        setMessages(prev => [...prev, { 
-            type: 'ai', 
-            content: 'Sorry, I encountered an error connecting to the AI. Please try again in a moment.'
-        }]);
-    }
-    
-    setIsLoading(false);
-};
+                // Simulate AI response (replace with actual API call)
+                setTimeout(() => {
+                    const responses = [
+                        "For interview preparation, I recommend practicing the STAR method (Situation, Task, Action, Result) for behavioral questions. Focus on demonstrating your analytical thinking and user empathy.",
+                        "When crafting your PM resume, highlight quantifiable achievements, technical projects, and leadership experiences. Include any data analysis, user research, or cross-functional collaboration experiences.",
+                        "As an Emory student, leverage your business school resources, case competition experiences, and any consulting or analytics coursework to demonstrate PM skills.",
+                        "Key PM interview topics include: product design questions, analytical problems, behavioral scenarios, and technical understanding. Practice with frameworks like CIRCLES for product design."
+                    ];
+                    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                    
+                    setMessages(prev => [...prev, { type: 'ai', content: randomResponse }]);
+                    setIsLoading(false);
+                }, 1500);
+            };
 
             return (
                 <div className="main">
