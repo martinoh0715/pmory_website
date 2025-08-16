@@ -101,20 +101,14 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
 
-        .hero-background::before {
-            content: '';
+        .hero-video {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
-                linear-gradient(45deg, rgba(255,255,255,0.1) 25%, transparent 25%),
-                linear-gradient(-45deg, rgba(255,255,255,0.1) 25%, transparent 25%),
-                linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.1) 75%),
-                linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.1) 75%);
-            background-size: 30px 30px;
-            background-position: 0 0, 0 15px, 15px -15px, -15px 0px;
+            object-fit: cover;
+            z-index: 1;
         }
 
         .hero-overlay {
@@ -123,7 +117,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 2;
         }
 
         .hero-content {
@@ -674,9 +669,12 @@
         // HomePage Component
         const HomePage = ({ setCurrentPage }) => (
             <div className="main">
-                {/* Hero Section with Background Image */}
+                {/* Hero Section with Background Video */}
                 <div className="hero-modern">
                     <div className="hero-background"></div>
+                    {/* <video className="hero-video" autoPlay muted loop>
+    <source src="./videos/hero-video.mp4" type="video/mp4" />
+</video> */}
                     <div className="hero-overlay"></div>
                     <div className="hero-content">
                         <div className="hero-text">
