@@ -563,7 +563,7 @@
 
         /* Footer */
         .footer {
-            background: #f6ece2;
+            background: #d2d2d2;
             color: #000000;
             text-align: center;
             padding: 2rem 0;
@@ -602,14 +602,14 @@
         .pm-hero {
             text-align: center;
             padding: 4rem 0;
-            background: white;
+            background: rgba(255, 255, 255, 0.6);
             border-radius: 16px;
             margin-bottom: 4rem;
             box-shadow: 0 2px 20px rgba(0, 0, 0, 0.04);
         }
 
         .pm-hero h1 {
-            font-size: 3rem;
+            font-size: 2.5rem;
             color: #1a1a1a;
             margin-bottom: 2rem;
             font-weight: 600;
@@ -624,21 +624,41 @@
             line-height: 1.7;
         }
 
+        /* Section Titles */
+        .section-title {
+            font-size: 2.2rem;
+            color: #1a1a1a;
+            margin-bottom: 3rem;
+            font-weight: 600;
+            text-align: center;
+            letter-spacing: -0.02em;
+        }
+
         /* Mind Map Styles */
+        .mindmap-section {
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+            justify-content: center;
+            min-height: 500px;
+        }
+
         .mindmap-container {
             display: flex;
             justify-content: center;
             padding: 3rem 0;
+            transition: all 0.5s ease;
+        }
+
+        .mindmap-container.shifted {
+            transform: translateX(-200px);
         }
 
         .mindmap {
             position: relative;
             width: 800px;
             height: 500px;
-            background: white;
-            border-radius: 16px;
             padding: 2rem;
-            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
         }
 
         .mindmap-center {
@@ -658,7 +678,7 @@
 
         .mindmap-node {
             position: absolute;
-            background: white;
+            background: rgba(255, 255, 255, 0.9);
             border: 2px solid;
             padding: 0.75rem 1.25rem;
             border-radius: 25px;
@@ -667,10 +687,13 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             z-index: 5;
             transition: all 0.3s ease;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
         }
 
         .mindmap-node:hover {
             transform: scale(1.05);
+            background: white;
         }
 
         .node-1 { top: 10%; left: 5%; border-color: #6366f1; color: #6366f1; }
@@ -687,6 +710,63 @@
             width: 100%;
             height: 100%;
             z-index: 1;
+        }
+
+        .responsibility-detail {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            position: relative;
+            animation: slideIn 0.5s ease;
+        }
+
+        .responsibility-detail h3 {
+            color: #1a1a1a;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .responsibility-detail p {
+            color: #6b7280;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: #f3f4f6;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #6b7280;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: #e5e7eb;
+            color: #374151;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
         /* Skills Carousel */
@@ -932,8 +1012,9 @@
                 {/* Hero Section with Background Video */}
                 <div className="hero-modern">
                     <div className="hero-background"></div>
-                    <video className="hero-video" autoPlay muted loop> <source src="./videos/hero-video.mp4" type="video/mp4" /> </video>
-
+                    {/* <video className="hero-video" autoPlay muted loop>
+                        <source src="YOUR_VIDEO_URL.mp4" type="video/mp4" />
+                    </video> */}
                     <div className="hero-overlay"></div>
                     <div className="hero-content">
                         <div className="hero-text">
@@ -992,6 +1073,7 @@
         // WhatIsPM Component
         const WhatIsPM = () => {
             const [currentSkill, setCurrentSkill] = useState(0);
+            const [selectedResponsibility, setSelectedResponsibility] = useState(null);
             
             const skills = [
                 { name: "Analytical Skills", description: "Data-driven decision making and metrics interpretation", image: "./images/analytics.jpg" },
@@ -1002,12 +1084,25 @@
                 { name: "Business Acumen", description: "Strategic thinking and market understanding", image: "./images/business.jpg" }
             ];
 
+            const responsibilities = {
+                "Strategic Planning": "Define product vision, roadmap, and long-term strategy. Product Managers create comprehensive plans that align business objectives with user needs, setting clear goals and milestones for product development.",
+                "Market Research": "Analyze market trends, competition, and user needs. Conduct user interviews, surveys, and competitive analysis to understand market opportunities and validate product hypotheses.",
+                "Feature Prioritization": "Decide what features to build and when based on impact, effort, and strategic value. Use frameworks like RICE scoring to make data-driven prioritization decisions.",
+                "Cross-functional Leadership": "Coordinate and align engineering, design, marketing, and sales teams. Lead without authority by building consensus and driving collaboration across departments.",
+                "Data Analysis": "Make data-driven decisions using metrics, user feedback, and performance analytics. Track KPIs, conduct A/B tests, and derive insights to optimize product performance.",
+                "User Advocacy": "Ensure the product solves real customer problems and delivers exceptional user experience. Champion user needs throughout the development process."
+            };
+
             const nextSkill = () => {
                 setCurrentSkill((prev) => (prev + 1) % skills.length);
             };
 
             const prevSkill = () => {
                 setCurrentSkill((prev) => (prev - 1 + skills.length) % skills.length);
+            };
+
+            const handleResponsibilityClick = (responsibility) => {
+                setSelectedResponsibility(selectedResponsibility === responsibility ? null : responsibility);
             };
 
             return (
@@ -1025,38 +1120,47 @@
                         {/* Responsibilities Mind Map */}
                         <div className="section">
                             <h2 className="section-title">Core Responsibilities</h2>
-                            <div className="mindmap-container">
-                                <div className="mindmap">
-                                    <div className="mindmap-center">
-                                        <span>Product Manager</span>
+                            <div className="mindmap-section">
+                                <div className={`mindmap-container ${selectedResponsibility ? 'shifted' : ''}`}>
+                                    <div className="mindmap">
+                                        <div className="mindmap-center">
+                                            <span>Product Manager</span>
+                                        </div>
+                                        <div className="mindmap-node node-1" onClick={() => handleResponsibilityClick("Strategic Planning")}>
+                                            <span>Strategic Planning</span>
+                                        </div>
+                                        <div className="mindmap-node node-2" onClick={() => handleResponsibilityClick("Market Research")}>
+                                            <span>Market Research</span>
+                                        </div>
+                                        <div className="mindmap-node node-3" onClick={() => handleResponsibilityClick("Feature Prioritization")}>
+                                            <span>Feature Prioritization</span>
+                                        </div>
+                                        <div className="mindmap-node node-4" onClick={() => handleResponsibilityClick("Cross-functional Leadership")}>
+                                            <span>Cross-functional Leadership</span>
+                                        </div>
+                                        <div className="mindmap-node node-5" onClick={() => handleResponsibilityClick("Data Analysis")}>
+                                            <span>Data Analysis</span>
+                                        </div>
+                                        <div className="mindmap-node node-6" onClick={() => handleResponsibilityClick("User Advocacy")}>
+                                            <span>User Advocacy</span>
+                                        </div>
+                                        <svg className="mindmap-connections">
+                                            <line x1="50%" y1="50%" x2="15%" y2="20%" stroke="#6366f1" strokeWidth="2"/>
+                                            <line x1="50%" y1="50%" x2="85%" y2="20%" stroke="#06b6d4" strokeWidth="2"/>
+                                            <line x1="50%" y1="50%" x2="90%" y2="60%" stroke="#10b981" strokeWidth="2"/>
+                                            <line x1="50%" y1="50%" x2="70%" y2="90%" stroke="#f59e0b" strokeWidth="2"/>
+                                            <line x1="50%" y1="50%" x2="30%" y2="90%" stroke="#ef4444" strokeWidth="2"/>
+                                            <line x1="50%" y1="50%" x2="10%" y2="60%" stroke="#8b5cf6" strokeWidth="2"/>
+                                        </svg>
                                     </div>
-                                    <div className="mindmap-node node-1">
-                                        <span>Strategic Planning</span>
-                                    </div>
-                                    <div className="mindmap-node node-2">
-                                        <span>Market Research</span>
-                                    </div>
-                                    <div className="mindmap-node node-3">
-                                        <span>Feature Prioritization</span>
-                                    </div>
-                                    <div className="mindmap-node node-4">
-                                        <span>Cross-functional Leadership</span>
-                                    </div>
-                                    <div className="mindmap-node node-5">
-                                        <span>Data Analysis</span>
-                                    </div>
-                                    <div className="mindmap-node node-6">
-                                        <span>User Advocacy</span>
-                                    </div>
-                                    <svg className="mindmap-connections">
-                                        <line x1="50%" y1="50%" x2="15%" y2="20%" stroke="#6366f1" strokeWidth="2"/>
-                                        <line x1="50%" y1="50%" x2="85%" y2="20%" stroke="#06b6d4" strokeWidth="2"/>
-                                        <line x1="50%" y1="50%" x2="90%" y2="60%" stroke="#10b981" strokeWidth="2"/>
-                                        <line x1="50%" y1="50%" x2="70%" y2="90%" stroke="#f59e0b" strokeWidth="2"/>
-                                        <line x1="50%" y1="50%" x2="30%" y2="90%" stroke="#ef4444" strokeWidth="2"/>
-                                        <line x1="50%" y1="50%" x2="10%" y2="60%" stroke="#8b5cf6" strokeWidth="2"/>
-                                    </svg>
                                 </div>
+                                {selectedResponsibility && (
+                                    <div className="responsibility-detail">
+                                        <h3>{selectedResponsibility}</h3>
+                                        <p>{responsibilities[selectedResponsibility]}</p>
+                                        <button className="close-btn" onClick={() => setSelectedResponsibility(null)}>×</button>
+                                    </div>
+                                )}
                             </div>
                         </div>
 
@@ -1097,7 +1201,7 @@
                                     <div className="resource-icon">📺</div>
                                     <h4>Videos</h4>
                                     <div className="resource-links">
-                                        <a href="https://www.youtube.com/watch?v=huTsEWt6T6c" target="_blank" className="resource-link">Product Management 101</a>
+                                        <a href="https://www.youtube.com/watch?v=jDgW5HVqb4I" target="_blank" className="resource-link">Product Management 101</a>
                                         <a href="https://www.youtube.com/channel/UC6hlQ0x6kPbAGjYkoz53cvA" target="_blank" className="resource-link">Product School Channel</a>
                                     </div>
                                 </div>
@@ -1106,7 +1210,6 @@
                                     <div className="resource-icon">📖</div>
                                     <h4>Blogs</h4>
                                     <div className="resource-links">
-                                        <a href="https://medium.com/the-product-person" target="_blank" className="resource-link">The Product Person</a>
                                         <a href="https://www.productplan.com/learn/" target="_blank" className="resource-link">ProductPlan Learning</a>
                                     </div>
                                 </div>
@@ -1125,7 +1228,6 @@
                                     <h4>Podcasts</h4>
                                     <div className="resource-links">
                                         <a href="https://www.lennyspodcast.com/" target="_blank" className="resource-link">Lenny's Podcast</a>
-                                        <a href="#" target="_blank" className="resource-link">This is Product Management</a>
                                     </div>
                                 </div>
                             </div>
