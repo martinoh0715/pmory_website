@@ -598,37 +598,294 @@
             }
         }
 
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #2563eb;
+        /* PM Hero Section */
+        .pm-hero {
+            text-align: center;
+            padding: 4rem 0;
+            background: white;
+            border-radius: 16px;
+            margin-bottom: 4rem;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.04);
+        }
+
+        .pm-hero h1 {
+            font-size: 3rem;
+            color: #1a1a1a;
+            margin-bottom: 2rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        .pm-definition {
+            font-size: 1.3rem;
+            color: #6b7280;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Mind Map Styles */
+        .mindmap-container {
+            display: flex;
+            justify-content: center;
+            padding: 3rem 0;
+        }
+
+        .mindmap {
+            position: relative;
+            width: 800px;
+            height: 500px;
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .mindmap-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            padding: 1.5rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.3);
+            z-index: 10;
+        }
+
+        .mindmap-node {
+            position: absolute;
+            background: white;
+            border: 2px solid;
+            padding: 0.75rem 1.25rem;
+            border-radius: 25px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            z-index: 5;
+            transition: all 0.3s ease;
+        }
+
+        .mindmap-node:hover {
+            transform: scale(1.05);
+        }
+
+        .node-1 { top: 10%; left: 5%; border-color: #6366f1; color: #6366f1; }
+        .node-2 { top: 10%; right: 5%; border-color: #06b6d4; color: #06b6d4; }
+        .node-3 { top: 50%; right: 2%; border-color: #10b981; color: #10b981; }
+        .node-4 { bottom: 5%; right: 20%; border-color: #f59e0b; color: #f59e0b; }
+        .node-5 { bottom: 5%; left: 20%; border-color: #ef4444; color: #ef4444; }
+        .node-6 { top: 50%; left: 2%; border-color: #8b5cf6; color: #8b5cf6; }
+
+        .mindmap-connections {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        /* Skills Carousel */
+        .skills-carousel {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .carousel-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .carousel-btn {
+            background: white;
+            border: 2px solid #e5e7eb;
             border-radius: 50%;
-            animation: spin 1s linear infinite;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #6b7280;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .carousel-btn:hover {
+            border-color: #6366f1;
+            color: #6366f1;
+            transform: scale(1.1);
         }
 
-        .alert {
-            padding: 1rem;
-            border-radius: 6px;
-            margin: 1rem 0;
+        .skill-display {
+            flex: 1;
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
         }
 
-        .alert-success {
-            background: #dcfce7;
-            color: #166534;
-            border: 1px solid #bbf7d0;
+        .skill-image {
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
         }
 
-        .alert-error {
-            background: #fef2f2;
-            color: #991b1b;
-            border: 1px solid #fecaca;
+        .skill-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .skill-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .skill-info {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .skill-info h3 {
+            font-size: 1.5rem;
+            color: #1a1a1a;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .skill-info p {
+            color: #6b7280;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-top: 2rem;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: none;
+            background: #e5e7eb;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: #6366f1;
+            transform: scale(1.2);
+        }
+
+        /* Resources Grid */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .resource-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .resource-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .resource-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .resource-card h4 {
+            font-size: 1.3rem;
+            color: #1a1a1a;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .resource-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .resource-link {
+            color: #6366f1;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .resource-link:hover {
+            background: #6366f1;
+            color: white;
+            border-color: #6366f1;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .pm-hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .pm-definition {
+                font-size: 1.1rem;
+            }
+            
+            .mindmap {
+                width: 100%;
+                height: 400px;
+            }
+            
+            .mindmap-center {
+                font-size: 1rem;
+                padding: 1rem 1.5rem;
+            }
+            
+            .mindmap-node {
+                font-size: 0.85rem;
+                padding: 0.5rem 1rem;
+            }
+            
+            .carousel-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .carousel-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            .resources-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -732,60 +989,151 @@
             </div>
         );
 
-        // What is PM Component
-        const WhatIsPM = () => (
-            <div className="main">
-                <div className="container">
-                    <div className="section-header">
-                        <h1 className="section-title">What is Product Management?</h1>
-                        <p className="section-subtitle">Understanding the role, responsibilities, and path to becoming a successful Product Manager</p>
-                    </div>
+        // WhatIsPM Component
+        const WhatIsPM = () => {
+            const [currentSkill, setCurrentSkill] = useState(0);
+            
+            const skills = [
+                { name: "Analytical Skills", description: "Data-driven decision making and metrics interpretation", image: "./images/analytics.jpg" },
+                { name: "Communication", description: "Clear presentation and stakeholder management", image: "./images/communication.jpg" },
+                { name: "Leadership", description: "Influence without authority and team coordination", image: "./images/leadership.jpg" },
+                { name: "Technical Understanding", description: "Basic tech knowledge and development processes", image: "./images/technical.jpg" },
+                { name: "User Empathy", description: "Understanding customer needs and pain points", image: "./images/user-empathy.jpg" },
+                { name: "Business Acumen", description: "Strategic thinking and market understanding", image: "./images/business.jpg" }
+            ];
 
-                    <div className="content-card">
-                        <h3>Definition of Product Management</h3>
-                        <p>Product Management is the practice of strategically driving the development, market launch, and continual support and improvement of a company's products. Product Managers act as the bridge between business, technology, and user experience, ensuring that products meet market needs while achieving business objectives.</p>
-                    </div>
+            const nextSkill = () => {
+                setCurrentSkill((prev) => (prev + 1) % skills.length);
+            };
 
-                    <div className="content-card">
-                        <h3>What Product Managers Do</h3>
-                        <ul>
-                            <li><strong>Strategic Planning:</strong> Define product vision, strategy, and roadmap</li>
-                            <li><strong>Market Research:</strong> Analyze market trends, competition, and user needs</li>
-                            <li><strong>Feature Prioritization:</strong> Decide what features to build and when</li>
-                            <li><strong>Cross-functional Collaboration:</strong> Work with engineering, design, marketing, and sales teams</li>
-                            <li><strong>Data Analysis:</strong> Make data-driven decisions to improve product performance</li>
-                            <li><strong>User Advocacy:</strong> Ensure the product meets user needs and expectations</li>
-                            <li><strong>Stakeholder Communication:</strong> Present updates and gather feedback from stakeholders</li>
-                        </ul>
-                    </div>
+            const prevSkill = () => {
+                setCurrentSkill((prev) => (prev - 1 + skills.length) % skills.length);
+            };
 
-                    <div className="content-card">
-                        <h3>Essential PM Skills</h3>
-                        <ul>
-                            <li><strong>Analytical Thinking:</strong> Ability to analyze data and make informed decisions</li>
-                            <li><strong>Communication:</strong> Clear and effective communication with diverse teams</li>
-                            <li><strong>Leadership:</strong> Influence without authority and guide teams toward goals</li>
-                            <li><strong>Technical Understanding:</strong> Basic understanding of technology and development processes</li>
-                            <li><strong>User Empathy:</strong> Understanding user needs and pain points</li>
-                            <li><strong>Business Acumen:</strong> Understanding of business models and market dynamics</li>
-                        </ul>
-                    </div>
+            return (
+                <div className="main">
+                    <div className="container">
+                        {/* Hero Section */}
+                        <div className="pm-hero">
+                            <h1>What is Product Management?</h1>
+                            <p className="pm-definition">
+                                Product Management is the strategic practice of guiding a product's journey from conception to market success, 
+                                bridging business objectives, user needs, and technical possibilities.
+                            </p>
+                        </div>
 
-                    <div className="content-card">
-                        <h3>Learning Sources</h3>
-                        <ul>
-                            <li><a href="https://www.youtube.com/watch?v=huTsEWt6T6c" className="external-link" target="_blank">Product Management 101 - YouTube 📺</a></li>
-                            <li><a href="https://www.youtube.com/channel/UC6hlQ0x6kPbAGjYkoz53cvA" className="external-link" target="_blank">Product School - YouTube Channel 📺</a></li>
-                            <li><a href="https://medium.com/the-product-person" className="external-link" target="_blank">The Product Person - Medium Blog 📖</a></li>
-                            <li><a href="https://www.productplan.com/learn/" className="external-link" target="_blank">ProductPlan Learning Center 📚</a></li>
-                            <li><a href="https://www.lennyspodcast.com/" className="external-link" target="_blank">Lenny's Podcast 🎧</a></li>
-                            <li><a href="https://www.coursera.org/learn/uva-darden-digital-product-management" className="external-link" target="_blank">Coursera - Digital Product Management 🎓</a></li>
-                            <li><a href="https://www.udemy.com/course/become-a-product-manager-learn-the-skills-get-a-job/" className="external-link" target="_blank">Udemy - Become a Product Manager 🎓</a></li>
-                        </ul>
+                        {/* Responsibilities Mind Map */}
+                        <div className="section">
+                            <h2 className="section-title">Core Responsibilities</h2>
+                            <div className="mindmap-container">
+                                <div className="mindmap">
+                                    <div className="mindmap-center">
+                                        <span>Product Manager</span>
+                                    </div>
+                                    <div className="mindmap-node node-1">
+                                        <span>Strategic Planning</span>
+                                    </div>
+                                    <div className="mindmap-node node-2">
+                                        <span>Market Research</span>
+                                    </div>
+                                    <div className="mindmap-node node-3">
+                                        <span>Feature Prioritization</span>
+                                    </div>
+                                    <div className="mindmap-node node-4">
+                                        <span>Cross-functional Leadership</span>
+                                    </div>
+                                    <div className="mindmap-node node-5">
+                                        <span>Data Analysis</span>
+                                    </div>
+                                    <div className="mindmap-node node-6">
+                                        <span>User Advocacy</span>
+                                    </div>
+                                    <svg className="mindmap-connections">
+                                        <line x1="50%" y1="50%" x2="15%" y2="20%" stroke="#6366f1" strokeWidth="2"/>
+                                        <line x1="50%" y1="50%" x2="85%" y2="20%" stroke="#06b6d4" strokeWidth="2"/>
+                                        <line x1="50%" y1="50%" x2="90%" y2="60%" stroke="#10b981" strokeWidth="2"/>
+                                        <line x1="50%" y1="50%" x2="70%" y2="90%" stroke="#f59e0b" strokeWidth="2"/>
+                                        <line x1="50%" y1="50%" x2="30%" y2="90%" stroke="#ef4444" strokeWidth="2"/>
+                                        <line x1="50%" y1="50%" x2="10%" y2="60%" stroke="#8b5cf6" strokeWidth="2"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Skills Carousel */}
+                        <div className="section">
+                            <h2 className="section-title">Essential Skills</h2>
+                            <div className="skills-carousel">
+                                <div className="carousel-container">
+                                    <button className="carousel-btn prev" onClick={prevSkill}>‹</button>
+                                    <div className="skill-display">
+                                        <div className="skill-image">
+                                            <img src={skills[currentSkill].image} alt={skills[currentSkill].name} />
+                                        </div>
+                                        <div className="skill-info">
+                                            <h3>{skills[currentSkill].name}</h3>
+                                            <p>{skills[currentSkill].description}</p>
+                                        </div>
+                                    </div>
+                                    <button className="carousel-btn next" onClick={nextSkill}>›</button>
+                                </div>
+                                <div className="carousel-dots">
+                                    {skills.map((_, index) => (
+                                        <button 
+                                            key={index}
+                                            className={`dot ${index === currentSkill ? 'active' : ''}`}
+                                            onClick={() => setCurrentSkill(index)}
+                                        />
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Learning Resources */}
+                        <div className="section">
+                            <h2 className="section-title">Learning Resources</h2>
+                            <div className="resources-grid">
+                                <div className="resource-card video">
+                                    <div className="resource-icon">📺</div>
+                                    <h4>Videos</h4>
+                                    <div className="resource-links">
+                                        <a href="https://www.youtube.com/watch?v=huTsEWt6T6c" target="_blank" className="resource-link">Product Management 101</a>
+                                        <a href="https://www.youtube.com/channel/UC6hlQ0x6kPbAGjYkoz53cvA" target="_blank" className="resource-link">Product School Channel</a>
+                                    </div>
+                                </div>
+                                
+                                <div className="resource-card blog">
+                                    <div className="resource-icon">📖</div>
+                                    <h4>Blogs</h4>
+                                    <div className="resource-links">
+                                        <a href="https://medium.com/the-product-person" target="_blank" className="resource-link">The Product Person</a>
+                                        <a href="https://www.productplan.com/learn/" target="_blank" className="resource-link">ProductPlan Learning</a>
+                                    </div>
+                                </div>
+                                
+                                <div className="resource-card course">
+                                    <div className="resource-icon">🎓</div>
+                                    <h4>Courses</h4>
+                                    <div className="resource-links">
+                                        <a href="https://www.coursera.org/learn/uva-darden-digital-product-management" target="_blank" className="resource-link">Coursera PM Course</a>
+                                        <a href="https://www.udemy.com/course/become-a-product-manager-learn-the-skills-get-a-job/" target="_blank" className="resource-link">Udemy PM Bootcamp</a>
+                                    </div>
+                                </div>
+                                
+                                <div className="resource-card podcast">
+                                    <div className="resource-icon">🎧</div>
+                                    <h4>Podcasts</h4>
+                                    <div className="resource-links">
+                                        <a href="https://www.lennyspodcast.com/" target="_blank" className="resource-link">Lenny's Podcast</a>
+                                        <a href="#" target="_blank" className="resource-link">This is Product Management</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        );
+            );
+        };
 
         // Skillsets Component
         const Skillsets = () => (
