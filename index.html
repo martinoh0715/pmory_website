@@ -211,47 +211,71 @@
         .feature-image {
             height: 160px;
             position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             overflow: hidden;
         }
 
-        .feature-icon {
-            position: relative;
-            z-index: 2;
-            width: 60px;
-            height: 60px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .feature-icon svg {
-            width: 28px;
-            height: 28px;
-            stroke: #1a1a1a;
-            fill: none;
-            stroke-width: 1.5;
-        }
-
         .feature-image.fundamentals {
-            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            background-image: url('./images/pm-fundamentals.jpg');
         }
 
         .feature-image.skills {
-            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+            background-image: url('./images/pm-skills.jpg');
         }
 
         .feature-image.ai {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            background-image: url('./images/ai-assistant.jpg');
         }
 
         .feature-image.jobs {
+            background-image: url('./images/job-opportunities.jpg');
+        }
+
+        /* Fallback gradient if images don't load */
+        .feature-image.fundamentals:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            z-index: -1;
+        }
+
+        .feature-image.skills:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+            z-index: -1;
+        }
+
+        .feature-image.ai:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            z-index: -1;
+        }
+
+        .feature-image.jobs:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            z-index: -1;
         }
 
         .feature-content {
@@ -652,10 +676,7 @@
                 {/* Hero Section with Background Video */}
                 <div className="hero-modern">
                     <div className="hero-background"></div>
-                    <video className="hero-video" autoPlay muted loop>
-    <source src="./videos/hero-video.mp4" type="video/mp4" />
-</video>
-                    
+                    <video className="hero-video" autoPlay muted loop> <source src="./videos/hero-video.mp4" type="video/mp4" /> </video>
                     <div className="hero-overlay"></div>
                     <div className="hero-content">
                         <div className="hero-text">
@@ -675,14 +696,7 @@
                         <h3>Explore PMory's Features</h3>
                         <div className="feature-grid">
                             <div className="feature-card" onClick={() => setCurrentPage('what-is-pm')}>
-                                <div className="feature-image fundamentals">
-                                    <div className="feature-icon">
-                                        <svg viewBox="0 0 24 24">
-                                            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
-                                            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
-                                        </svg>
-                                    </div>
-                                </div>
+                                <div className="feature-image fundamentals"></div>
                                 <div className="feature-content">
                                     <h4>What is PM?</h4>
                                     <p>Learn fundamentals & essential skills</p>
@@ -690,22 +704,7 @@
                             </div>
 
                             <div className="feature-card" onClick={() => setCurrentPage('skillsets')}>
-                                <div className="feature-image skills">
-                                    <div className="feature-icon">
-                                        <svg viewBox="0 0 24 24">
-                                            <path d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z"/>
-                                            <path d="M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/>
-                                            <path d="M12 2v2"/>
-                                            <path d="M12 20v2"/>
-                                            <path d="m4.93 4.93 1.41 1.41"/>
-                                            <path d="m17.66 17.66 1.41 1.41"/>
-                                            <path d="M2 12h2"/>
-                                            <path d="M20 12h2"/>
-                                            <path d="m6.34 17.66-1.41 1.41"/>
-                                            <path d="m19.07 4.93-1.41 1.41"/>
-                                        </svg>
-                                    </div>
-                                </div>
+                                <div className="feature-image skills"></div>
                                 <div className="feature-content">
                                     <h4>Skillsets</h4>
                                     <p>Master soft & hard skills for PM success</p>
@@ -713,18 +712,7 @@
                             </div>
 
                             <div className="feature-card" onClick={() => setCurrentPage('ai-assistant')}>
-                                <div className="feature-image ai">
-                                    <div className="feature-icon">
-                                        <svg viewBox="0 0 24 24">
-                                            <path d="M12 8V4H8"/>
-                                            <rect width="16" height="12" x="4" y="8" rx="2"/>
-                                            <path d="M2 14h2"/>
-                                            <path d="M20 14h2"/>
-                                            <path d="M15 13v2"/>
-                                            <path d="M9 13v2"/>
-                                        </svg>
-                                    </div>
-                                </div>
+                                <div className="feature-image ai"></div>
                                 <div className="feature-content">
                                     <h4>AI Assistant</h4>
                                     <p>Personalized career guidance & interview prep</p>
@@ -732,14 +720,7 @@
                             </div>
 
                             <div className="feature-card" onClick={() => setCurrentPage('job-alert')}>
-                                <div className="feature-image jobs">
-                                    <div className="feature-icon">
-                                        <svg viewBox="0 0 24 24">
-                                            <rect width="20" height="14" x="2" y="7" rx="2" ry="2"/>
-                                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
-                                        </svg>
-                                    </div>
-                                </div>
+                                <div className="feature-image jobs"></div>
                                 <div className="feature-content">
                                     <h4>Job Alert</h4>
                                     <p>Latest PM opportunities & notifications</p>
