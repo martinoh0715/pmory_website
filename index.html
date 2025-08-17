@@ -624,6 +624,48 @@
             line-height: 1.7;
         }
 
+        /* NEW: PM Definition Section with Image and Text */
+        .pm-definition-section {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            margin-bottom: 5rem;
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .pm-definition-image {
+            flex: 1;
+        }
+
+        .pm-definition-image img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .pm-definition-content {
+            flex: 1;
+        }
+
+        .pm-definition-content h2 {
+            font-size: 2rem;
+            color: #1a1a1a;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .pm-definition-content p {
+            color: #6b7280;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
         /* Section Titles */
         .section-title {
             font-size: 2.2rem;
@@ -632,6 +674,132 @@
             font-weight: 600;
             text-align: center;
             letter-spacing: -0.02em;
+        }
+
+        /* NEW: Essential Skills - Layered Images Gallery */
+        .skills-layered-section {
+            margin-bottom: 5rem;
+        }
+
+        .skills-gallery {
+            position: relative;
+            height: 500px;
+            max-width: 1000px;
+            margin: 0 auto 3rem;
+            perspective: 1000px;
+        }
+
+        .skill-image-layer {
+            position: absolute;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            transform-style: preserve-3d;
+        }
+
+        .skill-image-layer:hover {
+            transform: scale(1.05) !important;
+            z-index: 100 !important;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+        }
+
+        .skill-image-layer img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .skill-image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: white;
+            padding: 1.5rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .skill-image-layer:hover .skill-image-overlay {
+            transform: translateY(0);
+        }
+
+        .skill-image-overlay h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Positioning for layered effect */
+        .skill-layer-1 {
+            width: 280px;
+            height: 200px;
+            top: 50px;
+            left: 50px;
+            transform: rotate(-8deg);
+            z-index: 10;
+        }
+
+        .skill-layer-2 {
+            width: 320px;
+            height: 240px;
+            top: 20px;
+            right: 80px;
+            transform: rotate(5deg);
+            z-index: 20;
+        }
+
+        .skill-layer-3 {
+            width: 300px;
+            height: 220px;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-3deg);
+            z-index: 30;
+        }
+
+        .skill-layer-4 {
+            width: 260px;
+            height: 180px;
+            bottom: 80px;
+            left: 80px;
+            transform: rotate(7deg);
+            z-index: 15;
+        }
+
+        .skill-layer-5 {
+            width: 290px;
+            height: 210px;
+            bottom: 50px;
+            right: 100px;
+            transform: rotate(-5deg);
+            z-index: 25;
+        }
+
+        .selected-skill-display {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .selected-skill-display h3 {
+            font-size: 2rem;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .selected-skill-display p {
+            font-size: 1.1rem;
+            color: #6b7280;
+            line-height: 1.6;
         }
 
         /* Mind Map Styles */
@@ -936,6 +1104,57 @@
             .pm-definition {
                 font-size: 1.1rem;
             }
+
+            .pm-definition-section {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .pm-definition-image img {
+                height: 250px;
+            }
+
+            .pm-definition-content h2 {
+                font-size: 1.5rem;
+            }
+
+            .skills-gallery {
+                height: 350px;
+            }
+
+            .skill-layer-1 {
+                width: 200px;
+                height: 140px;
+                top: 30px;
+                left: 20px;
+            }
+
+            .skill-layer-2 {
+                width: 220px;
+                height: 160px;
+                top: 10px;
+                right: 30px;
+            }
+
+            .skill-layer-3 {
+                width: 210px;
+                height: 150px;
+                top: 60px;
+            }
+
+            .skill-layer-4 {
+                width: 180px;
+                height: 120px;
+                bottom: 60px;
+                left: 40px;
+            }
+
+            .skill-layer-5 {
+                width: 200px;
+                height: 140px;
+                bottom: 40px;
+                right: 50px;
+            }
             
             .mindmap {
                 width: 100%;
@@ -1076,12 +1295,31 @@
             const [selectedResponsibility, setSelectedResponsibility] = useState(null);
             
             const skills = [
-                { name: "Analytical Skills", description: "Data-driven decision making and metrics interpretation", image: "./images/analytics.jpg" },
-                { name: "Communication", description: "Clear presentation and stakeholder management", image: "./images/communication.jpg" },
-                { name: "Leadership", description: "Influence without authority and team coordination", image: "./images/leadership.jpg" },
-                { name: "Technical Understanding", description: "Basic tech knowledge and development processes", image: "./images/technical.jpg" },
-                { name: "User Empathy", description: "Understanding customer needs and pain points", image: "./images/user-empathy.jpg" },
-                { name: "Business Acumen", description: "Strategic thinking and market understanding", image: "./images/business.jpg" }
+                { 
+                    name: "Communication", 
+                    description: "Clear presentation and stakeholder management across all organizational levels", 
+                    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80"
+                },
+                { 
+                    name: "Strategic Thinking", 
+                    description: "Long-term vision and roadmap planning with market analysis", 
+                    image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                },
+                { 
+                    name: "Data Analysis", 
+                    description: "Making data-driven decisions and deriving actionable insights", 
+                    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                },
+                { 
+                    name: "User Experience", 
+                    description: "Understanding user needs, behaviors, and pain points", 
+                    image: "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                },
+                { 
+                    name: "Technical Knowledge", 
+                    description: "Understanding development processes and technology constraints", 
+                    image: "https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80"
+                }
             ];
 
             const responsibilities = {
@@ -1091,14 +1329,6 @@
                 "Cross-functional Leadership": "Coordinate and align engineering, design, marketing, and sales teams. Lead without authority by building consensus and driving collaboration across departments.",
                 "Data Analysis": "Make data-driven decisions using metrics, user feedback, and performance analytics. Track KPIs, conduct A/B tests, and derive insights to optimize product performance.",
                 "User Advocacy": "Ensure the product solves real customer problems and delivers exceptional user experience. Champion user needs throughout the development process."
-            };
-
-            const nextSkill = () => {
-                setCurrentSkill((prev) => (prev + 1) % skills.length);
-            };
-
-            const prevSkill = () => {
-                setCurrentSkill((prev) => (prev - 1 + skills.length) % skills.length);
             };
 
             const handleResponsibilityClick = (responsibility) => {
@@ -1115,6 +1345,59 @@
                                 Product Management is the strategic practice of guiding a product's journey from conception to market success, 
                                 bridging business objectives, user needs, and technical possibilities.
                             </p>
+                        </div>
+
+                        {/* NEW: Detailed PM Definition Section */}
+                        <div className="pm-definition-section">
+                            <div className="pm-definition-image">
+                                <img 
+                                    src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1926&q=80" 
+                                    alt="Product Manager at work in modern office environment"
+                                />
+                            </div>
+                            <div className="pm-definition-content">
+                                <h2>The Role of a Product Manager</h2>
+                                <p>
+                                    Product Managers serve as the central hub connecting various stakeholders, from engineering teams 
+                                    to customers, ensuring everyone works toward a shared vision. They are responsible for defining 
+                                    the product roadmap, prioritizing features, and making data-driven decisions.
+                                </p>
+                                <p>
+                                    At its core, Product Management involves understanding market needs, identifying opportunities, 
+                                    and translating complex requirements into actionable plans. PMs must balance competing priorities 
+                                    while maintaining focus on delivering value to both users and the business.
+                                </p>
+                                <p>
+                                    Modern Product Management combines analytical thinking with creative problem-solving, requiring 
+                                    a deep understanding of technology, user experience, and business strategy to drive successful 
+                                    product outcomes.
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* NEW: Essential Skills - Layered Images Gallery */}
+                        <div className="skills-layered-section">
+                            <h2 className="section-title">Essential Skills</h2>
+                            
+                            <div className="skills-gallery">
+                                {skills.map((skill, index) => (
+                                    <div 
+                                        key={index}
+                                        className={`skill-image-layer skill-layer-${index + 1}`}
+                                        onClick={() => setCurrentSkill(index)}
+                                    >
+                                        <img src={skill.image} alt={skill.name} />
+                                        <div className="skill-image-overlay">
+                                            <h3>{skill.name}</h3>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+
+                            <div className="selected-skill-display">
+                                <h3>{skills[currentSkill].name}</h3>
+                                <p>{skills[currentSkill].description}</p>
+                            </div>
                         </div>
 
                         {/* Responsibilities Mind Map */}
@@ -1161,35 +1444,6 @@
                                         <button className="close-btn" onClick={() => setSelectedResponsibility(null)}>×</button>
                                     </div>
                                 )}
-                            </div>
-                        </div>
-
-                        {/* Skills Carousel */}
-                        <div className="section">
-                            <h2 className="section-title">Essential Skills</h2>
-                            <div className="skills-carousel">
-                                <div className="carousel-container">
-                                    <button className="carousel-btn prev" onClick={prevSkill}>‹</button>
-                                    <div className="skill-display">
-                                        <div className="skill-image">
-                                            <img src={skills[currentSkill].image} alt={skills[currentSkill].name} />
-                                        </div>
-                                        <div className="skill-info">
-                                            <h3>{skills[currentSkill].name}</h3>
-                                            <p>{skills[currentSkill].description}</p>
-                                        </div>
-                                    </div>
-                                    <button className="carousel-btn next" onClick={nextSkill}>›</button>
-                                </div>
-                                <div className="carousel-dots">
-                                    {skills.map((_, index) => (
-                                        <button 
-                                            key={index}
-                                            className={`dot ${index === currentSkill ? 'active' : ''}`}
-                                            onClick={() => setCurrentSkill(index)}
-                                        />
-                                    ))}
-                                </div>
                             </div>
                         </div>
 
