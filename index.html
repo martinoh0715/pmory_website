@@ -563,7 +563,7 @@
 
         /* Footer */
         .footer {
-            background: #d2d2d2;
+            background: #f6ece2;
             color: #000000;
             text-align: center;
             padding: 2rem 0;
@@ -630,7 +630,7 @@
             align-items: center;
             gap: 3rem;
             margin-bottom: 5rem;
-            background: white;
+            background: rgba(255, 255, 255, 0.6);
             border-radius: 20px;
             padding: 2rem;
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
@@ -674,132 +674,6 @@
             font-weight: 600;
             text-align: center;
             letter-spacing: -0.02em;
-        }
-
-        /* NEW: Essential Skills - Layered Images Gallery */
-        .skills-layered-section {
-            margin-bottom: 5rem;
-        }
-
-        .skills-gallery {
-            position: relative;
-            height: 500px;
-            max-width: 1000px;
-            margin: 0 auto 3rem;
-            perspective: 1000px;
-        }
-
-        .skill-image-layer {
-            position: absolute;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-            transition: all 0.4s ease;
-            cursor: pointer;
-            transform-style: preserve-3d;
-        }
-
-        .skill-image-layer:hover {
-            transform: scale(1.05) !important;
-            z-index: 100 !important;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
-        }
-
-        .skill-image-layer img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .skill-image-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-            color: white;
-            padding: 1.5rem;
-            transform: translateY(100%);
-            transition: transform 0.3s ease;
-        }
-
-        .skill-image-layer:hover .skill-image-overlay {
-            transform: translateY(0);
-        }
-
-        .skill-image-overlay h3 {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        /* Positioning for layered effect */
-        .skill-layer-1 {
-            width: 280px;
-            height: 200px;
-            top: 50px;
-            left: 50px;
-            transform: rotate(-8deg);
-            z-index: 10;
-        }
-
-        .skill-layer-2 {
-            width: 320px;
-            height: 240px;
-            top: 20px;
-            right: 80px;
-            transform: rotate(5deg);
-            z-index: 20;
-        }
-
-        .skill-layer-3 {
-            width: 300px;
-            height: 220px;
-            top: 80px;
-            left: 50%;
-            transform: translateX(-50%) rotate(-3deg);
-            z-index: 30;
-        }
-
-        .skill-layer-4 {
-            width: 260px;
-            height: 180px;
-            bottom: 80px;
-            left: 80px;
-            transform: rotate(7deg);
-            z-index: 15;
-        }
-
-        .skill-layer-5 {
-            width: 290px;
-            height: 210px;
-            bottom: 50px;
-            right: 100px;
-            transform: rotate(-5deg);
-            z-index: 25;
-        }
-
-        .selected-skill-display {
-            background: white;
-            border-radius: 20px;
-            padding: 2.5rem;
-            text-align: center;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .selected-skill-display h3 {
-            font-size: 2rem;
-            color: #1a1a1a;
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-
-        .selected-skill-display p {
-            font-size: 1.1rem;
-            color: #6b7280;
-            line-height: 1.6;
         }
 
         /* Mind Map Styles */
@@ -1047,7 +921,7 @@
         }
 
         .resource-card {
-            background: white;
+            background: rgba(255, 255, 255, 0.6);
             border-radius: 16px;
             padding: 2rem;
             text-align: center;
@@ -1116,44 +990,6 @@
 
             .pm-definition-content h2 {
                 font-size: 1.5rem;
-            }
-
-            .skills-gallery {
-                height: 350px;
-            }
-
-            .skill-layer-1 {
-                width: 200px;
-                height: 140px;
-                top: 30px;
-                left: 20px;
-            }
-
-            .skill-layer-2 {
-                width: 220px;
-                height: 160px;
-                top: 10px;
-                right: 30px;
-            }
-
-            .skill-layer-3 {
-                width: 210px;
-                height: 150px;
-                top: 60px;
-            }
-
-            .skill-layer-4 {
-                width: 180px;
-                height: 120px;
-                bottom: 60px;
-                left: 40px;
-            }
-
-            .skill-layer-5 {
-                width: 200px;
-                height: 140px;
-                bottom: 40px;
-                right: 50px;
             }
             
             .mindmap {
@@ -1231,9 +1067,8 @@
                 {/* Hero Section with Background Video */}
                 <div className="hero-modern">
                     <div className="hero-background"></div>
-                    {/* <video className="hero-video" autoPlay muted loop>
-                        <source src="YOUR_VIDEO_URL.mp4" type="video/mp4" />
-                    </video> */}
+                    <video className="hero-video" autoPlay muted loop> <source src="./videos/hero-video.mp4" type="video/mp4" /> </video>
+
                     <div className="hero-overlay"></div>
                     <div className="hero-content">
                         <div className="hero-text">
@@ -1351,7 +1186,7 @@
                         <div className="pm-definition-section">
                             <div className="pm-definition-image">
                                 <img 
-                                    src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1926&q=80" 
+                                    src="./images/PM.jpg" 
                                     alt="Product Manager at work in modern office environment"
                                 />
                             </div>
@@ -1372,31 +1207,6 @@
                                     a deep understanding of technology, user experience, and business strategy to drive successful 
                                     product outcomes.
                                 </p>
-                            </div>
-                        </div>
-
-                        {/* NEW: Essential Skills - Layered Images Gallery */}
-                        <div className="skills-layered-section">
-                            <h2 className="section-title">Essential Skills</h2>
-                            
-                            <div className="skills-gallery">
-                                {skills.map((skill, index) => (
-                                    <div 
-                                        key={index}
-                                        className={`skill-image-layer skill-layer-${index + 1}`}
-                                        onClick={() => setCurrentSkill(index)}
-                                    >
-                                        <img src={skill.image} alt={skill.name} />
-                                        <div className="skill-image-overlay">
-                                            <h3>{skill.name}</h3>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-
-                            <div className="selected-skill-display">
-                                <h3>{skills[currentSkill].name}</h3>
-                                <p>{skills[currentSkill].description}</p>
                             </div>
                         </div>
 
