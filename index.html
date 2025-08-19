@@ -969,710 +969,371 @@
             border-color: #6366f1;
         }
 
-        /* Responsive Design */
+        /* ===== NEW SKILLSETS PAGE STYLES ===== */
+        .skillsets-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 4rem 2rem;
+            border-radius: 20px;
+            margin-bottom: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skillsets-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="white" opacity="0.1"><path d="M0,0v46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1100,7.5,1100,7.5V0Z"/></svg>') repeat-x;
+            background-size: 1000px 100px;
+            animation: wave 20s linear infinite;
+        }
+
+        @keyframes wave {
+            0% { transform: translateX(-1000px); }
+            100% { transform: translateX(0); }
+        }
+
+        .skillsets-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .skillsets-hero p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Modern Category Selector */
+        .skillset-categories {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .category-tab {
+            background: rgba(255, 255, 255, 0.8);
+            border: 2px solid transparent;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            color: #6b7280;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .category-tab:hover::before {
+            left: 100%;
+        }
+
+        .category-tab.active {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            border-color: #6366f1;
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .category-tab:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Skills Masonry Grid */
+        .skills-masonry {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .skill-card-new {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .skill-card-new::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #6366f1, #8b5cf6, #06b6d4, #10b981);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .skill-card-new:hover::before {
+            transform: scaleX(1);
+        }
+
+        .skill-card-new:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            background: white;
+        }
+
+        .skill-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-icon-modern {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            transition: all 0.3s ease;
+        }
+
+        .skill-card-new:hover .skill-icon-modern {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            transform: rotate(10deg) scale(1.1);
+        }
+
+        .skill-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin: 0;
+            letter-spacing: -0.01em;
+        }
+
+        .skill-description {
+            color: #6b7280;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        .skill-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .skill-learn-btn {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .skill-learn-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+            background: linear-gradient(135deg, #5b5fee, #7c3aed);
+        }
+
+        .skill-difficulty {
+            background: rgba(99, 102, 241, 0.1);
+            color: #6366f1;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .skill-difficulty.beginner {
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+        }
+
+        .skill-difficulty.intermediate {
+            background: rgba(245, 158, 11, 0.1);
+            color: #f59e0b;
+        }
+
+        .skill-difficulty.advanced {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+        }
+
+        /* Learning Path Visualization */
+        .learning-path {
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            margin: 4rem 0;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .learning-path h3 {
+            font-size: 2.2rem;
+            color: #1a1a1a;
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+
+        .path-steps {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .path-step {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            min-width: 200px;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .path-step:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .step-number {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin: 0 auto 1rem;
+            font-size: 1.1rem;
+        }
+
+        .step-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+        }
+
+        .step-desc {
+            font-size: 0.9rem;
+            color: #6b7280;
+            line-height: 1.5;
+        }
+
+        .path-arrow {
+            font-size: 1.5rem;
+            color: #6366f1;
+            opacity: 0.6;
+        }
+
+        /* Responsive Design for Skillsets */
         @media (max-width: 768px) {
-            .pm-hero h1 {
-                font-size: 2.2rem;
+            .skillsets-hero h1 {
+                font-size: 2.5rem;
             }
             
-            .pm-definition {
+            .skillsets-hero p {
                 font-size: 1.1rem;
             }
 
-            .pm-definition-section {
-                flex-direction: column;
-                gap: 2rem;
+            .skillset-categories {
+                gap: 0.5rem;
             }
 
-            .pm-definition-image img {
-                height: 250px;
+            .category-tab {
+                padding: 0.75rem 1.5rem;
+                font-size: 0.9rem;
             }
 
-            .pm-definition-content h2 {
+            .skills-masonry {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .skill-card-new {
+                padding: 1.5rem;
+            }
+
+            .skill-header {
+                gap: 0.75rem;
+            }
+
+            .skill-icon-modern {
+                width: 50px;
+                height: 50px;
                 font-size: 1.5rem;
             }
-            
-            .mindmap {
-                width: 100%;
-                height: 400px;
+
+            .skill-title {
+                font-size: 1.2rem;
             }
-            
-            .mindmap-center {
-                font-size: 1rem;
-                padding: 1rem 1.5rem;
+
+            .skill-actions {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.75rem;
             }
-            
-            .mindmap-node {
-                font-size: 0.85rem;
-                padding: 0.5rem 1rem;
-            }
-            
-            .carousel-container {
+
+            .path-steps {
                 flex-direction: column;
                 gap: 1rem;
             }
-            
-            .carousel-btn {
-                width: 40px;
-                height: 40px;
-                font-size: 1.2rem;
+
+            .path-arrow {
+                transform: rotate(90deg);
             }
-            
-            .resources-grid {
-                grid-template-columns: 1fr;
+
+            .learning-path {
+                padding: 2rem 1rem;
             }
         }
-    </style>
-</head>
-<body>
-    <div id="root"></div>
-
-    <script type="text/babel">
-        const { useState, useEffect } = React;
-
-        // Logo Component
-        const Logo = () => (
-            <svg className="logo-icon" viewBox="0 0 100 100">
-                <circle cx="30" cy="35" r="20" fill="none" stroke="#2563eb" strokeWidth="4" />
-                <circle cx="50" cy="35" r="20" fill="none" stroke="#2563eb" strokeWidth="4" />
-                <circle cx="40" cy="55" r="20" fill="none" stroke="#2563eb" strokeWidth="4" />
-            </svg>
-        );
-
-        // Header Component
-        const Header = ({ currentPage, setCurrentPage }) => (
-            <header className="header">
-                <div className="container">
-                    <nav className="nav">
-                        <div className="logo">
-                            <Logo />
-                            PMory
-                        </div>
-                        <ul className="nav-links">
-                            <li><a className={`nav-link ${currentPage === 'home' ? 'active' : ''}`} onClick={() => setCurrentPage('home')}>Home</a></li>
-                            <li><a className={`nav-link ${currentPage === 'what-is-pm' ? 'active' : ''}`} onClick={() => setCurrentPage('what-is-pm')}>What is PM</a></li>
-                            <li><a className={`nav-link ${currentPage === 'skillsets' ? 'active' : ''}`} onClick={() => setCurrentPage('skillsets')}>Skillsets</a></li>
-                            <li><a className={`nav-link ${currentPage === 'ai-assistant' ? 'active' : ''}`} onClick={() => setCurrentPage('ai-assistant')}>AI Assistant</a></li>
-                            <li><a className={`nav-link ${currentPage === 'job-alert' ? 'active' : ''}`} onClick={() => setCurrentPage('job-alert')}>Job Alert</a></li>
-                            <li><a className={`nav-link ${currentPage === 'about' ? 'active' : ''}`} onClick={() => setCurrentPage('about')}>About</a></li>
-                        </ul>
-                    </nav>
-                </div>
-            </header>
-        );
-
-        // HomePage Component
-        const HomePage = ({ setCurrentPage }) => (
-            <div className="main">
-                {/* Hero Section with Background Video */}
-                <div className="hero-modern">
-                    <div className="hero-background"></div>
-                    {/* <video className="hero-video" autoPlay muted loop>
-                        <source src="YOUR_VIDEO_URL.mp4" type="video/mp4" />
-                    </video> */}
-                    <div className="hero-overlay"></div>
-                    <div className="hero-content">
-                        <div className="hero-text">
-                            <h1>PMory</h1>
-                            <h2>Product Management Hub for Emory Students</h2>
-                            <p>Master PM fundamentals, develop essential skills, and accelerate your career with AI-powered guidance tailored specifically for Emory University students.</p>
-                            <button className="hero-cta" onClick={() => setCurrentPage('ai-assistant')}>
-                                Start Your PM Journey
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Navigation Cards Grid */}
-                <div className="container">
-                    <div className="features-section">
-                        <h3>Explore PMory's Features</h3>
-                        <div className="feature-grid">
-                            <div className="feature-card" onClick={() => setCurrentPage('what-is-pm')}>
-                                <div className="feature-image fundamentals"></div>
-                                <div className="feature-content">
-                                    <h4>What is PM?</h4>
-                                    <p>Learn fundamentals & essential skills</p>
-                                </div>
-                            </div>
-
-                            <div className="feature-card" onClick={() => setCurrentPage('skillsets')}>
-                                <div className="feature-image skills"></div>
-                                <div className="feature-content">
-                                    <h4>Skillsets</h4>
-                                    <p>Master soft & hard skills for PM success</p>
-                                </div>
-                            </div>
-
-                            <div className="feature-card" onClick={() => setCurrentPage('ai-assistant')}>
-                                <div className="feature-image ai"></div>
-                                <div className="feature-content">
-                                    <h4>AI Assistant</h4>
-                                    <p>Personalized career guidance & interview prep</p>
-                                </div>
-                            </div>
-
-                            <div className="feature-card" onClick={() => setCurrentPage('job-alert')}>
-                                <div className="feature-image jobs"></div>
-                                <div className="feature-content">
-                                    <h4>Job Alert</h4>
-                                    <p>Latest PM opportunities & notifications</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        );
-
-        // WhatIsPM Component
-        const WhatIsPM = () => {
-            const [currentSkill, setCurrentSkill] = useState(0);
-            const [selectedResponsibility, setSelectedResponsibility] = useState(null);
-            
-            const skills = [
-                { 
-                    name: "Communication", 
-                    description: "Clear presentation and stakeholder management across all organizational levels", 
-                    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80"
-                },
-                { 
-                    name: "Strategic Thinking", 
-                    description: "Long-term vision and roadmap planning with market analysis", 
-                    image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-                },
-                { 
-                    name: "Data Analysis", 
-                    description: "Making data-driven decisions and deriving actionable insights", 
-                    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-                },
-                { 
-                    name: "User Experience", 
-                    description: "Understanding user needs, behaviors, and pain points", 
-                    image: "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-                },
-                { 
-                    name: "Technical Knowledge", 
-                    description: "Understanding development processes and technology constraints", 
-                    image: "https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80"
-                }
-            ];
-
-            const responsibilities = {
-                "Strategic Planning": "Define product vision, roadmap, and long-term strategy. Product Managers create comprehensive plans that align business objectives with user needs, setting clear goals and milestones for product development.",
-                "Market Research": "Analyze market trends, competition, and user needs. Conduct user interviews, surveys, and competitive analysis to understand market opportunities and validate product hypotheses.",
-                "Feature Prioritization": "Decide what features to build and when based on impact, effort, and strategic value. Use frameworks like RICE scoring to make data-driven prioritization decisions.",
-                "Cross-functional Leadership": "Coordinate and align engineering, design, marketing, and sales teams. Lead without authority by building consensus and driving collaboration across departments.",
-                "Data Analysis": "Make data-driven decisions using metrics, user feedback, and performance analytics. Track KPIs, conduct A/B tests, and derive insights to optimize product performance.",
-                "User Advocacy": "Ensure the product solves real customer problems and delivers exceptional user experience. Champion user needs throughout the development process."
-            };
-
-            const handleResponsibilityClick = (responsibility) => {
-                setSelectedResponsibility(selectedResponsibility === responsibility ? null : responsibility);
-            };
-
-            return (
-                <div className="main">
-                    <div className="container">
-                        {/* Hero Section */}
-                        <div className="pm-hero">
-                            <h1>What is Product Management?</h1>
-                            <p className="pm-definition">
-                                Product Management is the strategic practice of guiding a product's journey from conception to market success, 
-                                bridging business objectives, user needs, and technical possibilities.
-                            </p>
-                        </div>
-
-                        {/* NEW: Detailed PM Definition Section */}
-                        <div className="pm-definition-section">
-                            <div className="pm-definition-image">
-                                <img 
-                                    src="./images/PM.jpg" 
-                                    alt="Product Manager at work in modern office environment"
-                                />
-                            </div>
-                            <div className="pm-definition-content">
-                                <h2>The Role of a Product Manager</h2>
-                                <p>
-                                    Product Managers serve as the central hub connecting various stakeholders, from engineering teams 
-                                    to customers, ensuring everyone works toward a shared vision. They are responsible for defining 
-                                    the product roadmap, prioritizing features, and making data-driven decisions.
-                                </p>
-                                <p>
-                                    At its core, Product Management involves understanding market needs, identifying opportunities, 
-                                    and translating complex requirements into actionable plans. PMs must balance competing priorities 
-                                    while maintaining focus on delivering value to both users and the business.
-                                </p>
-                                <p>
-                                    Modern Product Management combines analytical thinking with creative problem-solving, requiring 
-                                    a deep understanding of technology, user experience, and business strategy to drive successful 
-                                    product outcomes.
-                                </p>
-                            </div>
-                        </div>
-
-                        {/* Responsibilities Mind Map */}
-                        <div className="section">
-                            <h2 className="section-title">Core Responsibilities</h2>
-                            <div className="mindmap-section">
-                                <div className={`mindmap-container ${selectedResponsibility ? 'shifted' : ''}`}>
-                                    <div className="mindmap">
-                                        <div className="mindmap-center">
-                                            <span>Product Manager</span>
-                                        </div>
-                                        <div className="mindmap-node node-1" onClick={() => handleResponsibilityClick("Strategic Planning")}>
-                                            <span>Strategic Planning</span>
-                                        </div>
-                                        <div className="mindmap-node node-2" onClick={() => handleResponsibilityClick("Market Research")}>
-                                            <span>Market Research</span>
-                                        </div>
-                                        <div className="mindmap-node node-3" onClick={() => handleResponsibilityClick("Feature Prioritization")}>
-                                            <span>Feature Prioritization</span>
-                                        </div>
-                                        <div className="mindmap-node node-4" onClick={() => handleResponsibilityClick("Cross-functional Leadership")}>
-                                            <span>Cross-functional Leadership</span>
-                                        </div>
-                                        <div className="mindmap-node node-5" onClick={() => handleResponsibilityClick("Data Analysis")}>
-                                            <span>Data Analysis</span>
-                                        </div>
-                                        <div className="mindmap-node node-6" onClick={() => handleResponsibilityClick("User Advocacy")}>
-                                            <span>User Advocacy</span>
-                                        </div>
-                                        <svg className="mindmap-connections">
-                                            <line x1="50%" y1="50%" x2="15%" y2="20%" stroke="#6366f1" strokeWidth="2"/>
-                                            <line x1="50%" y1="50%" x2="85%" y2="20%" stroke="#06b6d4" strokeWidth="2"/>
-                                            <line x1="50%" y1="50%" x2="90%" y2="60%" stroke="#10b981" strokeWidth="2"/>
-                                            <line x1="50%" y1="50%" x2="70%" y2="90%" stroke="#f59e0b" strokeWidth="2"/>
-                                            <line x1="50%" y1="50%" x2="30%" y2="90%" stroke="#ef4444" strokeWidth="2"/>
-                                            <line x1="50%" y1="50%" x2="10%" y2="60%" stroke="#8b5cf6" strokeWidth="2"/>
-                                        </svg>
-                                    </div>
-                                </div>
-                                {selectedResponsibility && (
-                                    <div className="responsibility-detail">
-                                        <h3>{selectedResponsibility}</h3>
-                                        <p>{responsibilities[selectedResponsibility]}</p>
-                                        <button className="close-btn" onClick={() => setSelectedResponsibility(null)}>×</button>
-                                    </div>
-                                )}
-                            </div>
-                        </div>
-
-                        {/* Learning Resources */}
-                        <div className="section">
-                            <h2 className="section-title">Learning Resources</h2>
-                            <div className="resources-grid">
-                                <div className="resource-card video">
-                                    <div className="resource-icon">📺</div>
-                                    <h4>Videos</h4>
-                                    <div className="resource-links">
-                                        <a href="https://www.youtube.com/watch?v=jDgW5HVqb4I" target="_blank" className="resource-link">Product Management 101</a>
-                                        <a href="https://www.youtube.com/channel/UC6hlQ0x6kPbAGjYkoz53cvA" target="_blank" className="resource-link">Product School Channel</a>
-                                    </div>
-                                </div>
-                                
-                                <div className="resource-card blog">
-                                    <div className="resource-icon">📖</div>
-                                    <h4>Blogs</h4>
-                                    <div className="resource-links">
-                                        <a href="https://www.productplan.com/learn/" target="_blank" className="resource-link">ProductPlan Learning</a>
-                                    </div>
-                                </div>
-                                
-                                <div className="resource-card course">
-                                    <div className="resource-icon">🎓</div>
-                                    <h4>Courses</h4>
-                                    <div className="resource-links">
-                                        <a href="https://www.coursera.org/learn/uva-darden-digital-product-management" target="_blank" className="resource-link">Coursera PM Course</a>
-                                        <a href="https://www.udemy.com/course/become-a-product-manager-learn-the-skills-get-a-job/" target="_blank" className="resource-link">Udemy PM Bootcamp</a>
-                                    </div>
-                                </div>
-                                
-                                <div className="resource-card podcast">
-                                    <div className="resource-icon">🎧</div>
-                                    <h4>Podcasts</h4>
-                                    <div className="resource-links">
-                                        <a href="https://www.lennyspodcast.com/" target="_blank" className="resource-link">Lenny's Podcast</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            );
-        };
-
-        // Skillsets Component - FRESH REWRITE
-        const Skillsets = () => {
-            const [currentTab, setCurrentTab] = useState('soft');
-
-            const allSkills = {
-                soft: [
-                    { title: "Leadership & Influence", desc: "Lead cross-functional teams without direct authority", emoji: "👥", url: "https://www.coursera.org/learn/leadership-skills" },
-                    { title: "Communication", desc: "Clear, persuasive communication across all levels", emoji: "💬", url: "https://www.toastmasters.org/" },
-                    { title: "Empathy", desc: "Understanding user needs and team perspectives", emoji: "❤️", url: "https://www.nngroup.com/articles/empathy-mapping/" },
-                    { title: "Problem-Solving", desc: "Creative analytical approach to complex problems", emoji: "🧩" },
-                    { title: "Adaptability", desc: "Flexibility to pivot with changing conditions", emoji: "🔄" },
-                    { title: "Negotiation", desc: "Balancing competing priorities and interests", emoji: "🤝", url: "https://www.pon.harvard.edu/" },
-                    { title: "Time Management", desc: "Managing multiple priorities and deadlines", emoji: "⏰" },
-                    { title: "Storytelling", desc: "Crafting compelling product narratives", emoji: "📖" }
-                ],
-                hard: [
-                    { title: "Data Analysis", desc: "SQL, data interpretation, and metrics analysis", emoji: "📊", url: "https://www.kaggle.com/learn" },
-                    { title: "Market Research", desc: "User research and competitive analysis", emoji: "🔍", url: "https://www.nngroup.com/" },
-                    { title: "Technical Understanding", desc: "Software development and system architecture", emoji: "⚙️", url: "https://www.codecademy.com/" },
-                    { title: "Design Thinking", desc: "UX/UI principles and wireframing", emoji: "🎨", url: "https://www.interaction-design.org/" },
-                    { title: "Project Management", desc: "Agile/Scrum methodologies and planning", emoji: "📋", url: "https://www.scrum.org/" },
-                    { title: "Business Strategy", desc: "Business model analysis and pricing", emoji: "💼" },
-                    { title: "A/B Testing", desc: "Designing experiments to validate hypotheses", emoji: "🧪" },
-                    { title: "Financial Modeling", desc: "ROI calculations and forecasting", emoji: "💰" }
-                ],
-                tools: [
-                    { title: "Figma", desc: "Design and prototyping for interfaces", emoji: "🎯", url: "https://www.figma.com/" },
-                    { title: "Jira", desc: "Project management and issue tracking", emoji: "🛠️", url: "https://www.atlassian.com/software/jira" },
-                    { title: "Google Analytics", desc: "Web analytics and user behavior tracking", emoji: "📈", url: "https://analytics.google.com/" },
-                    { title: "Mixpanel", desc: "Advanced product analytics platform", emoji: "📊", url: "https://mixpanel.com/" },
-                    { title: "Slack", desc: "Team communication and collaboration", emoji: "💻", url: "https://slack.com/" },
-                    { title: "Notion", desc: "All-in-one workspace for documentation", emoji: "📝", url: "https://www.notion.so/" },
-                    { title: "SQL", desc: "Database queries for data analysis", emoji: "🗄️", url: "https://www.w3schools.com/sql/" },
-                    { title: "Tableau", desc: "Data visualization and business intelligence", emoji: "📉", url: "https://www.tableau.com/" }
-                ]
-            };
-
-            const tabNames = {
-                soft: 'Soft Skills',
-                hard: 'Hard Skills', 
-                tools: 'Tools & Technologies'
-            };
-
-            return (
-                <div className="main">
-                    <div className="container">
-                        <div className="section-header">
-                            <h1 className="section-title">Essential PM Skillsets</h1>
-                            <p className="section-subtitle">Master these skills to become a successful Product Manager</p>
-                        </div>
-
-                        {/* Apple-style tabs */}
-                        <div className="new-skillset-tabs">
-                            {Object.keys(allSkills).map((tab) => (
-                                <button
-                                    key={tab}
-                                    onClick={() => setCurrentTab(tab)}
-                                    className={`new-tab-button ${currentTab === tab ? 'tab-active' : ''}`}
-                                >
-                                    {tabNames[tab]}
-                                </button>
-                            ))}
-                        </div>
-
-                        {/* Skills gallery */}
-                        <div className="new-skills-grid">
-                            {allSkills[currentTab].map((skill, idx) => (
-                                <div key={idx} className="new-skill-card">
-                                    <div className="new-skill-emoji">{skill.emoji}</div>
-                                    <h3 className="new-skill-title">{skill.title}</h3>
-                                    <p className="new-skill-desc">{skill.desc}</p>
-                                    {skill.url && (
-                                        <a 
-                                            href={skill.url} 
-                                            target="_blank" 
-                                            rel="noopener noreferrer"
-                                            className="new-skill-link"
-                                        >
-                                            Learn More →
-                                        </a>
-                                    )}
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            );
-        };
-
-        // AI Assistant Component
-        const AIAssistant = () => {
-            const [messages, setMessages] = useState([
-                {
-                    type: 'ai',
-                    content: 'Hello! I\'m your PM Assistant. I can help you with interview preparation, resume tips, and general Product Management guidance for Emory students. How can I assist you today?'
-                }
-            ]);
-            const [inputValue, setInputValue] = useState('');
-            const [isLoading, setIsLoading] = useState(false);
-
-            const handleSendMessage = async () => {
-                if (!inputValue.trim()) return;
-
-                const userMessage = { type: 'user', content: inputValue };
-                setMessages(prev => [...prev, userMessage]);
-                setInputValue('');
-                setIsLoading(true);
-
-                // Simulate AI response (replace with actual API call)
-                setTimeout(() => {
-                    const responses = [
-                        "For interview preparation, I recommend practicing the STAR method (Situation, Task, Action, Result) for behavioral questions. Focus on demonstrating your analytical thinking and user empathy.",
-                        "When crafting your PM resume, highlight quantifiable achievements, technical projects, and leadership experiences. Include any data analysis, user research, or cross-functional collaboration experiences.",
-                        "As an Emory student, leverage your business school resources, case competition experiences, and any consulting or analytics coursework to demonstrate PM skills.",
-                        "Key PM interview topics include: product design questions, analytical problems, behavioral scenarios, and technical understanding. Practice with frameworks like CIRCLES for product design."
-                    ];
-                    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-                    
-                    setMessages(prev => [...prev, { type: 'ai', content: randomResponse }]);
-                    setIsLoading(false);
-                }, 1500);
-            };
-
-            return (
-                <div className="main">
-                    <div className="container">
-                        <div className="section-header">
-                            <h1 className="section-title">AI Assistant</h1>
-                            <p className="section-subtitle">Get personalized help with PM career guidance</p>
-                        </div>
-
-                        <div className="chat-container">
-                            <div className="chat-header">
-                                PM Assistant - Powered by Claude Sonnet 4
-                            </div>
-                            
-                            <div className="chat-messages">
-                                {messages.map((message, index) => (
-                                    <div key={index} className={`message ${message.type}`}>
-                                        <strong>{message.type === 'user' ? 'You' : 'Assistant'}:</strong>
-                                        <div>{message.content}</div>
-                                    </div>
-                                ))}
-                                {isLoading && (
-                                    <div className="message ai">
-                                        <strong>Assistant:</strong>
-                                        <div><span className="loading"></span> Thinking...</div>
-                                    </div>
-                                )}
-                            </div>
-
-                            <div className="chat-input-container">
-                                <input
-                                    type="text"
-                                    className="chat-input"
-                                    placeholder="Ask about interview prep, resume tips, or PM guidance..."
-                                    value={inputValue}
-                                    onChange={(e) => setInputValue(e.target.value)}
-                                    onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-                                />
-                                <button className="btn btn-primary" onClick={handleSendMessage} disabled={isLoading}>
-                                    Send
-                                </button>
-                            </div>
-                        </div>
-
-                        <div className="content-card" style={{marginTop: '2rem'}}>
-                            <h3>How the AI Assistant Can Help</h3>
-                            <ul>
-                                <li><strong>Interview Preparation:</strong> Practice behavioral and case questions, learn frameworks</li>
-                                <li><strong>Resume Tips:</strong> Optimize your resume for PM roles, highlight relevant experiences</li>
-                                <li><strong>General PM Help:</strong> Learn about PM processes, tools, and best practices</li>
-                                <li><strong>Emory-Specific Guidance:</strong> Leverage your Emory background and resources effectively</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            );
-        };
-
-        // Job Alert Component
-        const JobAlert = () => {
-            const [email, setEmail] = useState('');
-            const [alertStatus, setAlertStatus] = useState('');
-
-            const jobOpenings = [
-                { company: 'Microsoft', title: 'Associate Product Manager', status: 'open', link: 'https://careers.microsoft.com' },
-                { company: 'Google', title: 'Product Manager Intern', status: 'open', link: 'https://careers.google.com' },
-                { company: 'Amazon', title: 'Technical Product Manager', status: 'closed', link: 'https://amazon.jobs' },
-                { company: 'Meta', title: 'Product Manager, Growth', status: 'open', link: 'https://www.metacareers.com' },
-                { company: 'Apple', title: 'Product Marketing Manager', status: 'open', link: 'https://jobs.apple.com' },
-                { company: 'Salesforce', title: 'Associate Product Manager', status: 'closed', link: 'https://salesforce.wd1.myworkdayjobs.com' }
-            ];
-
-            const handleEmailSubmit = (e) => {
-                e.preventDefault();
-                if (email) {
-                    setAlertStatus('success');
-                    setEmail('');
-                    setTimeout(() => setAlertStatus(''), 3000);
-                }
-            };
-
-            return (
-                <div className="main">
-                    <div className="container">
-                        <div className="section-header">
-                            <h1 className="section-title">Job Alerts</h1>
-                            <p className="section-subtitle">Stay updated with the latest PM job openings</p>
-                        </div>
-
-                        <div className="section">
-                            <h3 style={{marginBottom: '2rem', color: '#2563eb'}}>Current Job Openings</h3>
-                            {jobOpenings.map((job, index) => (
-                                <div key={index} className="job-card">
-                                    <div className="job-info">
-                                        <h4>{job.title}</h4>
-                                        <p>{job.company}</p>
-                                    </div>
-                                    <div style={{display: 'flex', alignItems: 'center', gap: '1rem'}}>
-                                        <span className={`job-status ${job.status}`}>
-                                            {job.status.charAt(0).toUpperCase() + job.status.slice(1)}
-                                        </span>
-                                        <a href={job.link} target="_blank" className="btn btn-secondary" style={{textDecoration: 'none'}}>
-                                            View Job
-                                        </a>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-
-                        <div className="content-card">
-                            <h3>Get Job Status Notifications</h3>
-                            <p>Register your email to receive notifications when job openings status change or new opportunities are posted.</p>
-                            
-                            {alertStatus === 'success' && (
-                                <div className="alert alert-success">
-                                    ✅ Successfully registered for job alerts!
-                                </div>
-                            )}
-
-                            <form onSubmit={handleEmailSubmit}>
-                                <div className="form-group">
-                                    <label className="form-label">Email Address</label>
-                                    <input
-                                        type="email"
-                                        className="form-input"
-                                        placeholder="your.email@emory.edu"
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
-                                        required
-                                    />
-                                </div>
-                                <button type="submit" className="btn btn-primary">
-                                    Subscribe to Alerts
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            );
-        };
-
-        // About Component
-        const About = () => (
-            <div className="main">
-                <div className="container">
-                    <div className="section-header">
-                        <h1 className="section-title">About PMory</h1>
-                        <p className="section-subtitle">Our mission and vision for Product Management education</p>
-                    </div>
-
-                    <div className="content-card">
-                        <h3>Our Mission</h3>
-                        <p>
-                            PMory is dedicated to empowering Emory University students with comprehensive Product Management knowledge and resources. 
-                            We believe that every student should have access to high-quality PM education, practical guidance, and career support 
-                            to succeed in the rapidly evolving technology industry.
-                        </p>
-                        
-                        <p style={{marginTop: '1rem'}}>
-                            Our platform serves as a centralized hub where students can learn fundamental PM concepts, develop essential skills, 
-                            get personalized career guidance through our AI assistant, and stay updated with the latest job opportunities in the field.
-                        </p>
-                    </div>
-
-                    <div className="content-card">
-                        <h3>What We Offer</h3>
-                        <ul>
-                            <li><strong>Comprehensive Learning Resources:</strong> From basic PM concepts to advanced strategies</li>
-                            <li><strong>Skill Development Guidance:</strong> Both soft and hard skills essential for PM success</li>
-                            <li><strong>AI-Powered Career Support:</strong> Personalized interview prep and resume guidance</li>
-                            <li><strong>Job Opportunities:</strong> Curated PM job listings with real-time updates</li>
-                            <li><strong>Emory-Specific Content:</strong> Tailored resources leveraging Emory's academic strengths</li>
-                        </ul>
-                    </div>
-
-                    <div className="content-card">
-                        <h3>Why Choose PMory?</h3>
-                        <p>
-                            As Emory students, you have unique advantages in the business world through your rigorous academic training. 
-                            PMory helps you translate that knowledge into Product Management success by providing:
-                        </p>
-                        <ul>
-                            <li>Curated content specifically designed for business-minded students</li>
-                            <li>Real-world applications of your analytical and strategic thinking skills</li>
-                            <li>Networking opportunities within the Emory PM community</li>
-                            <li>Career guidance that understands the competitive landscape</li>
-                        </ul>
-                    </div>
-
-                    <div className="content-card">
-                        <h3>Contact & Support</h3>
-                        <p>
-                            Have questions or suggestions? We'd love to hear from you. PMory is continuously evolving based on 
-                            student feedback and industry trends.
-                        </p>
-                        <p>
-                            <strong>Email:</strong> info@pmory.com<br/>
-                            <strong>Community:</strong> Join our Slack workspace for peer discussions<br/>
-                            <strong>Updates:</strong> Follow us for the latest PM insights and opportunities
-                        </p>
-                    </div>
-                </div>
-            </div>
-        );
-
-        // Footer Component
-        const Footer = () => (
-            <footer className="footer">
-                <div className="container">
-                    <p>&copy; 2025 PMory - Product Management Hub for Emory Students</p>
-                    <p>Empowering the next generation of Product Managers</p>
-                </div>
-            </footer>
-        );
-
-        // Main App Component
-        const App = () => {
-            const [currentPage, setCurrentPage] = useState('home');
-
-            const renderPage = () => {
-                switch(currentPage) {
-                    case 'home':
-                        return <HomePage setCurrentPage={setCurrentPage} />;
-                    case 'what-is-pm':
-                        return <WhatIsPM />;
-                    case 'skillsets':
-                        return <Skillsets />;
-                    case 'ai-assistant':
-                        return <AIAssistant />;
-                    case 'job-alert':
-                        return <JobAlert />;
-                    case 'about':
-                        return <About />;
-                    default:
-                        return <HomePage setCurrentPage={setCurrentPage} />;
-                }
-            };
-
-            return (
-                <div>
-                    <Header currentPage={currentPage} setCurrentPage={setCurrentPage} />
-                    {renderPage()}
-                    <Footer />
-                </div>
-            );
-        };
-
-        // Render the app
-        ReactDOM.render(<App />, document.getElementById('root'));
-    </script>
-</body>
-</html>
