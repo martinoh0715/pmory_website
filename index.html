@@ -1684,11 +1684,28 @@
             return (
                 <div className="main">
                     <div className="container">
-                        <div className="section-header">
-                            <h1 className="section-title">AI Assistant</h1>
-                            <p className="section-subtitle">Get personalized help with PM career guidance</p>
-                        </div>
-
+                        <div className="skillsets-hero">
+    <h1>AI Mentor</h1>
+    <p>Get personalized help with PM career guidance and interview preparation</p>
+</div>
+    
+                        <div style={{
+    background: 'rgba(255, 255, 255, 0.6)',
+    borderRadius: '16px',
+    padding: '2rem',
+    marginBottom: '4rem',
+    boxShadow: '0 2px 20px rgba(0, 0, 0, 0.04)'
+}}>
+    <div className="content-card" style={{background: 'transparent', border: 'none', padding: '0', margin: '0'}}>
+        <h3>How the AI Assistant Can Help</h3>
+        <ul>
+            <li><strong>Interview Preparation:</strong> Practice behavioral and case questions, learn frameworks</li>
+            <li><strong>Resume Tips:</strong> Optimize your resume for PM roles, highlight relevant experiences</li>
+            <li><strong>General PM Help:</strong> Learn about PM processes, tools, and best practices</li>
+            <li><strong>Emory-Specific Guidance:</strong> Leverage your Emory background and resources effectively</li>
+        </ul>
+    </div>
+</div>
                         <div className="chat-container">
                             <div className="chat-header">
                                 PM Assistant - Powered by Claude Sonnet 4
@@ -1724,15 +1741,6 @@
                             </div>
                         </div>
 
-                        <div className="content-card" style={{marginTop: '2rem'}}>
-                            <h3>How the AI Assistant Can Help</h3>
-                            <ul>
-                                <li><strong>Interview Preparation:</strong> Practice behavioral and case questions, learn frameworks</li>
-                                <li><strong>Resume Tips:</strong> Optimize your resume for PM roles, highlight relevant experiences</li>
-                                <li><strong>General PM Help:</strong> Learn about PM processes, tools, and best practices</li>
-                                <li><strong>Emory-Specific Guidance:</strong> Leverage your Emory background and resources effectively</li>
-                            </ul>
-                        </div>
                     </div>
                 </div>
             );
