@@ -774,25 +774,19 @@
 
         /* ===== SKILLSETS PAGE STYLES ===== */
         .skillsets-hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-align: center;
-            padding: 4rem 2rem;
-            border-radius: 20px;
-            margin-bottom: 4rem;
-            position: relative;
-            overflow: hidden;
-        }
+  background: rgba(255, 255, 255, 0.6);  /* 60% opacity */
+  color: #1a1a1a;                        /* dark text (no more white) */
+  text-align: center;
+  padding: 4rem 2rem;
+  border-radius: 20px;
+  margin-bottom: 4rem;
+  position: relative;
+  overflow: visible;                      /* no need to clip */
+  box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+  border: 1px solid rgba(0,0,0,0.05);
+}
 
-        .skillsets-hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="white" opacity="0.1"><path d="M0,0v46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1100,7.5,1100,7.5V0Z"/></svg>') repeat-x;
-            background-size: 1000px 100px;
+        .skillsets-hero::before { content: none !important; }
             animation: wave 20s linear infinite;
         }
 
@@ -802,20 +796,17 @@
         }
 
         .skillsets-hero h1 {
-            font-size: 3.5rem;
+            font-size: 4rem;
             font-weight: 800;
-            margin-bottom: 1rem;
-            position: relative;
-            z-index: 2;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
 
         .skillsets-hero p {
-            font-size: 1.3rem;
-            opacity: 0.95;
-            max-width: 600px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 2;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
         }
 
         /* Modern Category Selector */
