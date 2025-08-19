@@ -1,4 +1,798 @@
-<!DOCTYPE html>
+</style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // Logo Component
+        const Logo = () => (
+            <svg className="logo-icon" viewBox="0 0 100 100">
+                <circle cx="30" cy="35" r="20" fill="none" stroke="#2563eb" strokeWidth="4" />
+                <circle cx="50" cy="35" r="20" fill="none" stroke="#2563eb" strokeWidth="4" />
+                <circle cx="40" cy="55" r="20" fill="none" stroke="#2563eb" strokeWidth="4" />
+            </svg>
+        );
+
+        // Header Component
+        const Header = ({ currentPage, setCurrentPage }) => (
+            <header className="header">
+                <div className="container">
+                    <nav className="nav">
+                        <div className="logo">
+                            <Logo />
+                            PMory
+                        </div>
+                        <ul className="nav-links">
+                            <li><a className={`nav-link ${currentPage === 'home' ? 'active' : ''}`} onClick={() => setCurrentPage('home')}>Home</a></li>
+                            <li><a className={`nav-link ${currentPage === 'what-is-pm' ? 'active' : ''}`} onClick={() => setCurrentPage('what-is-pm')}>What is PM</a></li>
+                            <li><a className={`nav-link ${currentPage === 'skillsets' ? 'active' : ''}`} onClick={() => setCurrentPage('skillsets')}>Skillsets</a></li>
+                            <li><a className={`nav-link ${currentPage === 'ai-assistant' ? 'active' : ''}`} onClick={() => setCurrentPage('ai-assistant')}>AI Assistant</a></li>
+                            <li><a className={`nav-link ${currentPage === 'job-alert' ? 'active' : ''}`} onClick={() => setCurrentPage('job-alert')}>Job Alert</a></li>
+                            <li><a className={`nav-link ${currentPage === 'about' ? 'active' : ''}`} onClick={() => setCurrentPage('about')}>About</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </header>
+        );
+
+        // HomePage Component
+        const HomePage = ({ setCurrentPage }) => (
+            <div className="main">
+                {/* Hero Section with Background Video */}
+                <div className="hero-modern">
+                    <div className="hero-background"></div>
+                    {/* <video className="hero-video" autoPlay muted loop>
+                        <source src="YOUR_VIDEO_URL.mp4" type="video/mp4" />
+                    </video> */}
+                    <div className="hero-overlay"></div>
+                    <div className="hero-content">
+                        <div className="hero-text">
+                            <h1>PMory</h1>
+                            <h2>Product Management Hub for Emory Students</h2>
+                            <p>Master PM fundamentals, develop essential skills, and accelerate your career with AI-powered guidance tailored specifically for Emory University students.</p>
+                            <button className="hero-cta" onClick={() => setCurrentPage('ai-assistant')}>
+                                Start Your PM Journey
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Navigation Cards Grid */}
+                <div className="container">
+                    <div className="features-section">
+                        <h3>Explore PMory's Features</h3>
+                        <div className="feature-grid">
+                            <div className="feature-card" onClick={() => setCurrentPage('what-is-pm')}>
+                                <div className="feature-image fundamentals"></div>
+                                <div className="feature-content">
+                                    <h4>What is PM?</h4>
+                                    <p>Learn fundamentals & essential skills</p>
+                                </div>
+                            </div>
+
+                            <div className="feature-card" onClick={() => setCurrentPage('skillsets')}>
+                                <div className="feature-image skills"></div>
+                                <div className="feature-content">
+                                    <h4>Skillsets</h4>
+                                    <p>Master soft & hard skills for PM success</p>
+                                </div>
+                            </div>
+
+                            <div className="feature-card" onClick={() => setCurrentPage('ai-assistant')}>
+                                <div className="feature-image ai"></div>
+                                <div className="feature-content">
+                                    <h4>AI Assistant</h4>
+                                    <p>Personalized career guidance & interview prep</p>
+                                </div>
+                            </div>
+
+                            <div className="feature-card" onClick={() => setCurrentPage('job-alert')}>
+                                <div className="feature-image jobs"></div>
+                                <div className="feature-content">
+                                    <h4>Job Alert</h4>
+                                    <p>Latest PM opportunities & notifications</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+
+        // WhatIsPM Component
+        const WhatIsPM = () => {
+            const [currentSkill, setCurrentSkill] = useState(0);
+            const [selectedResponsibility, setSelectedResponsibility] = useState(null);
+            
+            const skills = [
+                { 
+                    name: "Communication", 
+                    description: "Clear presentation and stakeholder management across all organizational levels", 
+                    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80"
+                },
+                { 
+                    name: "Strategic Thinking", 
+                    description: "Long-term vision and roadmap planning with market analysis", 
+                    image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                },
+                { 
+                    name: "Data Analysis", 
+                    description: "Making data-driven decisions and deriving actionable insights", 
+                    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                },
+                { 
+                    name: "User Experience", 
+                    description: "Understanding user needs, behaviors, and pain points", 
+                    image: "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                },
+                { 
+                    name: "Technical Knowledge", 
+                    description: "Understanding development processes and technology constraints", 
+                    image: "https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80"
+                }
+            ];
+
+            const responsibilities = {
+                "Strategic Planning": "Define product vision, roadmap, and long-term strategy. Product Managers create comprehensive plans that align business objectives with user needs, setting clear goals and milestones for product development.",
+                "Market Research": "Analyze market trends, competition, and user needs. Conduct user interviews, surveys, and competitive analysis to understand market opportunities and validate product hypotheses.",
+                "Feature Prioritization": "Decide what features to build and when based on impact, effort, and strategic value. Use frameworks like RICE scoring to make data-driven prioritization decisions.",
+                "Cross-functional Leadership": "Coordinate and align engineering, design, marketing, and sales teams. Lead without authority by building consensus and driving collaboration across departments.",
+                "Data Analysis": "Make data-driven decisions using metrics, user feedback, and performance analytics. Track KPIs, conduct A/B tests, and derive insights to optimize product performance.",
+                "User Advocacy": "Ensure the product solves real customer problems and delivers exceptional user experience. Champion user needs throughout the development process."
+            };
+
+            const handleResponsibilityClick = (responsibility) => {
+                setSelectedResponsibility(selectedResponsibility === responsibility ? null : responsibility);
+            };
+
+            return (
+                <div className="main">
+                    <div className="container">
+                        {/* Hero Section */}
+                        <div className="pm-hero">
+                            <h1>What is Product Management?</h1>
+                            <p className="pm-definition">
+                                Product Management is the strategic practice of guiding a product's journey from conception to market success, 
+                                bridging business objectives, user needs, and technical possibilities.
+                            </p>
+                        </div>
+
+                        {/* NEW: Detailed PM Definition Section */}
+                        <div className="pm-definition-section">
+                            <div className="pm-definition-image">
+                                <img 
+                                    src="./images/PM.jpg" 
+                                    alt="Product Manager at work in modern office environment"
+                                />
+                            </div>
+                            <div className="pm-definition-content">
+                                <h2>The Role of a Product Manager</h2>
+                                <p>
+                                    Product Managers serve as the central hub connecting various stakeholders, from engineering teams 
+                                    to customers, ensuring everyone works toward a shared vision. They are responsible for defining 
+                                    the product roadmap, prioritizing features, and making data-driven decisions.
+                                </p>
+                                <p>
+                                    At its core, Product Management involves understanding market needs, identifying opportunities, 
+                                    and translating complex requirements into actionable plans. PMs must balance competing priorities 
+                                    while maintaining focus on delivering value to both users and the business.
+                                </p>
+                                <p>
+                                    Modern Product Management combines analytical thinking with creative problem-solving, requiring 
+                                    a deep understanding of technology, user experience, and business strategy to drive successful 
+                                    product outcomes.
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* Responsibilities Mind Map */}
+                        <div className="section">
+                            <h2 className="section-title">Core Responsibilities</h2>
+                            <div className="mindmap-section">
+                                <div className={`mindmap-container ${selectedResponsibility ? 'shifted' : ''}`}>
+                                    <div className="mindmap">
+                                        <div className="mindmap-center">
+                                            <span>Product Manager</span>
+                                        </div>
+                                        <div className="mindmap-node node-1" onClick={() => handleResponsibilityClick("Strategic Planning")}>
+                                            <span>Strategic Planning</span>
+                                        </div>
+                                        <div className="mindmap-node node-2" onClick={() => handleResponsibilityClick("Market Research")}>
+                                            <span>Market Research</span>
+                                        </div>
+                                        <div className="mindmap-node node-3" onClick={() => handleResponsibilityClick("Feature Prioritization")}>
+                                            <span>Feature Prioritization</span>
+                                        </div>
+                                        <div className="mindmap-node node-4" onClick={() => handleResponsibilityClick("Cross-functional Leadership")}>
+                                            <span>Cross-functional Leadership</span>
+                                        </div>
+                                        <div className="mindmap-node node-5" onClick={() => handleResponsibilityClick("Data Analysis")}>
+                                            <span>Data Analysis</span>
+                                        </div>
+                                        <div className="mindmap-node node-6" onClick={() => handleResponsibilityClick("User Advocacy")}>
+                                            <span>User Advocacy</span>
+                                        </div>
+                                        <svg className="mindmap-connections">
+                                            <line x1="50%" y1="50%" x2="15%" y2="20%" stroke="#6366f1" strokeWidth="2"/>
+                                            <line x1="50%" y1="50%" x2="85%" y2="20%" stroke="#06b6d4" strokeWidth="2"/>
+                                            <line x1="50%" y1="50%" x2="90%" y2="60%" stroke="#10b981" strokeWidth="2"/>
+                                            <line x1="50%" y1="50%" x2="70%" y2="90%" stroke="#f59e0b" strokeWidth="2"/>
+                                            <line x1="50%" y1="50%" x2="30%" y2="90%" stroke="#ef4444" strokeWidth="2"/>
+                                            <line x1="50%" y1="50%" x2="10%" y2="60%" stroke="#8b5cf6" strokeWidth="2"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                {selectedResponsibility && (
+                                    <div className="responsibility-detail">
+                                        <h3>{selectedResponsibility}</h3>
+                                        <p>{responsibilities[selectedResponsibility]}</p>
+                                        <button className="close-btn" onClick={() => setSelectedResponsibility(null)}>×</button>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+
+                        {/* Learning Resources */}
+                        <div className="section">
+                            <h2 className="section-title">Learning Resources</h2>
+                            <div className="resources-grid">
+                                <div className="resource-card video">
+                                    <div className="resource-icon">📺</div>
+                                    <h4>Videos</h4>
+                                    <div className="resource-links">
+                                        <a href="https://www.youtube.com/watch?v=jDgW5HVqb4I" target="_blank" className="resource-link">Product Management 101</a>
+                                        <a href="https://www.youtube.com/channel/UC6hlQ0x6kPbAGjYkoz53cvA" target="_blank" className="resource-link">Product School Channel</a>
+                                    </div>
+                                </div>
+                                
+                                <div className="resource-card blog">
+                                    <div className="resource-icon">📖</div>
+                                    <h4>Blogs</h4>
+                                    <div className="resource-links">
+                                        <a href="https://www.productplan.com/learn/" target="_blank" className="resource-link">ProductPlan Learning</a>
+                                    </div>
+                                </div>
+                                
+                                <div className="resource-card course">
+                                    <div className="resource-icon">🎓</div>
+                                    <h4>Courses</h4>
+                                    <div className="resource-links">
+                                        <a href="https://www.coursera.org/learn/uva-darden-digital-product-management" target="_blank" className="resource-link">Coursera PM Course</a>
+                                        <a href="https://www.udemy.com/course/become-a-product-manager-learn-the-skills-get-a-job/" target="_blank" className="resource-link">Udemy PM Bootcamp</a>
+                                    </div>
+                                </div>
+                                
+                                <div className="resource-card podcast">
+                                    <div className="resource-icon">🎧</div>
+                                    <h4>Podcasts</h4>
+                                    <div className="resource-links">
+                                        <a href="https://www.lennyspodcast.com/" target="_blank" className="resource-link">Lenny's Podcast</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        // Skillsets Component - REDESIGNED
+        const Skillsets = () => {
+            const [selectedCategory, setSelectedCategory] = useState('soft');
+
+            const skillsData = {
+                soft: [
+                    { 
+                        name: "Leadership & Influence", 
+                        desc: "Lead cross-functional teams without direct authority. Build consensus and drive collaboration across engineering, design, marketing, and sales teams.", 
+                        icon: "👥", 
+                        link: "https://www.coursera.org/learn/leadership-skills",
+                        difficulty: "intermediate"
+                    },
+                    { 
+                        name: "Communication", 
+                        desc: "Master clear, persuasive communication across all organizational levels. Present complex ideas simply to both technical and non-technical stakeholders.", 
+                        icon: "💬", 
+                        link: "https://www.toastmasters.org/",
+                        difficulty: "beginner"
+                    },
+                    { 
+                        name: "Empathy & User Focus", 
+                        desc: "Deeply understand user needs, pain points, and team perspectives. Champion the user voice throughout the product development process.", 
+                        icon: "❤️", 
+                        link: "https://www.nngroup.com/",
+                        difficulty: "beginner"
+                    },
+                    { 
+                        name: "Technical Understanding", 
+                        desc: "Grasp software development processes, system architecture, and technical constraints. Communicate effectively with engineering teams.", 
+                        icon: "⚙️", 
+                        link: "https://www.codecademy.com/",
+                        difficulty: "intermediate"
+                    },
+                    { 
+                        name: "UX/UI Design", 
+                        desc: "Apply user experience principles, create wireframes, and understand design thinking methodologies. Collaborate effectively with designers.", 
+                        icon: "🎨", 
+                        link: "https://www.interaction-design.org/",
+                        difficulty: "intermediate"
+                    },
+                    { 
+                        name: "Project Management", 
+                        desc: "Master Agile/Scrum methodologies, roadmap planning, and sprint management. Coordinate complex projects across multiple teams.", 
+                        icon: "📋", 
+                        link: "https://www.scrum.org/",
+                        difficulty: "beginner"
+                    },
+                    { 
+                        name: "Financial Modeling", 
+                        desc: "Calculate ROI, LTV, CAC, and other key business metrics. Build financial models to support product investment decisions.", 
+                        icon: "💰",
+                        difficulty: "advanced"
+                    }
+                ],
+                tools: [
+                    { 
+                        name: "Figma", 
+                        desc: "Industry-standard design and prototyping tool. Create wireframes, mockups, and interactive prototypes for user testing.", 
+                        icon: "🎯", 
+                        link: "https://www.figma.com/",
+                        difficulty: "beginner"
+                    },
+                    { 
+                        name: "Jira", 
+                        desc: "Agile project management and issue tracking. Manage backlogs, sprints, and collaborate with engineering teams.", 
+                        icon: "🛠️", 
+                        link: "https://www.atlassian.com/software/jira",
+                        difficulty: "beginner"
+                    },
+                    { 
+                        name: "Google Analytics", 
+                        desc: "Web analytics platform for tracking user behavior, conversion funnels, and product performance metrics.", 
+                        icon: "📈", 
+                        link: "https://analytics.google.com/",
+                        difficulty: "intermediate"
+                    },
+                    { 
+                        name: "Mixpanel", 
+                        desc: "Advanced product analytics for tracking user actions, cohort analysis, and behavioral insights.", 
+                        icon: "📊", 
+                        link: "https://mixpanel.com/",
+                        difficulty: "intermediate"
+                    },
+                    { 
+                        name: "Notion", 
+                        desc: "All-in-one workspace for documentation, knowledge management, and team collaboration.", 
+                        icon: "📝", 
+                        link: "https://www.notion.so/",
+                        difficulty: "beginner"
+                    },
+                    { 
+                        name: "SQL", 
+                        desc: "Database query language essential for data analysis and extracting insights from product databases.", 
+                        icon: "🗄️", 
+                        link: "https://www.w3schools.com/sql/",
+                        difficulty: "intermediate"
+                    }
+                ]
+            };
+
+            const categories = [
+                { key: 'soft', label: 'Soft Skills', emoji: '🧠' },
+                { key: 'hard', label: 'Hard Skills', emoji: '⚡' },
+                { key: 'tools', label: 'Tools & Tech', emoji: '🛠️' }
+            ];
+
+            const learningPath = [
+                { step: 1, title: "Foundation", desc: "Start with communication and basic PM concepts" },
+                { step: 2, title: "Research", desc: "Learn user research and market analysis methods" },
+                { step: 3, title: "Technical", desc: "Develop data analysis and technical understanding" },
+                { step: 4, title: "Leadership", desc: "Master stakeholder management and strategy" },
+                { step: 5, title: "Mastery", desc: "Integrate all skills and lead product organizations" }
+            ];
+
+            return (
+                <div className="main">
+                    <div className="container">
+                        {/* Hero Section */}
+                        <div className="skillsets-hero">
+                            <h1>Master PM Skills</h1>
+                            <p>Develop the essential skills needed to excel as a Product Manager in today's competitive tech landscape</p>
+                        </div>
+
+                        {/* Category Selector */}
+                        <div className="skillset-categories">
+                            {categories.map((category) => (
+                                <button
+                                    key={category.key}
+                                    onClick={() => setSelectedCategory(category.key)}
+                                    className={`category-tab ${selectedCategory === category.key ? 'active' : ''}`}
+                                >
+                                    <span style={{marginRight: '0.5rem'}}>{category.emoji}</span>
+                                    {category.label}
+                                </button>
+                            ))}
+                        </div>
+
+                        {/* Skills Grid */}
+                        <div className="skills-masonry">
+                            {skillsData[selectedCategory].map((skill, index) => (
+                                <div key={index} className="skill-card-new">
+                                    <div className="skill-header">
+                                        <div className="skill-icon-modern">{skill.icon}</div>
+                                        <h3 className="skill-title">{skill.name}</h3>
+                                    </div>
+                                    <p className="skill-description">{skill.desc}</p>
+                                    <div className="skill-actions">
+                                        {skill.link ? (
+                                            <a 
+                                                href={skill.link} 
+                                                target="_blank" 
+                                                rel="noopener noreferrer"
+                                                className="skill-learn-btn"
+                                            >
+                                                Learn More
+                                            </a>
+                                        ) : (
+                                            <div className="skill-learn-btn" style={{background: '#6b7280', cursor: 'default'}}>
+                                                Coming Soon
+                                            </div>
+                                        )}
+                                        {skill.difficulty && (
+                                            <span className={`skill-difficulty ${skill.difficulty}`}>
+                                                {skill.difficulty.charAt(0).toUpperCase() + skill.difficulty.slice(1)}
+                                            </span>
+                                        )}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* Learning Path */}
+                        <div className="learning-path">
+                            <h3>Your PM Learning Journey</h3>
+                            <div className="path-steps">
+                                {learningPath.map((step, index) => (
+                                    <div key={step.step}>
+                                        <div className="path-step">
+                                            <div className="step-number">{step.step}</div>
+                                            <div className="step-title">{step.title}</div>
+                                            <div className="step-desc">{step.desc}</div>
+                                        </div>
+                                        {index < learningPath.length - 1 && (
+                                            <div className="path-arrow">→</div>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        // AI Assistant Component
+        const AIAssistant = () => {
+            const [messages, setMessages] = useState([
+                {
+                    type: 'ai',
+                    content: 'Hello! I\'m your PM Assistant. I can help you with interview preparation, resume tips, and general Product Management guidance for Emory students. How can I assist you today?'
+                }
+            ]);
+            const [inputValue, setInputValue] = useState('');
+            const [isLoading, setIsLoading] = useState(false);
+
+            const handleSendMessage = async () => {
+                if (!inputValue.trim()) return;
+
+                const userMessage = { type: 'user', content: inputValue };
+                setMessages(prev => [...prev, userMessage]);
+                setInputValue('');
+                setIsLoading(true);
+
+                // Simulate AI response (replace with actual API call)
+                setTimeout(() => {
+                    const responses = [
+                        "For interview preparation, I recommend practicing the STAR method (Situation, Task, Action, Result) for behavioral questions. Focus on demonstrating your analytical thinking and user empathy.",
+                        "When crafting your PM resume, highlight quantifiable achievements, technical projects, and leadership experiences. Include any data analysis, user research, or cross-functional collaboration experiences.",
+                        "As an Emory student, leverage your business school resources, case competition experiences, and any consulting or analytics coursework to demonstrate PM skills.",
+                        "Key PM interview topics include: product design questions, analytical problems, behavioral scenarios, and technical understanding. Practice with frameworks like CIRCLES for product design."
+                    ];
+                    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                    
+                    setMessages(prev => [...prev, { type: 'ai', content: randomResponse }]);
+                    setIsLoading(false);
+                }, 1500);
+            };
+
+            return (
+                <div className="main">
+                    <div className="container">
+                        <div className="section-header">
+                            <h1 className="section-title">AI Assistant</h1>
+                            <p className="section-subtitle">Get personalized help with PM career guidance</p>
+                        </div>
+
+                        <div className="chat-container">
+                            <div className="chat-header">
+                                PM Assistant - Powered by Claude Sonnet 4
+                            </div>
+                            
+                            <div className="chat-messages">
+                                {messages.map((message, index) => (
+                                    <div key={index} className={`message ${message.type}`}>
+                                        <strong>{message.type === 'user' ? 'You' : 'Assistant'}:</strong>
+                                        <div>{message.content}</div>
+                                    </div>
+                                ))}
+                                {isLoading && (
+                                    <div className="message ai">
+                                        <strong>Assistant:</strong>
+                                        <div><span className="loading"></span> Thinking...</div>
+                                    </div>
+                                )}
+                            </div>
+
+                            <div className="chat-input-container">
+                                <input
+                                    type="text"
+                                    className="chat-input"
+                                    placeholder="Ask about interview prep, resume tips, or PM guidance..."
+                                    value={inputValue}
+                                    onChange={(e) => setInputValue(e.target.value)}
+                                    onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+                                />
+                                <button className="btn btn-primary" onClick={handleSendMessage} disabled={isLoading}>
+                                    Send
+                                </button>
+                            </div>
+                        </div>
+
+                        <div className="content-card" style={{marginTop: '2rem'}}>
+                            <h3>How the AI Assistant Can Help</h3>
+                            <ul>
+                                <li><strong>Interview Preparation:</strong> Practice behavioral and case questions, learn frameworks</li>
+                                <li><strong>Resume Tips:</strong> Optimize your resume for PM roles, highlight relevant experiences</li>
+                                <li><strong>General PM Help:</strong> Learn about PM processes, tools, and best practices</li>
+                                <li><strong>Emory-Specific Guidance:</strong> Leverage your Emory background and resources effectively</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        // Job Alert Component
+        const JobAlert = () => {
+            const [email, setEmail] = useState('');
+            const [alertStatus, setAlertStatus] = useState('');
+
+            const jobOpenings = [
+                { company: 'Microsoft', title: 'Associate Product Manager', status: 'open', link: 'https://careers.microsoft.com' },
+                { company: 'Google', title: 'Product Manager Intern', status: 'open', link: 'https://careers.google.com' },
+                { company: 'Amazon', title: 'Technical Product Manager', status: 'closed', link: 'https://amazon.jobs' },
+                { company: 'Meta', title: 'Product Manager, Growth', status: 'open', link: 'https://www.metacareers.com' },
+                { company: 'Apple', title: 'Product Marketing Manager', status: 'open', link: 'https://jobs.apple.com' },
+                { company: 'Salesforce', title: 'Associate Product Manager', status: 'closed', link: 'https://salesforce.wd1.myworkdayjobs.com' }
+            ];
+
+            const handleEmailSubmit = (e) => {
+                e.preventDefault();
+                if (email) {
+                    setAlertStatus('success');
+                    setEmail('');
+                    setTimeout(() => setAlertStatus(''), 3000);
+                }
+            };
+
+            return (
+                <div className="main">
+                    <div className="container">
+                        <div className="section-header">
+                            <h1 className="section-title">Job Alerts</h1>
+                            <p className="section-subtitle">Stay updated with the latest PM job openings</p>
+                        </div>
+
+                        <div className="section">
+                            <h3 style={{marginBottom: '2rem', color: '#2563eb'}}>Current Job Openings</h3>
+                            {jobOpenings.map((job, index) => (
+                                <div key={index} className="job-card">
+                                    <div className="job-info">
+                                        <h4>{job.title}</h4>
+                                        <p>{job.company}</p>
+                                    </div>
+                                    <div style={{display: 'flex', alignItems: 'center', gap: '1rem'}}>
+                                        <span className={`job-status ${job.status}`}>
+                                            {job.status.charAt(0).toUpperCase() + job.status.slice(1)}
+                                        </span>
+                                        <a href={job.link} target="_blank" className="btn btn-secondary" style={{textDecoration: 'none'}}>
+                                            View Job
+                                        </a>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className="content-card">
+                            <h3>Get Job Status Notifications</h3>
+                            <p>Register your email to receive notifications when job openings status change or new opportunities are posted.</p>
+                            
+                            {alertStatus === 'success' && (
+                                <div className="alert alert-success">
+                                    ✅ Successfully registered for job alerts!
+                                </div>
+                            )}
+
+                            <form onSubmit={handleEmailSubmit}>
+                                <div className="form-group">
+                                    <label className="form-label">Email Address</label>
+                                    <input
+                                        type="email"
+                                        className="form-input"
+                                        placeholder="your.email@emory.edu"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        required
+                                    />
+                                </div>
+                                <button type="submit" className="btn btn-primary">
+                                    Subscribe to Alerts
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        // About Component
+        const About = () => (
+            <div className="main">
+                <div className="container">
+                    <div className="section-header">
+                        <h1 className="section-title">About PMory</h1>
+                        <p className="section-subtitle">Our mission and vision for Product Management education</p>
+                    </div>
+
+                    <div className="content-card">
+                        <h3>Our Mission</h3>
+                        <p>
+                            PMory is dedicated to empowering Emory University students with comprehensive Product Management knowledge and resources. 
+                            We believe that every student should have access to high-quality PM education, practical guidance, and career support 
+                            to succeed in the rapidly evolving technology industry.
+                        </p>
+                        
+                        <p style={{marginTop: '1rem'}}>
+                            Our platform serves as a centralized hub where students can learn fundamental PM concepts, develop essential skills, 
+                            get personalized career guidance through our AI assistant, and stay updated with the latest job opportunities in the field.
+                        </p>
+                    </div>
+
+                    <div className="content-card">
+                        <h3>What We Offer</h3>
+                        <ul>
+                            <li><strong>Comprehensive Learning Resources:</strong> From basic PM concepts to advanced strategies</li>
+                            <li><strong>Skill Development Guidance:</strong> Both soft and hard skills essential for PM success</li>
+                            <li><strong>AI-Powered Career Support:</strong> Personalized interview prep and resume guidance</li>
+                            <li><strong>Job Opportunities:</strong> Curated PM job listings with real-time updates</li>
+                            <li><strong>Emory-Specific Content:</strong> Tailored resources leveraging Emory's academic strengths</li>
+                        </ul>
+                    </div>
+
+                    <div className="content-card">
+                        <h3>Why Choose PMory?</h3>
+                        <p>
+                            As Emory students, you have unique advantages in the business world through your rigorous academic training. 
+                            PMory helps you translate that knowledge into Product Management success by providing:
+                        </p>
+                        <ul>
+                            <li>Curated content specifically designed for business-minded students</li>
+                            <li>Real-world applications of your analytical and strategic thinking skills</li>
+                            <li>Networking opportunities within the Emory PM community</li>
+                            <li>Career guidance that understands the competitive landscape</li>
+                        </ul>
+                    </div>
+
+                    <div className="content-card">
+                        <h3>Contact & Support</h3>
+                        <p>
+                            Have questions or suggestions? We'd love to hear from you. PMory is continuously evolving based on 
+                            student feedback and industry trends.
+                        </p>
+                        <p>
+                            <strong>Email:</strong> info@pmory.com<br/>
+                            <strong>Community:</strong> Join our Slack workspace for peer discussions<br/>
+                            <strong>Updates:</strong> Follow us for the latest PM insights and opportunities
+                        </p>
+                    </div>
+                </div>
+            </div>
+        );
+
+        // Footer Component
+        const Footer = () => (
+            <footer className="footer">
+                <div className="container">
+                    <p>&copy; 2025 PMory - Product Management Hub for Emory Students</p>
+                    <p>Empowering the next generation of Product Managers</p>
+                </div>
+            </footer>
+        );
+
+        // Main App Component
+        const App = () => {
+            const [currentPage, setCurrentPage] = useState('home');
+
+            const renderPage = () => {
+                switch(currentPage) {
+                    case 'home':
+                        return <HomePage setCurrentPage={setCurrentPage} />;
+                    case 'what-is-pm':
+                        return <WhatIsPM />;
+                    case 'skillsets':
+                        return <Skillsets />;
+                    case 'ai-assistant':
+                        return <AIAssistant />;
+                    case 'job-alert':
+                        return <JobAlert />;
+                    case 'about':
+                        return <About />;
+                    default:
+                        return <HomePage setCurrentPage={setCurrentPage} />;
+                }
+            };
+
+            return (
+                <div>
+                    <Header currentPage={currentPage} setCurrentPage={setCurrentPage} />
+                    {renderPage()}
+                    <Footer />
+                </div>
+            );
+        };
+
+        // Render the app
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>articles/empathy-mapping/",
+                        difficulty: "beginner"
+                    },
+                    { 
+                        name: "Strategic Thinking", 
+                        desc: "Think long-term and see the bigger picture. Connect day-to-day decisions to business objectives and market opportunities.", 
+                        icon: "🧠", 
+                        difficulty: "advanced"
+                    },
+                    { 
+                        name: "Problem-Solving", 
+                        desc: "Break down complex challenges into manageable components. Use structured frameworks to analyze and solve ambiguous problems.", 
+                        icon: "🧩",
+                        difficulty: "intermediate"
+                    },
+                    { 
+                        name: "Negotiation", 
+                        desc: "Balance competing priorities and interests across stakeholders. Find win-win solutions in resource-constrained environments.", 
+                        icon: "🤝", 
+                        link: "https://www.pon.harvard.edu/",
+                        difficulty: "intermediate"
+                    }
+                ],
+                hard: [
+                    { 
+                        name: "Data Analysis", 
+                        desc: "Extract insights from user behavior data, A/B test results, and product metrics. Make data-driven decisions using SQL and analytics tools.", 
+                        icon: "📊", 
+                        link: "https://www.kaggle.com/learn",
+                        difficulty: "intermediate"
+                    },
+                    { 
+                        name: "Market Research", 
+                        desc: "Conduct user interviews, surveys, and competitive analysis. Validate product hypotheses through systematic research methodologies.", 
+                        icon: "🔍", 
+                        link: "https://www.nngroup.com/<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -568,34 +1362,6 @@
             text-align: center;
             padding: 2rem 0;
             margin-top: 4rem;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            
-            .hero-text h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero-text h2 {
-                font-size: 1.2rem;
-            }
-            
-            .features-section h3 {
-                font-size: 2rem;
-            }
-            
-            .feature-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-            
-            .feature-image {
-                height: 140px;
-            }
         }
 
         /* PM Hero Section */
@@ -1278,6 +2044,31 @@
 
         /* Responsive Design for Skillsets */
         @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-text h2 {
+                font-size: 1.2rem;
+            }
+            
+            .features-section h3 {
+                font-size: 2rem;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .feature-image {
+                height: 140px;
+            }
+            
             .skillsets-hero h1 {
                 font-size: 2.5rem;
             }
@@ -1335,5 +2126,48 @@
 
             .learning-path {
                 padding: 2rem 1rem;
+            }
+
+            .pm-definition-section {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .pm-definition-image img {
+                height: 250px;
+            }
+
+            .pm-definition-content h2 {
+                font-size: 1.5rem;
+            }
+            
+            .mindmap {
+                width: 100%;
+                height: 400px;
+            }
+            
+            .mindmap-center {
+                font-size: 1rem;
+                padding: 1rem 1.5rem;
+            }
+            
+            .mindmap-node {
+                font-size: 0.85rem;
+                padding: 0.5rem 1rem;
+            }
+            
+            .carousel-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .carousel-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            .resources-grid {
+                grid-template-columns: 1fr;
             }
         }
