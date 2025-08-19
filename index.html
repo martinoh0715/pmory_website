@@ -563,7 +563,7 @@
 
         /* Footer */
         .footer {
-            background: #f6ece2;
+            background: #d2d2d2;
             color: #000000;
             text-align: center;
             padding: 2rem 0;
@@ -1067,8 +1067,9 @@
                 {/* Hero Section with Background Video */}
                 <div className="hero-modern">
                     <div className="hero-background"></div>
-                    <video className="hero-video" autoPlay muted loop> <source src="./videos/hero-video.mp4" type="video/mp4" /> </video>
-
+                    {/* <video className="hero-video" autoPlay muted loop>
+                        <source src="YOUR_VIDEO_URL.mp4" type="video/mp4" />
+                    </video> */}
                     <div className="hero-overlay"></div>
                     <div className="hero-content">
                         <div className="hero-text">
@@ -1302,60 +1303,268 @@
         };
 
         // Skillsets Component
-        const Skillsets = () => (
-            <div className="main">
-                <div className="container">
-                    <div className="section-header">
-                        <h1 className="section-title">Essential PM Skillsets</h1>
-                        <p className="section-subtitle">Master these skills to become a successful Product Manager</p>
-                    </div>
+        const Skillsets = () => {
+            const [activeCategory, setActiveCategory] = useState('soft');
+            const [hoveredSkill, setHoveredSkill] = useState(null);
 
-                    <div className="content-card">
-                        <h3>Soft Skills</h3>
-                        <ul>
-                            <li><strong>Leadership & Influence:</strong> Ability to lead cross-functional teams without direct authority</li>
-                            <li><strong>Communication:</strong> Clear, concise, and persuasive communication across all levels</li>
-                            <li><strong>Empathy:</strong> Understanding user needs and team perspectives</li>
-                            <li><strong>Problem-Solving:</strong> Creative and analytical approach to solving complex problems</li>
-                            <li><strong>Adaptability:</strong> Flexibility to pivot and adapt to changing market conditions</li>
-                            <li><strong>Negotiation:</strong> Balancing competing priorities and stakeholder interests</li>
-                            <li><strong>Time Management:</strong> Efficiently managing multiple priorities and deadlines</li>
-                            <li><strong>Curiosity:</strong> Continuous learning and questioning assumptions</li>
-                            <li><strong>Storytelling:</strong> Crafting compelling narratives around product vision</li>
-                            <li><strong>Emotional Intelligence:</strong> Managing relationships and team dynamics effectively</li>
-                        </ul>
-                    </div>
+            const skillCategories = {
+                soft: {
+                    title: "Soft Skills",
+                    subtitle: "Essential interpersonal and leadership abilities",
+                    color: "from-purple-500 to-pink-500",
+                    skills: [
+                        { 
+                            name: "Leadership & Influence", 
+                            description: "Ability to lead cross-functional teams without direct authority",
+                            level: "Essential",
+                            icon: "👥"
+                        },
+                        { 
+                            name: "Communication", 
+                            description: "Clear, concise, and persuasive communication across all levels",
+                            level: "Critical",
+                            icon: "💬"
+                        },
+                        { 
+                            name: "Empathy", 
+                            description: "Understanding user needs and team perspectives",
+                            level: "Essential",
+                            icon: "❤️"
+                        },
+                        { 
+                            name: "Problem-Solving", 
+                            description: "Creative and analytical approach to solving complex problems",
+                            level: "Critical",
+                            icon: "🧩"
+                        },
+                        { 
+                            name: "Adaptability", 
+                            description: "Flexibility to pivot and adapt to changing market conditions",
+                            level: "Important",
+                            icon: "🔄"
+                        },
+                        { 
+                            name: "Negotiation", 
+                            description: "Balancing competing priorities and stakeholder interests",
+                            level: "Important",
+                            icon: "🤝"
+                        },
+                        { 
+                            name: "Time Management", 
+                            description: "Efficiently managing multiple priorities and deadlines",
+                            level: "Essential",
+                            icon: "⏰"
+                        },
+                        { 
+                            name: "Storytelling", 
+                            description: "Crafting compelling narratives around product vision",
+                            level: "Important",
+                            icon: "📖"
+                        }
+                    ]
+                },
+                hard: {
+                    title: "Hard Skills",
+                    subtitle: "Technical and analytical competencies",
+                    color: "from-blue-500 to-cyan-500",
+                    skills: [
+                        { 
+                            name: "Data Analysis", 
+                            description: "SQL, Excel/Google Sheets, data interpretation, and metrics analysis",
+                            level: "Critical",
+                            icon: "📊"
+                        },
+                        { 
+                            name: "Market Research", 
+                            description: "User research methodologies, surveys, interviews, and competitive analysis",
+                            level: "Essential",
+                            icon: "🔍"
+                        },
+                        { 
+                            name: "Technical Understanding", 
+                            description: "Basic knowledge of software development, APIs, and system architecture",
+                            level: "Important",
+                            icon: "⚙️"
+                        },
+                        { 
+                            name: "Design Thinking", 
+                            description: "UX/UI principles, wireframing, and user experience design",
+                            level: "Essential",
+                            icon: "🎨"
+                        },
+                        { 
+                            name: "Project Management", 
+                            description: "Agile/Scrum methodologies, roadmap planning, and resource allocation",
+                            level: "Critical",
+                            icon: "📋"
+                        },
+                        { 
+                            name: "Business Strategy", 
+                            description: "Business model analysis, pricing strategies, and P&L understanding",
+                            level: "Essential",
+                            icon: "💼"
+                        },
+                        { 
+                            name: "A/B Testing", 
+                            description: "Designing and analyzing experiments to validate hypotheses",
+                            level: "Important",
+                            icon: "🧪"
+                        },
+                        { 
+                            name: "Financial Modeling", 
+                            description: "ROI calculations, forecasting, and budget management",
+                            level: "Important",
+                            icon: "💰"
+                        }
+                    ]
+                },
+                tools: {
+                    title: "Tools & Technologies",
+                    subtitle: "Essential software and platforms",
+                    color: "from-green-500 to-teal-500",
+                    skills: [
+                        { 
+                            name: "Product Management Tools", 
+                            description: "Jira, Asana, Trello, ProductPlan, Aha!",
+                            level: "Critical",
+                            icon: "🛠️"
+                        },
+                        { 
+                            name: "Analytics Platforms", 
+                            description: "Google Analytics, Mixpanel, Amplitude, Hotjar",
+                            level: "Essential",
+                            icon: "📈"
+                        },
+                        { 
+                            name: "Design Software", 
+                            description: "Figma, Sketch, Adobe Creative Suite, InVision",
+                            level: "Important",
+                            icon: "🎯"
+                        },
+                        { 
+                            name: "Data Analysis Tools", 
+                            description: "Excel, Google Sheets, SQL, Tableau, Power BI",
+                            level: "Critical",
+                            icon: "📊"
+                        },
+                        { 
+                            name: "Communication Tools", 
+                            description: "Slack, Microsoft Teams, Notion, Confluence",
+                            level: "Essential",
+                            icon: "💻"
+                        },
+                        { 
+                            name: "User Research Tools", 
+                            description: "UserTesting.com, SurveyMonkey, Typeform",
+                            level: "Important",
+                            icon: "🔬"
+                        }
+                    ]
+                }
+            };
 
-                    <div className="content-card">
-                        <h3>Hard Skills</h3>
-                        <ul>
-                            <li><strong>Data Analysis:</strong> SQL, Excel/Google Sheets, data interpretation, and metrics analysis</li>
-                            <li><strong>Market Research:</strong> User research methodologies, surveys, interviews, and competitive analysis</li>
-                            <li><strong>Technical Understanding:</strong> Basic knowledge of software development, APIs, and system architecture</li>
-                            <li><strong>Design Thinking:</strong> UX/UI principles, wireframing, and user experience design</li>
-                            <li><strong>Project Management:</strong> Agile/Scrum methodologies, roadmap planning, and resource allocation</li>
-                            <li><strong>Business Strategy:</strong> Business model analysis, pricing strategies, and P&L understanding</li>
-                            <li><strong>Analytics Tools:</strong> Google Analytics, Mixpanel, Amplitude, Tableau, or similar</li>
-                            <li><strong>Prototyping:</strong> Creating mockups and prototypes using tools like Figma, Sketch, or InVision</li>
-                            <li><strong>A/B Testing:</strong> Designing and analyzing experiments to validate hypotheses</li>
-                            <li><strong>Financial Modeling:</strong> ROI calculations, forecasting, and budget management</li>
-                        </ul>
-                    </div>
+            const getLevelColor = (level) => {
+                switch(level) {
+                    case 'Critical': return 'bg-red-100 text-red-800';
+                    case 'Essential': return 'bg-orange-100 text-orange-800';
+                    case 'Important': return 'bg-blue-100 text-blue-800';
+                    default: return 'bg-gray-100 text-gray-800';
+                }
+            };
 
-                    <div className="content-card">
-                        <h3>Tools & Technologies</h3>
-                        <ul>
-                            <li><strong>Product Management:</strong> Jira, Asana, Trello, ProductPlan, Aha!</li>
-                            <li><strong>Analytics:</strong> Google Analytics, Mixpanel, Amplitude, Hotjar</li>
-                            <li><strong>Design:</strong> Figma, Sketch, Adobe Creative Suite, InVision</li>
-                            <li><strong>Data Analysis:</strong> Excel, Google Sheets, SQL, Tableau, Power BI</li>
-                            <li><strong>Communication:</strong> Slack, Microsoft Teams, Notion, Confluence</li>
-                            <li><strong>User Research:</strong> UserTesting.com, SurveyMonkey, Typeform</li>
-                        </ul>
+            return (
+                <div className="main">
+                    <div className="container">
+                        {/* Hero Section */}
+                        <div className="section-header">
+                            <h1 className="section-title">Essential PM Skillsets</h1>
+                            <p className="section-subtitle">Master these skills to become a successful Product Manager</p>
+                        </div>
+
+                        {/* Category Tabs */}
+                        <div className="skill-categories-nav">
+                            {Object.entries(skillCategories).map(([key, category]) => (
+                                <button
+                                    key={key}
+                                    onClick={() => setActiveCategory(key)}
+                                    className={`category-tab ${activeCategory === key ? 'active' : ''}`}
+                                >
+                                    <div className={`category-indicator bg-gradient-to-r ${category.color}`} />
+                                    <div>
+                                        <h3>{category.title}</h3>
+                                        <p>{category.subtitle}</p>
+                                    </div>
+                                </button>
+                            ))}
+                        </div>
+
+                        {/* Skills Grid */}
+                        <div className="skills-grid">
+                            {skillCategories[activeCategory].skills.map((skill, index) => (
+                                <div 
+                                    key={index}
+                                    className="skill-card"
+                                    onMouseEnter={() => setHoveredSkill(index)}
+                                    onMouseLeave={() => setHoveredSkill(null)}
+                                >
+                                    <div className="skill-card-header">
+                                        <div className="skill-icon">{skill.icon}</div>
+                                        <div className={`skill-level ${getLevelColor(skill.level)}`}>
+                                            {skill.level}
+                                        </div>
+                                    </div>
+                                    <h3 className="skill-title">{skill.name}</h3>
+                                    <p className="skill-description">{skill.description}</p>
+                                    <div className={`skill-card-overlay ${hoveredSkill === index ? 'visible' : ''}`}>
+                                        <div className="skill-progress">
+                                            <div className="progress-bar">
+                                                <div 
+                                                    className={`progress-fill bg-gradient-to-r ${skillCategories[activeCategory].color}`}
+                                                    style={{ width: skill.level === 'Critical' ? '90%' : skill.level === 'Essential' ? '75%' : '60%' }}
+                                                />
+                                            </div>
+                                            <span className="progress-text">
+                                                {skill.level === 'Critical' ? 'Must Master' : skill.level === 'Essential' ? 'Highly Recommended' : 'Nice to Have'}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* Skill Development Roadmap */}
+                        <div className="skill-roadmap-section">
+                            <h2 className="section-title">Skill Development Roadmap</h2>
+                            <div className="roadmap-container">
+                                <div className="roadmap-step">
+                                    <div className="step-number">1</div>
+                                    <div className="step-content">
+                                        <h3>Foundation (0-6 months)</h3>
+                                        <p>Focus on core communication, basic data analysis, and product management fundamentals</p>
+                                    </div>
+                                </div>
+                                <div className="roadmap-connector" />
+                                <div className="roadmap-step">
+                                    <div className="step-number">2</div>
+                                    <div className="step-content">
+                                        <h3>Development (6-12 months)</h3>
+                                        <p>Master technical tools, advanced analytics, and cross-functional leadership</p>
+                                    </div>
+                                </div>
+                                <div className="roadmap-connector" />
+                                <div className="roadmap-step">
+                                    <div className="step-number">3</div>
+                                    <div className="step-content">
+                                        <h3>Mastery (12+ months)</h3>
+                                        <p>Develop strategic thinking, financial modeling, and advanced problem-solving</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        );
+            );
+        };
 
         // AI Assistant Component
         const AIAssistant = () => {
