@@ -1302,48 +1302,48 @@
             );
         };
 
-        // Skillsets Component - COMPLETELY REWRITTEN
+        // Skillsets Component - FRESH REWRITE
         const Skillsets = () => {
-            const [selectedCategory, setSelectedCategory] = useState('soft');
+            const [currentTab, setCurrentTab] = useState('soft');
 
-            const skillsData = {
+            const allSkills = {
                 soft: [
-                    { name: "Leadership & Influence", desc: "Lead cross-functional teams without direct authority", icon: "👥", link: "https://www.coursera.org/learn/leadership-skills" },
-                    { name: "Communication", desc: "Clear, persuasive communication across all levels", icon: "💬", link: "https://www.toastmasters.org/" },
-                    { name: "Empathy", desc: "Understanding user needs and team perspectives", icon: "❤️", link: "https://www.nngroup.com/articles/empathy-mapping/" },
-                    { name: "Problem-Solving", desc: "Creative analytical approach to complex problems", icon: "🧩" },
-                    { name: "Adaptability", desc: "Flexibility to pivot with changing conditions", icon: "🔄" },
-                    { name: "Negotiation", desc: "Balancing competing priorities and interests", icon: "🤝", link: "https://www.pon.harvard.edu/" },
-                    { name: "Time Management", desc: "Managing multiple priorities and deadlines", icon: "⏰" },
-                    { name: "Storytelling", desc: "Crafting compelling product narratives", icon: "📖" }
+                    { title: "Leadership & Influence", desc: "Lead cross-functional teams without direct authority", emoji: "👥", url: "https://www.coursera.org/learn/leadership-skills" },
+                    { title: "Communication", desc: "Clear, persuasive communication across all levels", emoji: "💬", url: "https://www.toastmasters.org/" },
+                    { title: "Empathy", desc: "Understanding user needs and team perspectives", emoji: "❤️", url: "https://www.nngroup.com/articles/empathy-mapping/" },
+                    { title: "Problem-Solving", desc: "Creative analytical approach to complex problems", emoji: "🧩" },
+                    { title: "Adaptability", desc: "Flexibility to pivot with changing conditions", emoji: "🔄" },
+                    { title: "Negotiation", desc: "Balancing competing priorities and interests", emoji: "🤝", url: "https://www.pon.harvard.edu/" },
+                    { title: "Time Management", desc: "Managing multiple priorities and deadlines", emoji: "⏰" },
+                    { title: "Storytelling", desc: "Crafting compelling product narratives", emoji: "📖" }
                 ],
                 hard: [
-                    { name: "Data Analysis", desc: "SQL, data interpretation, and metrics analysis", icon: "📊", link: "https://www.kaggle.com/learn" },
-                    { name: "Market Research", desc: "User research and competitive analysis", icon: "🔍", link: "https://www.nngroup.com/" },
-                    { name: "Technical Understanding", desc: "Software development and system architecture", icon: "⚙️", link: "https://www.codecademy.com/" },
-                    { name: "Design Thinking", desc: "UX/UI principles and wireframing", icon: "🎨", link: "https://www.interaction-design.org/" },
-                    { name: "Project Management", desc: "Agile/Scrum methodologies and planning", icon: "📋", link: "https://www.scrum.org/" },
-                    { name: "Business Strategy", desc: "Business model analysis and pricing", icon: "💼" },
-                    { name: "A/B Testing", desc: "Designing experiments to validate hypotheses", icon: "🧪" },
-                    { name: "Financial Modeling", desc: "ROI calculations and forecasting", icon: "💰" }
+                    { title: "Data Analysis", desc: "SQL, data interpretation, and metrics analysis", emoji: "📊", url: "https://www.kaggle.com/learn" },
+                    { title: "Market Research", desc: "User research and competitive analysis", emoji: "🔍", url: "https://www.nngroup.com/" },
+                    { title: "Technical Understanding", desc: "Software development and system architecture", emoji: "⚙️", url: "https://www.codecademy.com/" },
+                    { title: "Design Thinking", desc: "UX/UI principles and wireframing", emoji: "🎨", url: "https://www.interaction-design.org/" },
+                    { title: "Project Management", desc: "Agile/Scrum methodologies and planning", emoji: "📋", url: "https://www.scrum.org/" },
+                    { title: "Business Strategy", desc: "Business model analysis and pricing", emoji: "💼" },
+                    { title: "A/B Testing", desc: "Designing experiments to validate hypotheses", emoji: "🧪" },
+                    { title: "Financial Modeling", desc: "ROI calculations and forecasting", emoji: "💰" }
                 ],
                 tools: [
-                    { name: "Figma", desc: "Design and prototyping for interfaces", icon: "🎯", link: "https://www.figma.com/" },
-                    { name: "Jira", desc: "Project management and issue tracking", icon: "🛠️", link: "https://www.atlassian.com/software/jira" },
-                    { name: "Google Analytics", desc: "Web analytics and user behavior tracking", icon: "📈", link: "https://analytics.google.com/" },
-                    { name: "Mixpanel", desc: "Advanced product analytics platform", icon: "📊", link: "https://mixpanel.com/" },
-                    { name: "Slack", desc: "Team communication and collaboration", icon: "💻", link: "https://slack.com/" },
-                    { name: "Notion", desc: "All-in-one workspace for documentation", icon: "📝", link: "https://www.notion.so/" },
-                    { name: "SQL", desc: "Database queries for data analysis", icon: "🗄️", link: "https://www.w3schools.com/sql/" },
-                    { name: "Tableau", desc: "Data visualization and business intelligence", icon: "📉", link: "https://www.tableau.com/" }
+                    { title: "Figma", desc: "Design and prototyping for interfaces", emoji: "🎯", url: "https://www.figma.com/" },
+                    { title: "Jira", desc: "Project management and issue tracking", emoji: "🛠️", url: "https://www.atlassian.com/software/jira" },
+                    { title: "Google Analytics", desc: "Web analytics and user behavior tracking", emoji: "📈", url: "https://analytics.google.com/" },
+                    { title: "Mixpanel", desc: "Advanced product analytics platform", emoji: "📊", url: "https://mixpanel.com/" },
+                    { title: "Slack", desc: "Team communication and collaboration", emoji: "💻", url: "https://slack.com/" },
+                    { title: "Notion", desc: "All-in-one workspace for documentation", emoji: "📝", url: "https://www.notion.so/" },
+                    { title: "SQL", desc: "Database queries for data analysis", emoji: "🗄️", url: "https://www.w3schools.com/sql/" },
+                    { title: "Tableau", desc: "Data visualization and business intelligence", emoji: "📉", url: "https://www.tableau.com/" }
                 ]
             };
 
-            const categories = [
-                { key: 'soft', label: 'Soft Skills' },
-                { key: 'hard', label: 'Hard Skills' },
-                { key: 'tools', label: 'Tools & Technologies' }
-            ];
+            const tabNames = {
+                soft: 'Soft Skills',
+                hard: 'Hard Skills', 
+                tools: 'Tools & Technologies'
+            };
 
             return (
                 <div className="main">
@@ -1353,32 +1353,32 @@
                             <p className="section-subtitle">Master these skills to become a successful Product Manager</p>
                         </div>
 
-                        {/* Apple-style horizontal category buttons */}
-                        <div className="apple-category-selector">
-                            {categories.map((category) => (
+                        {/* Apple-style tabs */}
+                        <div className="new-skillset-tabs">
+                            {Object.keys(allSkills).map((tab) => (
                                 <button
-                                    key={category.key}
-                                    onClick={() => setSelectedCategory(category.key)}
-                                    className={`apple-category-btn ${selectedCategory === category.key ? 'selected' : ''}`}
+                                    key={tab}
+                                    onClick={() => setCurrentTab(tab)}
+                                    className={`new-tab-button ${currentTab === tab ? 'tab-active' : ''}`}
                                 >
-                                    {category.label}
+                                    {tabNames[tab]}
                                 </button>
                             ))}
                         </div>
 
-                        {/* Skills cards gallery */}
-                        <div className="skills-cards-gallery">
-                            {skillsData[selectedCategory].map((skill, index) => (
-                                <div key={index} className="skill-gallery-item">
-                                    <div className="skill-icon-big">{skill.icon}</div>
-                                    <h3 className="skill-name">{skill.name}</h3>
-                                    <p className="skill-desc">{skill.desc}</p>
-                                    {skill.link && (
+                        {/* Skills gallery */}
+                        <div className="new-skills-grid">
+                            {allSkills[currentTab].map((skill, idx) => (
+                                <div key={idx} className="new-skill-card">
+                                    <div className="new-skill-emoji">{skill.emoji}</div>
+                                    <h3 className="new-skill-title">{skill.title}</h3>
+                                    <p className="new-skill-desc">{skill.desc}</p>
+                                    {skill.url && (
                                         <a 
-                                            href={skill.link} 
+                                            href={skill.url} 
                                             target="_blank" 
                                             rel="noopener noreferrer"
-                                            className="skill-learn-link"
+                                            className="new-skill-link"
                                         >
                                             Learn More →
                                         </a>
