@@ -1213,8 +1213,11 @@
         // HomePage Component
         const HomePage = ({ setCurrentPage }) => (
             <div className="main">
+                {/* Hero Section with Background Video */}
                 <div className="hero-modern">
                     <div className="hero-background"></div>
+                     <video className="hero-video" autoPlay muted loop> <source src="./videos/hero-video.mp4" type="video/mp4" /> </video>
+ 
                     <div className="hero-overlay"></div>
                     <div className="hero-content">
                         <div className="hero-text">
@@ -1423,21 +1426,20 @@
                         name: "Leadership & Influence", 
                         desc: "Lead cross-functional teams without direct authority. Build consensus and drive collaboration across engineering, design, marketing, and sales teams.", 
                         icon: "👥", 
-                        link: "https://www.coursera.org/learn/leadership-skills",
+                        link: "https://www.zingtrain.com/article/servant-leadership/",
                         difficulty: "intermediate"
                     },
                     { 
                         name: "Communication", 
                         desc: "Master clear, persuasive communication across all organizational levels. Present complex ideas simply to both technical and non-technical stakeholders.", 
                         icon: "💬", 
-                        link: "https://www.toastmasters.org/",
                         difficulty: "beginner"
                     },
                     { 
                         name: "Empathy & User Focus", 
                         desc: "Deeply understand user needs, pain points, and team perspectives. Champion the user voice throughout the product development process.", 
                         icon: "❤️", 
-                        link: "https://www.nngroup.com/articles/empathy-mapping/",
+                        link: "https://medium.com/@yujdesigns23/understanding-user-needs-the-role-of-empathy-in-design-thinking-8caafce53abe",
                         difficulty: "beginner"
                     },
                     { 
