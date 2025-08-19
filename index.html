@@ -1302,208 +1302,89 @@
             );
         };
 
-        // Skillsets Component
+        // Skillsets Component - COMPLETELY REWRITTEN
         const Skillsets = () => {
-            const [activeCategory, setActiveCategory] = useState('soft');
+            const [selectedCategory, setSelectedCategory] = useState('soft');
 
-            const skillCategories = {
-                soft: {
-                    title: "Soft Skills",
-                    skills: [
-                        { 
-                            name: "Leadership & Influence", 
-                            description: "Lead cross-functional teams without direct authority",
-                            icon: "👥",
-                            link: "https://www.coursera.org/learn/leadership-skills"
-                        },
-                        { 
-                            name: "Communication", 
-                            description: "Clear, persuasive communication across all levels",
-                            icon: "💬",
-                            link: "https://www.toastmasters.org/"
-                        },
-                        { 
-                            name: "Empathy", 
-                            description: "Understanding user needs and team perspectives",
-                            icon: "❤️",
-                            link: "https://www.nngroup.com/articles/empathy-mapping/"
-                        },
-                        { 
-                            name: "Problem-Solving", 
-                            description: "Creative analytical approach to complex problems",
-                            icon: "🧩"
-                        },
-                        { 
-                            name: "Adaptability", 
-                            description: "Flexibility to pivot with changing conditions",
-                            icon: "🔄"
-                        },
-                        { 
-                            name: "Negotiation", 
-                            description: "Balancing competing priorities and interests",
-                            icon: "🤝",
-                            link: "https://www.pon.harvard.edu/"
-                        },
-                        { 
-                            name: "Time Management", 
-                            description: "Managing multiple priorities and deadlines",
-                            icon: "⏰"
-                        },
-                        { 
-                            name: "Storytelling", 
-                            description: "Crafting compelling product narratives",
-                            icon: "📖"
-                        }
-                    ]
-                },
-                hard: {
-                    title: "Hard Skills",
-                    skills: [
-                        { 
-                            name: "Data Analysis", 
-                            description: "SQL, data interpretation, and metrics analysis",
-                            icon: "📊",
-                            link: "https://www.kaggle.com/learn"
-                        },
-                        { 
-                            name: "Market Research", 
-                            description: "User research and competitive analysis",
-                            icon: "🔍",
-                            link: "https://www.nngroup.com/"
-                        },
-                        { 
-                            name: "Technical Understanding", 
-                            description: "Software development and system architecture",
-                            icon: "⚙️",
-                            link: "https://www.codecademy.com/"
-                        },
-                        { 
-                            name: "Design Thinking", 
-                            description: "UX/UI principles and wireframing",
-                            icon: "🎨",
-                            link: "https://www.interaction-design.org/"
-                        },
-                        { 
-                            name: "Project Management", 
-                            description: "Agile/Scrum methodologies and planning",
-                            icon: "📋",
-                            link: "https://www.scrum.org/"
-                        },
-                        { 
-                            name: "Business Strategy", 
-                            description: "Business model analysis and pricing",
-                            icon: "💼"
-                        },
-                        { 
-                            name: "A/B Testing", 
-                            description: "Designing experiments to validate hypotheses",
-                            icon: "🧪"
-                        },
-                        { 
-                            name: "Financial Modeling", 
-                            description: "ROI calculations and forecasting",
-                            icon: "💰"
-                        }
-                    ]
-                },
-                tools: {
-                    title: "Tools & Technologies",
-                    skills: [
-                        { 
-                            name: "Figma", 
-                            description: "Design and prototyping for interfaces",
-                            icon: "🎯",
-                            link: "https://www.figma.com/"
-                        },
-                        { 
-                            name: "Jira", 
-                            description: "Project management and issue tracking",
-                            icon: "🛠️",
-                            link: "https://www.atlassian.com/software/jira"
-                        },
-                        { 
-                            name: "Google Analytics", 
-                            description: "Web analytics and user behavior tracking",
-                            icon: "📈",
-                            link: "https://analytics.google.com/"
-                        },
-                        { 
-                            name: "Mixpanel", 
-                            description: "Advanced product analytics platform",
-                            icon: "📊",
-                            link: "https://mixpanel.com/"
-                        },
-                        { 
-                            name: "Slack", 
-                            description: "Team communication and collaboration",
-                            icon: "💻",
-                            link: "https://slack.com/"
-                        },
-                        { 
-                            name: "Notion", 
-                            description: "All-in-one workspace for documentation",
-                            icon: "📝",
-                            link: "https://www.notion.so/"
-                        },
-                        { 
-                            name: "SQL", 
-                            description: "Database queries for data analysis",
-                            icon: "🗄️",
-                            link: "https://www.w3schools.com/sql/"
-                        },
-                        { 
-                            name: "Tableau", 
-                            description: "Data visualization and business intelligence",
-                            icon: "📉",
-                            link: "https://www.tableau.com/"
-                        }
-                    ]
-                }
+            const skillsData = {
+                soft: [
+                    { name: "Leadership & Influence", desc: "Lead cross-functional teams without direct authority", icon: "👥", link: "https://www.coursera.org/learn/leadership-skills" },
+                    { name: "Communication", desc: "Clear, persuasive communication across all levels", icon: "💬", link: "https://www.toastmasters.org/" },
+                    { name: "Empathy", desc: "Understanding user needs and team perspectives", icon: "❤️", link: "https://www.nngroup.com/articles/empathy-mapping/" },
+                    { name: "Problem-Solving", desc: "Creative analytical approach to complex problems", icon: "🧩" },
+                    { name: "Adaptability", desc: "Flexibility to pivot with changing conditions", icon: "🔄" },
+                    { name: "Negotiation", desc: "Balancing competing priorities and interests", icon: "🤝", link: "https://www.pon.harvard.edu/" },
+                    { name: "Time Management", desc: "Managing multiple priorities and deadlines", icon: "⏰" },
+                    { name: "Storytelling", desc: "Crafting compelling product narratives", icon: "📖" }
+                ],
+                hard: [
+                    { name: "Data Analysis", desc: "SQL, data interpretation, and metrics analysis", icon: "📊", link: "https://www.kaggle.com/learn" },
+                    { name: "Market Research", desc: "User research and competitive analysis", icon: "🔍", link: "https://www.nngroup.com/" },
+                    { name: "Technical Understanding", desc: "Software development and system architecture", icon: "⚙️", link: "https://www.codecademy.com/" },
+                    { name: "Design Thinking", desc: "UX/UI principles and wireframing", icon: "🎨", link: "https://www.interaction-design.org/" },
+                    { name: "Project Management", desc: "Agile/Scrum methodologies and planning", icon: "📋", link: "https://www.scrum.org/" },
+                    { name: "Business Strategy", desc: "Business model analysis and pricing", icon: "💼" },
+                    { name: "A/B Testing", desc: "Designing experiments to validate hypotheses", icon: "🧪" },
+                    { name: "Financial Modeling", desc: "ROI calculations and forecasting", icon: "💰" }
+                ],
+                tools: [
+                    { name: "Figma", desc: "Design and prototyping for interfaces", icon: "🎯", link: "https://www.figma.com/" },
+                    { name: "Jira", desc: "Project management and issue tracking", icon: "🛠️", link: "https://www.atlassian.com/software/jira" },
+                    { name: "Google Analytics", desc: "Web analytics and user behavior tracking", icon: "📈", link: "https://analytics.google.com/" },
+                    { name: "Mixpanel", desc: "Advanced product analytics platform", icon: "📊", link: "https://mixpanel.com/" },
+                    { name: "Slack", desc: "Team communication and collaboration", icon: "💻", link: "https://slack.com/" },
+                    { name: "Notion", desc: "All-in-one workspace for documentation", icon: "📝", link: "https://www.notion.so/" },
+                    { name: "SQL", desc: "Database queries for data analysis", icon: "🗄️", link: "https://www.w3schools.com/sql/" },
+                    { name: "Tableau", desc: "Data visualization and business intelligence", icon: "📉", link: "https://www.tableau.com/" }
+                ]
             };
+
+            const categories = [
+                { key: 'soft', label: 'Soft Skills' },
+                { key: 'hard', label: 'Hard Skills' },
+                { key: 'tools', label: 'Tools & Technologies' }
+            ];
 
             return (
                 <div className="main">
                     <div className="container">
-                        {/* Hero Section */}
                         <div className="section-header">
                             <h1 className="section-title">Essential PM Skillsets</h1>
                             <p className="section-subtitle">Master these skills to become a successful Product Manager</p>
                         </div>
 
-                        {/* Apple-style Category Selection */}
-                        <div className="apple-style-tabs">
-                            {Object.entries(skillCategories).map(([key, category]) => (
+                        {/* Apple-style horizontal category buttons */}
+                        <div className="apple-category-selector">
+                            {categories.map((category) => (
                                 <button
-                                    key={key}
-                                    onClick={() => setActiveCategory(key)}
-                                    className={`apple-tab ${activeCategory === key ? 'active' : ''}`}
+                                    key={category.key}
+                                    onClick={() => setSelectedCategory(category.key)}
+                                    className={`apple-category-btn ${selectedCategory === category.key ? 'selected' : ''}`}
                                 >
-                                    {category.title}
+                                    {category.label}
                                 </button>
                             ))}
                         </div>
 
-                        {/* Skills Gallery */}
-                        <div className="skills-gallery-section">
-                            <div className="skills-gallery-grid">
-                                {skillCategories[activeCategory].skills.map((skill, index) => (
-                                    <div key={index} className="skill-gallery-card">
-                                        <div className="skill-icon-large">{skill.icon}</div>
-                                        <h3>{skill.name}</h3>
-                                        <p>{skill.description}</p>
-                                        {skill.link && (
-                                            <a 
-                                                href={skill.link} 
-                                                target="_blank" 
-                                                rel="noopener noreferrer"
-                                                className="skill-link"
-                                            >
-                                                Learn More →
-                                            </a>
-                                        )}
-                                    </div>
-                                ))}
-                            </div>
+                        {/* Skills cards gallery */}
+                        <div className="skills-cards-gallery">
+                            {skillsData[selectedCategory].map((skill, index) => (
+                                <div key={index} className="skill-gallery-item">
+                                    <div className="skill-icon-big">{skill.icon}</div>
+                                    <h3 className="skill-name">{skill.name}</h3>
+                                    <p className="skill-desc">{skill.desc}</p>
+                                    {skill.link && (
+                                        <a 
+                                            href={skill.link} 
+                                            target="_blank" 
+                                            rel="noopener noreferrer"
+                                            className="skill-learn-link"
+                                        >
+                                            Learn More →
+                                        </a>
+                                    )}
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>
