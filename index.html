@@ -774,40 +774,31 @@
 
         /* ===== SKILLSETS PAGE STYLES ===== */
         .skillsets-hero {
-  background: rgba(255, 255, 255, 0.6);  /* 60% opacity */
-  color: #1a1a1a;                        /* dark text (no more white) */
+  background: rgba(255, 255, 255, 0.6);
   text-align: center;
-  padding: 4rem 2rem;
-  border-radius: 20px;
+  padding: 4rem 0;
+  border-radius: 16px;
   margin-bottom: 4rem;
-  position: relative;
-  overflow: visible;                      /* no need to clip */
-  box-shadow: 0 2px 20px rgba(0,0,0,0.06);
-  border: 1px solid rgba(0,0,0,0.05);
+  box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+  color: #1a1a1a;
 }
 
-        .skillsets-hero::before { content: none !important; }
-            animation: wave 20s linear infinite;
-        }
+/* match heading style to What is PM */
+.skillsets-hero h1 {
+  font-size: 2.5rem;
+  color: #1a1a1a;
+  margin-bottom: 2rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
 
-        @keyframes wave {
-            0% { transform: translateX(-1000px); }
-            100% { transform: translateX(0); }
-        }
-
-        .skillsets-hero h1 {
-            font-size: 4rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        }
-
-        .skillsets-hero p {
-            font-size: 1.1rem;
-            line-height: 1.7;
-            margin-bottom: 2.5rem;
-            opacity: 0.9;
-        }
+.skillsets-hero p {
+  font-size: 1.3rem;
+  color: #6b7280;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
 
         /* Modern Category Selector */
         .skillset-categories {
