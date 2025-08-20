@@ -438,6 +438,244 @@
         .btn-secondary:hover {
             background: #e2e8f0;
         }
+        /* Modern AI Assistant Styles */
+.ai-hero {
+    background: rgba(255, 255, 255, 0.6);
+    text-align: center;
+    padding: 4rem 0;
+    border-radius: 16px;
+    margin-bottom: 3rem;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+}
+
+.ai-hero h1 {
+    font-size: 2.5rem;
+    color: #1a1a1a;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+
+.ai-hero p {
+    font-size: 1.3rem;
+    color: #6b7280;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+.ai-info-section {
+    margin-bottom: 3rem;
+}
+
+.ai-info-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+}
+
+.ai-info-item {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 1.5rem;
+    border-radius: 12px;
+    text-align: center;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.ai-info-item h3 {
+    color: #1a1a1a;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.ai-info-item p {
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+
+.chat-container-modern {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    overflow: hidden;
+    max-width: 900px;
+    margin: 0 auto;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.chat-header-modern {
+    background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.chat-status {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #475569;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    background: #10b981;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.chat-messages-modern {
+    height: 500px;
+    overflow-y: auto;
+    padding: 2rem;
+    background: #fafafa;
+}
+
+.message-modern {
+    margin-bottom: 1.5rem;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.message-modern.user {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.message-modern.ai {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.message-label {
+    font-size: 0.85rem;
+    color: #6b7280;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.message-content {
+    background: white;
+    padding: 1rem 1.25rem;
+    border-radius: 16px;
+    max-width: 75%;
+    line-height: 1.6;
+    color: #374151;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.message-modern.user .message-content {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: white;
+}
+
+.typing-indicator {
+    display: flex;
+    gap: 4px;
+    padding: 0.5rem 0;
+}
+
+.typing-indicator span {
+    width: 8px;
+    height: 8px;
+    background: #6b7280;
+    border-radius: 50%;
+    animation: typing 1.4s infinite;
+}
+
+.typing-indicator span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-indicator span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes typing {
+    0%, 60%, 100% { opacity: 0.3; }
+    30% { opacity: 1; }
+}
+
+.chat-input-modern {
+    padding: 1.5rem;
+    background: white;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.input-modern {
+    flex: 1;
+    padding: 0.875rem 1.25rem;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    outline: none;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+    background: #fafafa;
+}
+
+.input-modern:focus {
+    border-color: #6366f1;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.send-btn-modern {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.send-btn-modern:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+}
+
+.send-btn-modern:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Responsive for AI Assistant */
+@media (max-width: 768px) {
+    .ai-info-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .chat-messages-modern {
+        height: 400px;
+    }
+    
+    .message-content {
+        max-width: 85%;
+    }
+}
+        
 
         /* Job Alert Styles */
         .job-card {
@@ -1649,132 +1887,167 @@
         };
 
         // AI Assistant Component
-        const AIAssistant = () => {
-            const [messages, setMessages] = useState([
-                {
-                    type: 'ai',
-                    content: 'Hello! I\'m your PM Assistant. I can help you with interview preparation, resume tips, and general Product Management guidance for Emory students. How can I assist you today?'
-                }
-            ]);
-            const [inputValue, setInputValue] = useState('');
-            const [isLoading, setIsLoading] = useState(false);
-
-            const handleSendMessage = async () => {
-    if (!inputValue.trim()) return;
-
-    const userMessage = { type: 'user', content: inputValue };
-    setMessages(prev => [...prev, userMessage]);
-    const currentInput = inputValue;
-    setInputValue('');
-    setIsLoading(true);
-
-    try {
-        console.log('Sending message to AI:', currentInput);
-        
-        const response = await fetch('https://6zvr36ftm5cfajwvxscn73zhzi0txfdo.lambda-url.us-east-1.on.aws/api/chat', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                message: currentInput
-            })
-        });
-
-        console.log('Response status:', response.status);
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+        // AI Assistant Component
+const AIAssistant = () => {
+    const [messages, setMessages] = useState([
+        {
+            type: 'ai',
+            content: 'Hello! I\'m your PM Assistant. I can help you with interview preparation, resume tips, and general Product Management guidance for Emory students. How can I assist you today?'
         }
+    ]);
+    const [inputValue, setInputValue] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
-        const data = await response.json();
-        console.log('AI Response:', data);
-        
-        setMessages(prev => [...prev, { 
-            type: 'ai', 
-            content: data.response || 'Sorry, I encountered an error. Please try again.',
-            metadata: {
-                model: data.ai_model || 'PMory AI',
-                knowledgeUsed: data.knowledge_used || false,
-                system: data.system || 'AI Assistant'
+    // Function to parse markdown-style formatting
+    const formatMessage = (text) => {
+        // Remove or replace **text** with just text (removing bold markers)
+        let formatted = text.replace(/\*\*(.*?)\*\*/g, '$1');
+        // Convert line breaks to <br> for better formatting
+        formatted = formatted.split('\n').map((line, i) => (
+            <span key={i}>
+                {line}
+                {i < formatted.split('\n').length - 1 && <br />}
+            </span>
+        ));
+        return formatted;
+    };
+
+    const handleSendMessage = async () => {
+        if (!inputValue.trim()) return;
+
+        const userMessage = { type: 'user', content: inputValue };
+        setMessages(prev => [...prev, userMessage]);
+        const currentInput = inputValue;
+        setInputValue('');
+        setIsLoading(true);
+
+        try {
+            console.log('Sending message to AI:', currentInput);
+            
+            const response = await fetch('https://6zvr36ftm5cfajwvxscn73zhzi0txfdo.lambda-url.us-east-1.on.aws/api/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    message: currentInput
+                })
+            });
+
+            console.log('Response status:', response.status);
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
             }
-        }]);
+
+            const data = await response.json();
+            console.log('AI Response:', data);
+            
+            setMessages(prev => [...prev, { 
+                type: 'ai', 
+                content: data.response || 'Sorry, I encountered an error. Please try again.',
+                metadata: {
+                    model: data.ai_model || 'PMory AI',
+                    knowledgeUsed: data.knowledge_used || false,
+                    system: data.system || 'AI Assistant'
+                }
+            }]);
+            
+        } catch (error) {
+            console.error('Error calling AI:', error);
+            setMessages(prev => [...prev, { 
+                type: 'ai', 
+                content: 'Sorry, I encountered an error connecting to the AI. Please try again in a moment.'
+            }]);
+        }
         
-    } catch (error) {
-        console.error('Error calling AI:', error);
-        setMessages(prev => [...prev, { 
-            type: 'ai', 
-            content: 'Sorry, I encountered an error connecting to the AI. Please try again in a moment.'
-        }]);
-    }
-    
-    setIsLoading(false);
-};
+        setIsLoading(false);
+    };
 
-            return (
-                <div className="main">
-                    <div className="container">
-                        <div className="skillsets-hero">
-    <h1>AI Mentor</h1>
-    <p>Get personalized help with PM career guidance and interview preparation</p>
-</div>
-    
-                        <div style={{
-    background: 'rgba(255, 255, 255, 0.6)',
-    borderRadius: '16px',
-    padding: '2rem',
-    marginBottom: '4rem',
-    boxShadow: '0 2px 20px rgba(0, 0, 0, 0.04)'
-}}>
-    <div className="content-card" style={{background: 'transparent', border: 'none', padding: '0', margin: '0'}}>
-        <h3>How the AI Assistant Can Help</h3>
-        <ul>
-            <li><strong>Interview Preparation:</strong> Practice behavioral and case questions, learn frameworks</li>
-            <li><strong>Resume Tips:</strong> Optimize your resume for PM roles, highlight relevant experiences</li>
-            <li><strong>General PM Help:</strong> Learn about PM processes, tools, and best practices</li>
-            <li><strong>Emory-Specific Guidance:</strong> Leverage your Emory background and resources effectively</li>
-        </ul>
-    </div>
-</div>
-                        <div className="chat-container">
-                            <div className="chat-header">
-                                PM Assistant - Powered by Claude Sonnet 4
-                            </div>
-                            
-                            <div className="chat-messages">
-                                {messages.map((message, index) => (
-                                    <div key={index} className={`message ${message.type}`}>
-                                        <strong>{message.type === 'user' ? 'You' : 'Assistant'}:</strong>
-                                        <div>{message.content}</div>
-                                    </div>
-                                ))}
-                                {isLoading && (
-                                    <div className="message ai">
-                                        <strong>Assistant:</strong>
-                                        <div>Thinking...</div>
-                                    </div>
-                                )}
-                            </div>
+    return (
+        <div className="main">
+            <div className="container">
+                <div className="ai-hero">
+                    <h1>AI Mentor</h1>
+                    <p>Get personalized help with PM career guidance and interview preparation</p>
+                </div>
 
-                            <div className="chat-input-container">
-                                <input
-                                    type="text"
-                                    className="chat-input"
-                                    placeholder="Ask about interview prep, resume tips, or PM guidance..."
-                                    value={inputValue}
-                                    onChange={(e) => setInputValue(e.target.value)}
-                                    onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-                                />
-                                <button className="btn btn-primary" onClick={handleSendMessage} disabled={isLoading}>
-                                    Send
-                                </button>
-                            </div>
+                <div className="ai-info-section">
+                    <div className="ai-info-grid">
+                        <div className="ai-info-item">
+                            <h3>Interview Prep</h3>
+                            <p>Practice behavioral and case questions</p>
                         </div>
-
+                        <div className="ai-info-item">
+                            <h3>Resume Tips</h3>
+                            <p>Optimize for PM roles</p>
+                        </div>
+                        <div className="ai-info-item">
+                            <h3>Career Guidance</h3>
+                            <p>Leverage your Emory background</p>
+                        </div>
+                        <div className="ai-info-item">
+                            <h3>PM Knowledge</h3>
+                            <p>Learn frameworks and best practices</p>
+                        </div>
                     </div>
                 </div>
-            );
-        };
+
+                <div className="chat-container-modern">
+                    <div className="chat-header-modern">
+                        <div className="chat-status">
+                            <span className="status-dot"></span>
+                            PM Assistant - Powered by Claude Sonnet 4
+                        </div>
+                    </div>
+                    
+                    <div className="chat-messages-modern">
+                        {messages.map((message, index) => (
+                            <div key={index} className={`message-modern ${message.type}`}>
+                                <div className="message-label">
+                                    {message.type === 'user' ? 'You' : 'Assistant'}
+                                </div>
+                                <div className="message-content">
+                                    {typeof message.content === 'string' 
+                                        ? formatMessage(message.content)
+                                        : message.content}
+                                </div>
+                            </div>
+                        ))}
+                        {isLoading && (
+                            <div className="message-modern ai">
+                                <div className="message-label">Assistant</div>
+                                <div className="message-content">
+                                    <div className="typing-indicator">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+
+                    <div className="chat-input-modern">
+                        <input
+                            type="text"
+                            className="input-modern"
+                            placeholder="Ask about interview prep, resume tips, or PM guidance..."
+                            value={inputValue}
+                            onChange={(e) => setInputValue(e.target.value)}
+                            onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+                        />
+                        <button className="send-btn-modern" onClick={handleSendMessage} disabled={isLoading}>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <path d="M22 2L11 13M22 2L15 22L11 13L2 9L22 2Z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
 
         // Job Alert Component
         const JobAlert = () => {
