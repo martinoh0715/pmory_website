@@ -2297,7 +2297,9 @@ const AIAssistant = () => {
 const JobAlert = () => {
     const [email, setEmail] = useState('');
     const [subscriptionStatus, setSubscriptionStatus] = useState('');
+    const [isSubscribing, setIsSubscribing] = useState(false); // Add this line
     const [subscribers, setSubscribers] = useState([]);
+
     
     // Store your Lambda URL here
     const EMAIL_LAMBDA_URL = 'https://wkndwo73luez66sxx636udqiwu0dkodi.lambda-url.us-east-1.on.aws/';
