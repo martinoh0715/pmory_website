@@ -2350,13 +2350,10 @@ const notifySubscribers = async (newJob) => {
 };
 
 // Real job data - you can update this or fetch from a database
-const allJobOpenings = [
+const storedJobs = JSON.parse(localStorage.getItem('pmoryJobs') || '[]');
+const allJobOpenings = storedJobs.length > 0 ? storedJobs : [
     { id: 1, company: 'Microsoft', title: 'Associate Product Manager', status: 'open', link: 'https://careers.microsoft.com', postedDate: '2024-08-15', location: 'Seattle, WA' },
-    { id: 2, company: 'Google', title: 'Product Manager Intern', status: 'open', link: 'https://careers.google.com', postedDate: '2024-08-14', location: 'Mountain View, CA' },
-    { id: 3, company: 'Amazon', title: 'Technical Product Manager', status: 'closed', link: 'https://amazon.jobs', postedDate: '2024-08-10', location: 'Remote' },
-    { id: 4, company: 'Meta', title: 'Product Manager, Growth', status: 'open', link: 'https://www.metacareers.com', postedDate: '2024-08-13', location: 'Menlo Park, CA' },
-    { id: 5, company: 'Apple', title: 'Product Marketing Manager', status: 'open', link: 'https://jobs.apple.com', postedDate: '2024-08-12', location: 'Cupertino, CA' },
-    { id: 6, company: 'Salesforce', title: 'Associate Product Manager', status: 'closed', link: 'https://salesforce.wd1.myworkdayjobs.com', postedDate: '2024-08-08', location: 'San Francisco, CA' }
+    // ... keep your default jobs as fallback
 ];
 
 const displayedJobs = showOnlyOpen 
@@ -2532,6 +2529,7 @@ return (
     const AdminPanel = () => {
     const [password, setPassword] = useState('');
     const [isAuthorized, setIsAuthorized] = useState(false);
+    const [jobs, setJobs] = useState([]);
     const [newJob, setNewJob] = useState({
         company: '',
         title: '',
@@ -2539,16 +2537,30 @@ return (
         link: ''
     });
     
+    // Load jobs when authorized
+    useEffect(() => {
+        if (isAuthorized) {
+            const storedJobs = JSON.parse(localStorage.getItem('pmoryJobs') || '[]');
+            setJobs(storedJobs);
+        }
+    }, [isAuthorized]);
+    
     const handleAddJob = async () => {
-        // Add to your job list
-        const jobs = JSON.parse(localStorage.getItem('pmoryJobs') || '[]');
-        jobs.push({ ...newJob, id: Date.now(), status: 'open', dateAdded: new Date().toISOString() });
-        localStorage.setItem('pmoryJobs', JSON.stringify(jobs));
+        const jobToAdd = {
+            ...newJob,
+            id: Date.now(),
+            status: 'open',
+            postedDate: new Date().toISOString().split('T')[0]
+        };
         
-        // Notify all subscribers
+        const updatedJobs = [...jobs, jobToAdd];
+        setJobs(updatedJobs);
+        localStorage.setItem('pmoryJobs', JSON.stringify(updatedJobs));
+        
+        // Notify subscribers
         const subscribers = JSON.parse(localStorage.getItem('pmorySubscribers') || '[]');
         if (subscribers.length > 0) {
-            await fetch('YOUR_EMAIL_LAMBDA_URL/notify', {
+            await fetch('https://wkndwo73luez66sxx636udqiwu0dkodi.lambda-url.us-east-1.on.aws/notify', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -2561,30 +2573,114 @@ return (
         setNewJob({ company: '', title: '', location: '', link: '' });
     };
     
+    const handleRemoveJob = (jobId) => {
+        const updatedJobs = jobs.filter(job => job.id !== jobId);
+        setJobs(updatedJobs);
+        localStorage.setItem('pmoryJobs', JSON.stringify(updatedJobs));
+    };
+    
+    const handleToggleStatus = (jobId) => {
+        const updatedJobs = jobs.map(job => 
+            job.id === jobId 
+                ? { ...job, status: job.status === 'open' ? 'closed' : 'open' }
+                : job
+        );
+        setJobs(updatedJobs);
+        localStorage.setItem('pmoryJobs', JSON.stringify(updatedJobs));
+    };
+    
     if (!isAuthorized) {
         return (
-            <div>
-                <input 
-                    type="password" 
-                    placeholder="Admin password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-                <button onClick={() => setIsAuthorized(password === 'dh960122!')}>
-                    Login
-                </button>
+            <div className="main">
+                <div className="container">
+                    <div className="admin-login">
+                        <h2>Admin Access</h2>
+                        <input 
+                            type="password" 
+                            className="form-input"
+                            placeholder="Admin password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            onKeyPress={(e) => e.key === 'Enter' && setIsAuthorized(password === 'your-secret-password')}
+                        />
+                        <button 
+                            className="btn btn-primary"
+                            onClick={() => setIsAuthorized(password === 'your-secret-password')}>
+                            Login
+                        </button>
+                    </div>
+                </div>
             </div>
         );
     }
     
     return (
-        <div className="admin-panel">
-            <h2>Add New Job</h2>
-            <input placeholder="Company" value={newJob.company} onChange={(e) => setNewJob({...newJob, company: e.target.value})} />
-            <input placeholder="Title" value={newJob.title} onChange={(e) => setNewJob({...newJob, title: e.target.value})} />
-            <input placeholder="Location" value={newJob.location} onChange={(e) => setNewJob({...newJob, location: e.target.value})} />
-            <input placeholder="Link" value={newJob.link} onChange={(e) => setNewJob({...newJob, link: e.target.value})} />
-            <button onClick={handleAddJob}>Add Job & Notify Subscribers</button>
+        <div className="main">
+            <div className="container">
+                <div className="admin-panel">
+                    <h2>Admin Dashboard</h2>
+                    
+                    <div className="admin-section">
+                        <h3>Add New Job</h3>
+                        <div className="form-group">
+                            <input className="form-input" placeholder="Company" value={newJob.company} onChange={(e) => setNewJob({...newJob, company: e.target.value})} />
+                        </div>
+                        <div className="form-group">
+                            <input className="form-input" placeholder="Title" value={newJob.title} onChange={(e) => setNewJob({...newJob, title: e.target.value})} />
+                        </div>
+                        <div className="form-group">
+                            <input className="form-input" placeholder="Location" value={newJob.location} onChange={(e) => setNewJob({...newJob, location: e.target.value})} />
+                        </div>
+                        <div className="form-group">
+                            <input className="form-input" placeholder="Link" value={newJob.link} onChange={(e) => setNewJob({...newJob, link: e.target.value})} />
+                        </div>
+                        <button className="btn btn-primary" onClick={handleAddJob}>Add Job & Notify Subscribers</button>
+                    </div>
+                    
+                    <div className="admin-section" style={{marginTop: '3rem'}}>
+                        <h3>Current Jobs ({jobs.length})</h3>
+                        <div className="admin-jobs-list">
+                            {jobs.map(job => (
+                                <div key={job.id} className="admin-job-item" style={{
+                                    background: 'white',
+                                    padding: '1rem',
+                                    marginBottom: '1rem',
+                                    borderRadius: '8px',
+                                    border: '1px solid #e5e7eb'
+                                }}>
+                                    <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                                        <div>
+                                            <strong>{job.title}</strong> at {job.company}
+                                            <div style={{fontSize: '0.9rem', color: '#666'}}>
+                                                {job.location} • Status: {job.status}
+                                            </div>
+                                        </div>
+                                        <div style={{display: 'flex', gap: '0.5rem'}}>
+                                            <button 
+                                                className="btn btn-secondary"
+                                                onClick={() => handleToggleStatus(job.id)}
+                                                style={{padding: '0.5rem 1rem', fontSize: '0.9rem'}}
+                                            >
+                                                {job.status === 'open' ? 'Close' : 'Open'}
+                                            </button>
+                                            <button 
+                                                className="btn btn-secondary"
+                                                onClick={() => handleRemoveJob(job.id)}
+                                                style={{padding: '0.5rem 1rem', fontSize: '0.9rem', background: '#ef4444', color: 'white'}}
+                                            >
+                                                Remove
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                            {jobs.length === 0 && (
+                                <p style={{color: '#666'}}>No jobs added yet. Jobs will be stored locally.</p>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };
