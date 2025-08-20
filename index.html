@@ -1660,26 +1660,56 @@
             const [isLoading, setIsLoading] = useState(false);
 
             const handleSendMessage = async () => {
-                if (!inputValue.trim()) return;
+    if (!inputValue.trim()) return;
 
-                const userMessage = { type: 'user', content: inputValue };
-                setMessages(prev => [...prev, userMessage]);
-                setInputValue('');
-                setIsLoading(true);
+    const userMessage = { type: 'user', content: inputValue };
+    setMessages(prev => [...prev, userMessage]);
+    const currentInput = inputValue;
+    setInputValue('');
+    setIsLoading(true);
 
-                setTimeout(() => {
-                    const responses = [
-                        "For interview preparation, I recommend practicing the STAR method (Situation, Task, Action, Result) for behavioral questions. Focus on demonstrating your analytical thinking and user empathy.",
-                        "When crafting your PM resume, highlight quantifiable achievements, technical projects, and leadership experiences. Include any data analysis, user research, or cross-functional collaboration experiences.",
-                        "As an Emory student, leverage your business school resources, case competition experiences, and any consulting or analytics coursework to demonstrate PM skills.",
-                        "Key PM interview topics include: product design questions, analytical problems, behavioral scenarios, and technical understanding. Practice with frameworks like CIRCLES for product design."
-                    ];
-                    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-                    
-                    setMessages(prev => [...prev, { type: 'ai', content: randomResponse }]);
-                    setIsLoading(false);
-                }, 1500);
-            };
+    try {
+        console.log('Sending message to AI:', currentInput);
+        
+        const response = await fetch('https://fkcirm3k6ueaen3ghjubdalci40vqrtv.lambda-url.us-east-1.on.aws/api/chat', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                message: currentInput
+            })
+        });
+
+        console.log('Response status:', response.status);
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log('AI Response:', data);
+        
+        setMessages(prev => [...prev, { 
+            type: 'ai', 
+            content: data.response || 'Sorry, I encountered an error. Please try again.',
+            metadata: {
+                model: data.ai_model || 'PMory AI',
+                knowledgeUsed: data.knowledge_used || false,
+                system: data.system || 'AI Assistant'
+            }
+        }]);
+        
+    } catch (error) {
+        console.error('Error calling AI:', error);
+        setMessages(prev => [...prev, { 
+            type: 'ai', 
+            content: 'Sorry, I encountered an error connecting to the AI. Please try again in a moment.'
+        }]);
+    }
+    
+    setIsLoading(false);
+};
 
             return (
                 <div className="main">
