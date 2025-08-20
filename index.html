@@ -2294,12 +2294,55 @@ const AIAssistant = () => {
 };
 
         // Job Alert Component
-        // Job Alert Component
 const JobAlert = () => {
     const [email, setEmail] = useState('');
     const [subscriptionStatus, setSubscriptionStatus] = useState('');
-    const [showOnlyOpen, setShowOnlyOpen] = useState(true);
-    const [isSubscribing, setIsSubscribing] = useState(false);
+    const [subscribers, setSubscribers] = useState([]);
+    
+    // Store your Lambda URL here
+    const EMAIL_LAMBDA_URL = 'https://wkndwo73luez66sxx636udqiwu0dkodi.lambda-url.us-east-1.on.aws/';
+    
+    const handleEmailSubmit = async (e) => {
+        e.preventDefault();
+        setIsSubscribing(true);
+        
+        try {
+            const response = await fetch(`${https://wkndwo73luez66sxx636udqiwu0dkodi.lambda-url.us-east-1.on.aws/}/subscribe`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email })
+            });
+            
+            if (response.ok) {
+                // Also store locally for admin purposes
+                const subs = JSON.parse(localStorage.getItem('pmorySubscribers') || '[]');
+                subs.push(email);
+                localStorage.setItem('pmorySubscribers', JSON.stringify(subs));
+                
+                setSubscriptionStatus('success');
+                setEmail('');
+            }
+        } catch (error) {
+            setSubscriptionStatus('error');
+        }
+        
+        setIsSubscribing(false);
+        setTimeout(() => setSubscriptionStatus(''), 5000);
+    };
+    
+    // Admin function to notify subscribers about new jobs
+    const notifySubscribers = async (newJob) => {
+        const subs = JSON.parse(localStorage.getItem('pmorySubscribers') || '[]');
+        
+        await fetch(`${EMAIL_LAMBDA_URL}/notify`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                emails: subs,
+                jobData: newJob
+            })
+        });
+    };
 
     // Real job data - you can update this or fetch from a database
     const allJobOpenings = [
@@ -2505,16 +2548,82 @@ const JobAlert = () => {
                 </div>
             </div>
         );
+    const AdminPanel = () => {
+    const [password, setPassword] = useState('');
+    const [isAuthorized, setIsAuthorized] = useState(false);
+    const [newJob, setNewJob] = useState({
+        company: '',
+        title: '',
+        location: '',
+        link: ''
+    });
+    
+    const handleAddJob = async () => {
+        // Add to your job list
+        const jobs = JSON.parse(localStorage.getItem('pmoryJobs') || '[]');
+        jobs.push({ ...newJob, id: Date.now(), status: 'open', dateAdded: new Date().toISOString() });
+        localStorage.setItem('pmoryJobs', JSON.stringify(jobs));
+        
+        // Notify all subscribers
+        const subscribers = JSON.parse(localStorage.getItem('pmorySubscribers') || '[]');
+        if (subscribers.length > 0) {
+            await fetch('YOUR_EMAIL_LAMBDA_URL/notify', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    emails: subscribers,
+                    jobData: newJob
+                })
+            });
+        }
+        
+        setNewJob({ company: '', title: '', location: '', link: '' });
+    };
+    
+    if (!isAuthorized) {
+        return (
+            <div>
+                <input 
+                    type="password" 
+                    placeholder="Admin password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+                <button onClick={() => setIsAuthorized(password === 'dh960122!')}>
+                    Login
+                </button>
+            </div>
+        );
+    }
+    
+    return (
+        <div className="admin-panel">
+            <h2>Add New Job</h2>
+            <input placeholder="Company" value={newJob.company} onChange={(e) => setNewJob({...newJob, company: e.target.value})} />
+            <input placeholder="Title" value={newJob.title} onChange={(e) => setNewJob({...newJob, title: e.target.value})} />
+            <input placeholder="Location" value={newJob.location} onChange={(e) => setNewJob({...newJob, location: e.target.value})} />
+            <input placeholder="Link" value={newJob.link} onChange={(e) => setNewJob({...newJob, link: e.target.value})} />
+            <button onClick={handleAddJob}>Add Job & Notify Subscribers</button>
+        </div>
+    );
+};
 
         // Footer Component
-        const Footer = () => (
-            <footer className="footer">
-                <div className="container">
-                    <p>© 2025 PMory - Product Management Hub for Emory Students</p>
-                    <p>Empowering the next generation of Product Managers</p>
-                </div>
-            </footer>
-        );
+        const Footer = ({ setCurrentPage }) => (
+    <footer className="footer">
+        <div className="container">
+            <p>© 2025 PMory - Product Management Hub for Emory Students</p>
+            <p>Empowering the next generation of Product Managers</p>
+            {/* Hidden admin link - style it to be barely visible */}
+            <div style={{marginTop: '2rem', opacity: 0.3, fontSize: '0.8rem'}}>
+                <a onClick={() => setCurrentPage('admin')} style={{color: '#666', cursor: 'pointer'}}>
+                    •
+                </a>
+            </div>
+        </div>
+    </footer>
+);
+
 
         // Main App Component
         const App = () => {
@@ -2534,6 +2643,8 @@ const JobAlert = () => {
                         return <JobAlert />;
                     case 'about':
                         return <About />;
+                    case 'admin':  // Add this new case
+                        return <AdminPanel />;
                     default:
                         return <HomePage setCurrentPage={setCurrentPage} />;
                 }
