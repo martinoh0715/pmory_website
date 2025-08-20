@@ -1468,6 +1468,187 @@
             color: #ef4444;
         }
 
+        /* About Page Styles */
+.about-hero {
+    text-align: center;
+    padding: 4rem 0;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+    border-radius: 20px;
+    margin-bottom: 3rem;
+}
+
+.about-hero h1 {
+    font-size: 3rem;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.hero-subtitle {
+    font-size: 1.3rem;
+    color: #6b7280;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.about-card {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    padding: 2.5rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.about-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #6366f1, #8b5cf6);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.about-card:hover::before {
+    opacity: 1;
+}
+
+.about-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(99, 102, 241, 0.15);
+}
+
+.card-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    color: white;
+}
+
+.about-card h2 {
+    font-size: 1.5rem;
+    color: #1a1a1a;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.about-card p {
+    color: #4b5563;
+    line-height: 1.7;
+    font-size: 1rem;
+}
+
+.feature-list {
+    list-style: none;
+    padding: 0;
+}
+
+.feature-list li {
+    color: #4b5563;
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.feature-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #6366f1;
+    font-weight: bold;
+}
+
+.contact-info {
+    margin-top: 1rem;
+}
+
+.contact-info p {
+    margin: 0.5rem 0;
+}
+
+.contact-info a {
+    color: #6366f1;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.contact-info a:hover {
+    color: #8b5cf6;
+    text-decoration: underline;
+}
+
+.contact-note {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    font-style: italic;
+    color: #6b7280;
+}
+
+.about-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    padding: 3rem;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    text-align: center;
+}
+
+.stat {
+    position: relative;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    color: #6b7280;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .about-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .about-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .about-hero h1 {
+        font-size: 2rem;
+    }
+}
         /* Learning Path Visualization */
         .learning-path {
             background: rgba(255, 255, 255, 0.6);
@@ -2464,68 +2645,93 @@ return (
 );
 };
         // About Component
-        const About = () => (
-            <div className="main">
-                <div className="container">
-                    <div className="section-header">
-                        <h1 className="section-title">About PMory</h1>
-                        <p className="section-subtitle">Our mission and vision for Product Management education</p>
-                    </div>
+        // About Component
+const About = () => (
+    <div className="main">
+        <div className="container">
+            <div className="about-hero">
+                <h1>About PMory</h1>
+                <p className="hero-subtitle">Empowering Emory students to launch successful Product Management careers</p>
+            </div>
 
-                    <div className="content-card">
-                        <h3>Our Mission</h3>
-                        <p>
-                            PMory is dedicated to empowering Emory University students with comprehensive Product Management knowledge and resources. 
-                            We believe that every student should have access to high-quality PM education, practical guidance, and career support 
-                            to succeed in the rapidly evolving technology industry.
-                        </p>
-                        
-                        <p style={{marginTop: '1rem'}}>
-                            Our platform serves as a centralized hub where students can learn fundamental PM concepts, develop essential skills, 
-                            get personalized career guidance through our AI assistant, and stay updated with the latest job opportunities in the field.
-                        </p>
+            <div className="about-grid">
+                <div className="about-card mission">
+                    <div className="card-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M12 2L2 7L12 12L22 7L12 2Z"/>
+                            <path d="M2 17L12 22L22 17"/>
+                            <path d="M2 12L12 17L22 12"/>
+                        </svg>
                     </div>
+                    <h2>Our Mission</h2>
+                    <p>Bridge the gap between academic excellence and industry requirements by providing Emory students with tailored PM resources, real interview preparation, and direct access to opportunities.</p>
+                </div>
 
-                    <div className="content-card">
-                        <h3>What We Offer</h3>
-                        <ul>
-                            <li><strong>Comprehensive Learning Resources:</strong> From basic PM concepts to advanced strategies</li>
-                            <li><strong>Skill Development Guidance:</strong> Both soft and hard skills essential for PM success</li>
-                            <li><strong>AI-Powered Career Support:</strong> Personalized interview prep and resume guidance</li>
-                            <li><strong>Job Opportunities:</strong> Curated PM job listings with real-time updates</li>
-                            <li><strong>Emory-Specific Content:</strong> Tailored resources leveraging Emory's academic strengths</li>
-                        </ul>
+                <div className="about-card vision">
+                    <div className="card-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+                            <line x1="9" y1="9" x2="9.01" y2="9"/>
+                            <line x1="15" y1="9" x2="15.01" y2="9"/>
+                        </svg>
                     </div>
+                    <h2>Why PMory?</h2>
+                    <p>Emory students possess unique analytical and business skills perfect for PM roles. We provide the specific guidance to transform that potential into offers from top tech companies.</p>
+                </div>
 
-                    <div className="content-card">
-                        <h3>Why Choose PMory?</h3>
-                        <p>
-                            As Emory students, you have unique advantages in the business world through your rigorous academic training. 
-                            PMory helps you translate that knowledge into Product Management success by providing:
-                        </p>
-                        <ul>
-                            <li>Curated content specifically designed for business-minded students</li>
-                            <li>Real-world applications of your analytical and strategic thinking skills</li>
-                            <li>Networking opportunities within the Emory PM community</li>
-                            <li>Career guidance that understands the competitive landscape</li>
-                        </ul>
+                <div className="about-card features">
+                    <div className="card-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                        </svg>
                     </div>
+                    <h2>What We Offer</h2>
+                    <ul className="feature-list">
+                        <li>AI-powered interview coaching</li>
+                        <li>Curated job opportunities</li>
+                        <li>PM skillset assessments</li>
+                        <li>Real-world case studies</li>
+                    </ul>
+                </div>
 
-                    <div className="content-card">
-                        <h3>Contact & Support</h3>
-                        <p>
-                            Have questions or suggestions? We'd love to hear from you. PMory is continuously evolving based on 
-                            student feedback and industry trends.
-                        </p>
-                        <p>
-                            <strong>Email:</strong> info@pmory.com<br/>
-                            <strong>Community:</strong> Join our Slack workspace for peer discussions<br/>
-                            <strong>Updates:</strong> Follow us for the latest PM insights and opportunities
-                        </p>
+                <div className="about-card contact">
+                    <div className="card-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                            <polyline points="22,6 12,13 2,6"/>
+                        </svg>
+                    </div>
+                    <h2>Contact & Support</h2>
+                    <div className="contact-info">
+                        <p><strong>Creator:</strong> Martin Oh</p>
+                        <p><strong>Email:</strong> <a href="mailto:martinoh0715@gmail.com">martinoh0715@gmail.com</a></p>
+                        <p className="contact-note">Questions, feedback, or partnership inquiries welcome</p>
                     </div>
                 </div>
             </div>
-        );
+
+            <div className="about-stats">
+                <div className="stat">
+                    <div className="stat-number">500+</div>
+                    <div className="stat-label">Students Helped</div>
+                </div>
+                <div className="stat">
+                    <div className="stat-number">50+</div>
+                    <div className="stat-label">PM Offers</div>
+                </div>
+                <div className="stat">
+                    <div className="stat-number">24/7</div>
+                    <div className="stat-label">AI Support</div>
+                </div>
+                <div className="stat">
+                    <div className="stat-number">100%</div>
+                    <div className="stat-label">Free Forever</div>
+                </div>
+            </div>
+        </div>
+    </div>
+);
     const AdminPanel = () => {
     const [password, setPassword] = useState('');
     const [isAuthorized, setIsAuthorized] = useState(false);
