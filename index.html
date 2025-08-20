@@ -1695,7 +1695,6 @@
                             <li><a className={`nav-link ${currentPage === 'ai-assistant' ? 'active' : ''}`} onClick={() => setCurrentPage('ai-assistant')}>AI Assistant</a></li>
                             <li><a className={`nav-link ${currentPage === 'job-alert' ? 'active' : ''}`} onClick={() => setCurrentPage('job-alert')}>Job Alert</a></li>
                             <li><a className={`nav-link ${currentPage === 'about' ? 'active' : ''}`} onClick={() => setCurrentPage('about')}>About</a></li>
-                            <li><a className="nav-link" onClick={() => setCurrentPage('admin')}>Admin</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -2596,8 +2595,7 @@ return (
         <div className="container">
             <p>© 2025 PMory - Product Management Hub for Emory Students</p>
             <p>Empowering the next generation of Product Managers</p>
-            {/* Hidden admin link - style it to be barely visible */}
-            <div style={{marginTop: '2rem', opacity: 0.3, fontSize: '0.8rem'}}>
+            <div style={{marginTop: '2rem', opacity: 0.6, fontSize: '1.5rem'}}>
                 <a onClick={() => setCurrentPage('admin')} style={{color: '#666', cursor: 'pointer'}}>
                     •
                 </a>
