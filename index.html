@@ -2297,6 +2297,7 @@ const AIAssistant = () => {
 const JobAlert = () => {
     const [email, setEmail] = useState('');
     const [subscriptionStatus, setSubscriptionStatus] = useState('');
+    const [showOnlyOpen, setShowOnlyOpen] = useState(true);
     const [isSubscribing, setIsSubscribing] = useState(false); // Add this line
     const [subscribers, setSubscribers] = useState([]);
 
