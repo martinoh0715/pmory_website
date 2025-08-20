@@ -1472,9 +1472,10 @@
 .about-hero {
     text-align: center;
     padding: 4rem 0;
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+    background: rgba(255, 255, 255, 0.6);
     border-radius: 20px;
     margin-bottom: 3rem;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.04);
 }
 
 .about-hero h1 {
@@ -1497,7 +1498,6 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
-    margin-bottom: 4rem;
 }
 
 .about-card {
@@ -1604,45 +1604,10 @@
     color: #6b7280;
 }
 
-.about-stats {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
-    padding: 3rem;
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    text-align: center;
-}
-
-.stat {
-    position: relative;
-}
-
-.stat-number {
-    font-size: 2.5rem;
-    font-weight: 700;
-    background: linear-gradient(135deg, #6366f1, #8b5cf6);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 0.5rem;
-}
-
-.stat-label {
-    color: #6b7280;
-    font-size: 0.95rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-
 /* Responsive Design */
 @media (max-width: 768px) {
     .about-grid {
         grid-template-columns: 1fr;
-    }
-    
-    .about-stats {
-        grid-template-columns: repeat(2, 1fr);
     }
     
     .about-hero h1 {
@@ -2646,6 +2611,7 @@ return (
 };
         // About Component
         // About Component
+// About Component
 const About = () => (
     <div className="main">
         <div className="container">
@@ -2708,25 +2674,6 @@ const About = () => (
                         <p><strong>Email:</strong> <a href="mailto:martinoh0715@gmail.com">martinoh0715@gmail.com</a></p>
                         <p className="contact-note">Questions, feedback, or partnership inquiries welcome</p>
                     </div>
-                </div>
-            </div>
-
-            <div className="about-stats">
-                <div className="stat">
-                    <div className="stat-number">500+</div>
-                    <div className="stat-label">Students Helped</div>
-                </div>
-                <div className="stat">
-                    <div className="stat-number">50+</div>
-                    <div className="stat-label">PM Offers</div>
-                </div>
-                <div className="stat">
-                    <div className="stat-number">24/7</div>
-                    <div className="stat-label">AI Support</div>
-                </div>
-                <div className="stat">
-                    <div className="stat-number">100%</div>
-                    <div className="stat-label">Free Forever</div>
                 </div>
             </div>
         </div>
