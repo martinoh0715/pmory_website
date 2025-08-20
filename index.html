@@ -677,7 +677,251 @@
 }
         
 
+
+        /* Job Alert Page Styles */
+.job-hero {
+    background: rgba(255, 255, 255, 0.6);
+    text-align: center;
+    padding: 4rem 0;
+    border-radius: 16px;
+    margin-bottom: 3rem;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+}
+
+.job-hero h1 {
+    font-size: 2.5rem;
+    color: #1a1a1a;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+
+.job-hero p {
+    font-size: 1.3rem;
+    color: #6b7280;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+.job-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.stat-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #6366f1;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    color: #6b7280;
+    font-size: 0.95rem;
+}
+
+.job-filters {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.filter-toggle {
+    background: white;
+    border: 2px solid #e5e7eb;
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-toggle.active {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: white;
+    border-color: #6366f1;
+}
+
+.jobs-grid {
+    display: grid;
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+}
+
+.job-card-modern {
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    border: 1px solid #e5e7eb;
+    transition: all 0.3s ease;
+}
+
+.job-card-modern:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+}
+
+.job-card-modern.closed {
+    opacity: 0.6;
+}
+
+.job-card-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.company-logo {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: white;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.job-meta {
+    flex: 1;
+}
+
+.job-meta h3 {
+    color: #1a1a1a;
+    font-size: 1.2rem;
+    margin-bottom: 0.25rem;
+}
+
+.job-meta p {
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+
+.job-badge {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.job-badge.open {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.job-badge.closed {
+    background: #fef2f2;
+    color: #991b1b;
+}
+
+.job-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid #f3f4f6;
+}
+
+.posted-date {
+    color: #9ca3af;
+    font-size: 0.85rem;
+}
+
+.apply-btn {
+    color: #6366f1;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.apply-btn:hover {
+    color: #4f46e5;
+    transform: translateX(4px);
+}
+
+.email-subscription {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    border-radius: 20px;
+    padding: 3rem;
+    color: white;
+    text-align: center;
+}
+
+.subscription-form {
+    display: flex;
+    gap: 1rem;
+    max-width: 500px;
+    margin: 2rem auto;
+}
+
+.email-input {
+    flex: 1;
+    padding: 1rem;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+}
+
+.subscribe-btn {
+    background: white;
+    color: #6366f1;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.subscribe-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.subscription-features {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.feature {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.alert {
+    padding: 1rem;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+}
+
+.alert.success {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.alert.info {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.alert.error {
+    background: rgba(239, 68, 68, 0.2);
+}
         /* Job Alert Styles */
+        
         .job-card {
             background: white;
             border-radius: 8px;
@@ -2050,87 +2294,153 @@ const AIAssistant = () => {
 };
 
         // Job Alert Component
-        const JobAlert = () => {
-            const [email, setEmail] = useState('');
-            const [alertStatus, setAlertStatus] = useState('');
+        // Job Alert Component
+const JobAlert = () => {
+    const [email, setEmail] = useState('');
+    const [subscriptionStatus, setSubscriptionStatus] = useState('');
+    const [showOnlyOpen, setShowOnlyOpen] = useState(true);
+    const [isSubscribing, setIsSubscribing] = useState(false);
 
-            const jobOpenings = [
-                { company: 'Microsoft', title: 'Associate Product Manager', status: 'open', link: 'https://careers.microsoft.com' },
-                { company: 'Google', title: 'Product Manager Intern', status: 'open', link: 'https://careers.google.com' },
-                { company: 'Amazon', title: 'Technical Product Manager', status: 'closed', link: 'https://amazon.jobs' },
-                { company: 'Meta', title: 'Product Manager, Growth', status: 'open', link: 'https://www.metacareers.com' },
-                { company: 'Apple', title: 'Product Marketing Manager', status: 'open', link: 'https://jobs.apple.com' },
-                { company: 'Salesforce', title: 'Associate Product Manager', status: 'closed', link: 'https://salesforce.wd1.myworkdayjobs.com' }
-            ];
+    // Real job data - you can update this or fetch from a database
+    const allJobOpenings = [
+        { id: 1, company: 'Microsoft', title: 'Associate Product Manager', status: 'open', link: 'https://careers.microsoft.com', postedDate: '2024-08-15', location: 'Seattle, WA' },
+        { id: 2, company: 'Google', title: 'Product Manager Intern', status: 'open', link: 'https://careers.google.com', postedDate: '2024-08-14', location: 'Mountain View, CA' },
+        { id: 3, company: 'Amazon', title: 'Technical Product Manager', status: 'closed', link: 'https://amazon.jobs', postedDate: '2024-08-10', location: 'Remote' },
+        { id: 4, company: 'Meta', title: 'Product Manager, Growth', status: 'open', link: 'https://www.metacareers.com', postedDate: '2024-08-13', location: 'Menlo Park, CA' },
+        { id: 5, company: 'Apple', title: 'Product Marketing Manager', status: 'open', link: 'https://jobs.apple.com', postedDate: '2024-08-12', location: 'Cupertino, CA' },
+        { id: 6, company: 'Salesforce', title: 'Associate Product Manager', status: 'closed', link: 'https://salesforce.wd1.myworkdayjobs.com', postedDate: '2024-08-08', location: 'San Francisco, CA' }
+    ];
 
-            const handleEmailSubmit = (e) => {
-                e.preventDefault();
-                if (email) {
-                    setAlertStatus('success');
-                    setEmail('');
-                    setTimeout(() => setAlertStatus(''), 3000);
-                }
-            };
+    const displayedJobs = showOnlyOpen 
+        ? allJobOpenings.filter(job => job.status === 'open')
+        : allJobOpenings;
 
-            return (
-                <div className="main">
-                    <div className="container">
-                        <div className="section-header">
-                            <h1 className="section-title">Job Alerts</h1>
-                            <p className="section-subtitle">Stay updated with the latest PM job openings</p>
+    const handleEmailSubmit = async (e) => {
+        e.preventDefault();
+        setIsSubscribing(true);
+        
+        try {
+            // For now, store in localStorage (replace with API call later)
+            const subscribers = JSON.parse(localStorage.getItem('pmorySubscribers') || '[]');
+            if (!subscribers.includes(email)) {
+                subscribers.push(email);
+                localStorage.setItem('pmorySubscribers', JSON.stringify(subscribers));
+                setSubscriptionStatus('success');
+                setEmail('');
+            } else {
+                setSubscriptionStatus('already_subscribed');
+            }
+        } catch (error) {
+            setSubscriptionStatus('error');
+        }
+        
+        setIsSubscribing(false);
+        setTimeout(() => setSubscriptionStatus(''), 5000);
+    };
+
+    return (
+        <div className="main">
+            <div className="container">
+                <div className="job-hero">
+                    <h1>PM Job Opportunities</h1>
+                    <p>Curated product management positions for Emory students</p>
+                </div>
+
+                <div className="job-stats">
+                    <div className="stat-card">
+                        <div className="stat-number">{allJobOpenings.filter(j => j.status === 'open').length}</div>
+                        <div className="stat-label">Open Positions</div>
+                    </div>
+                    <div className="stat-card">
+                        <div className="stat-number">{allJobOpenings.length}</div>
+                        <div className="stat-label">Total Listed</div>
+                    </div>
+                    <div className="stat-card">
+                        <div className="stat-number">24h</div>
+                        <div className="stat-label">Updated Daily</div>
+                    </div>
+                </div>
+
+                <div className="job-filters">
+                    <button 
+                        className={`filter-toggle ${showOnlyOpen ? 'active' : ''}`}
+                        onClick={() => setShowOnlyOpen(!showOnlyOpen)}
+                    >
+                        {showOnlyOpen ? '✓ Showing Open Jobs Only' : 'Show All Jobs'}
+                    </button>
+                </div>
+
+                <div className="jobs-grid">
+                    {displayedJobs.map((job) => (
+                        <div key={job.id} className={`job-card-modern ${job.status}`}>
+                            <div className="job-card-header">
+                                <div className="company-logo">
+                                    {job.company.charAt(0)}
+                                </div>
+                                <div className="job-meta">
+                                    <h3>{job.title}</h3>
+                                    <p>{job.company} • {job.location}</p>
+                                </div>
+                                <span className={`job-badge ${job.status}`}>
+                                    {job.status === 'open' ? 'Open' : 'Closed'}
+                                </span>
+                            </div>
+                            <div className="job-card-footer">
+                                <span className="posted-date">Posted {job.postedDate}</span>
+                                <a href={job.link} target="_blank" className="apply-btn">
+                                    View Position →
+                                </a>
+                            </div>
                         </div>
+                    ))}
+                </div>
 
-                        <div className="section">
-                            <h3 style={{marginBottom: '2rem', color: '#2563eb'}}>Current Job Openings</h3>
-                            {jobOpenings.map((job, index) => (
-                                <div key={index} className="job-card">
-                                    <div className="job-info">
-                                        <h4>{job.title}</h4>
-                                        <p>{job.company}</p>
-                                    </div>
-                                    <div style={{display: 'flex', alignItems: 'center', gap: '1rem'}}>
-                                        <span className={`job-status ${job.status}`}>
-                                            {job.status.charAt(0).toUpperCase() + job.status.slice(1)}
-                                        </span>
-                                        <a href={job.link} target="_blank" className="btn btn-secondary" style={{textDecoration: 'none'}}>
-                                            View Job
-                                        </a>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
+                <div className="email-subscription">
+                    <div className="subscription-content">
+                        <h2>Never Miss an Opportunity</h2>
+                        <p>Get instant notifications when new PM positions open up</p>
+                        
+                        {subscriptionStatus === 'success' && (
+                            <div className="alert success">
+                                ✓ Successfully subscribed! You'll receive job alerts at {email}
+                            </div>
+                        )}
+                        {subscriptionStatus === 'already_subscribed' && (
+                            <div className="alert info">
+                                This email is already subscribed to alerts
+                            </div>
+                        )}
+                        {subscriptionStatus === 'error' && (
+                            <div className="alert error">
+                                Something went wrong. Please try again.
+                            </div>
+                        )}
 
-                        <div className="content-card">
-                            <h3>Get Job Status Notifications</h3>
-                            <p>Register your email to receive notifications when job openings status change or new opportunities are posted.</p>
-                            
-                            {alertStatus === 'success' && (
-                                <div className="alert alert-success">
-                                    Successfully registered for job alerts!
-                                </div>
-                            )}
+                        <form onSubmit={handleEmailSubmit} className="subscription-form">
+                            <input
+                                type="email"
+                                className="email-input"
+                                placeholder="your.email@emory.edu"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
+                            />
+                            <button type="submit" className="subscribe-btn" disabled={isSubscribing}>
+                                {isSubscribing ? 'Subscribing...' : 'Subscribe to Alerts'}
+                            </button>
+                        </form>
 
-                            <form onSubmit={handleEmailSubmit}>
-                                <div className="form-group">
-                                    <label className="form-label">Email Address</label>
-                                    <input
-                                        type="email"
-                                        className="form-input"
-                                        placeholder="your.email@emory.edu"
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
-                                        required
-                                    />
-                                </div>
-                                <button type="submit" className="btn btn-primary">
-                                    Subscribe to Alerts
-                                </button>
-                            </form>
+                        <div className="subscription-features">
+                            <div className="feature">✓ Instant notifications</div>
+                            <div className="feature">✓ Weekly digest</div>
+                            <div className="feature">✓ Unsubscribe anytime</div>
                         </div>
                     </div>
                 </div>
-            );
-        };
+            </div>
+        </div>
+    );
+};
 
         // About Component
         const About = () => (
