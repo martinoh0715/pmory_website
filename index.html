@@ -2635,7 +2635,7 @@ return (
                 <div>
                     <Header currentPage={currentPage} setCurrentPage={setCurrentPage} />
                     {renderPage()}
-                    <Footer />
+                    <Footer setCurrentPage={setCurrentPage/>
                 </div>
             );
         };
