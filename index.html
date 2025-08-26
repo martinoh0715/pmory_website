@@ -2289,18 +2289,28 @@ const AIAssistant = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     // Function to parse markdown-style formatting
-    const formatMessage = (text) => {
-        // Remove or replace **text** with just text (removing bold markers)
-        let formatted = text.replace(/\*\*(.*?)\*\*/g, '$1');
-        // Convert line breaks to <br> for better formatting
-        formatted = formatted.split('\n').map((line, i) => (
-            <span key={i}>
-                {line}
-                {i < formatted.split('\n').length - 1 && <br />}
+const formatMessage = (text) => {
+    // Split by lines first
+    const lines = text.split('\n');
+    
+    return lines.map((line, lineIndex) => {
+        // Parse bold markers in each line
+        const parts = line.split(/(\*\*[^*]+\*\*)/g);
+        const formattedLine = parts.map((part, partIndex) => {
+            if (part.startsWith('**') && part.endsWith('**')) {
+                return <strong key={`${lineIndex}-${partIndex}`}>{part.slice(2, -2)}</strong>;
+            }
+            return part;
+        });
+        
+        return (
+            <span key={lineIndex}>
+                {formattedLine}
+                {lineIndex < lines.length - 1 && <br />}
             </span>
-        ));
-        return formatted;
-    };
+        );
+    });
+};
 
     const handleSendMessage = async () => {
         if (!inputValue.trim()) return;
