@@ -2859,25 +2859,27 @@ const About = () => (
             const [currentPage, setCurrentPage] = useState('home');
 
             // Handle browser history
-    useEffect(() => {
-        // Push state when page changes
+useEffect(() => {
+    // Only push state if it's different from current state
+    if (window.location.hash !== `#${currentPage}`) {
         window.history.pushState({ page: currentPage }, '', `#${currentPage}`);
-        
-        // Handle browser back/forward buttons
-        const handlePopState = (event) => {
-            if (event.state && event.state.page) {
-                setCurrentPage(event.state.page);
-            } else {
-                // Handle initial page load from URL hash
-                const hash = window.location.hash.slice(1) || 'home';
-                setCurrentPage(hash);
-            }
-        };
-
-        window.addEventListener('popstate', handlePopState);
-        
-        return () => window.removeEventListener('popstate', handlePopState);
-    }, [currentPage]);
+    }
+    
+    // Handle browser back/forward buttons
+    const handlePopState = (event) => {
+        if (event.state && event.state.page) {
+            setCurrentPage(event.state.page);
+        } else {
+            // Handle initial page load from URL hash
+            const hash = window.location.hash.slice(1) || 'home';
+            setCurrentPage(hash);
+        }
+    };
+    
+    window.addEventListener('popstate', handlePopState);
+    
+    return () => window.removeEventListener('popstate', handlePopState);
+}, [currentPage]);
 
     // Initialize from URL on first load
     useEffect(() => {
