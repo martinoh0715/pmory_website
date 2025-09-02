@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PMory - Product Management Hub for Emory Students</title>
+    
+    <!-- Google Analytics - ADD THIS PART -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-M6EM7WHZPE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-M6EM7WHZPE');
+    </script>
+    
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -2315,6 +2325,13 @@ const formatMessage = (text) => {
     const handleSendMessage = async () => {
         if (!inputValue.trim()) return;
 
+        // Track AI usage
+        if (window.gtag) {
+            window.gtag('event', 'ai_chat', {
+                'event_category': 'ai_assistant',
+                'event_label': 'message_sent'
+            });
+        }
         const userMessage = { type: 'user', content: inputValue };
         setMessages(prev => [...prev, userMessage]);
         const currentInput = inputValue;
@@ -2477,6 +2494,15 @@ const handleEmailSubmit = async (e) => {
             const subs = JSON.parse(localStorage.getItem('pmorySubscribers') || '[]');
             subs.push(email);
             localStorage.setItem('pmorySubscribers', JSON.stringify(subs));
+            
+            // Track successful email signup
+            if (window.gtag) {
+                window.gtag('event', 'sign_up', {
+                    'event_category': 'email_alerts',
+                    'event_label': 'newsletter_subscription',
+                    'value': 1
+                });
+            }
             
             setSubscriptionStatus('success');
             setEmail('');
