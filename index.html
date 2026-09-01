@@ -2859,6 +2859,10 @@ body {
     <script type="text/babel">
         const { useState, useEffect, useRef } = React;
 
+        // PMory backend — update if Lambda Function URL changes after deploy
+        const CHAT_API_URL = 'https://6zvr36ftm5cfajwvxscn73zhzi0txfdo.lambda-url.us-east-1.on.aws/api/chat';
+        const EMAIL_LAMBDA_URL = 'https://wkndwo73luez66sxx636udqiwu0dkodi.lambda-url.us-east-1.on.aws';
+
         // Logo Component
         const Logo = () => (
             <svg className="logo-icon" viewBox="0 0 100 100">
@@ -3494,7 +3498,7 @@ const formatMessage = (text) => {
         try {
             console.log('Sending message to AI:', currentInput);
             
-            const response = await fetch('https://6zvr36ftm5cfajwvxscn73zhzi0txfdo.lambda-url.us-east-1.on.aws/api/chat', {
+            const response = await fetch(CHAT_API_URL, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -3627,10 +3631,6 @@ const JobAlert = () => {
     const [isSubscribing, setIsSubscribing] = useState(false); // Add this line
     const [subscribers, setSubscribers] = useState([]);
 
-    
-    // Store your Lambda URL here
-const EMAIL_LAMBDA_URL = 'https://wkndwo73luez66sxx636udqiwu0dkodi.lambda-url.us-east-1.on.aws';
-    
 const handleEmailSubmit = async (e) => {
     e.preventDefault();
     setIsSubscribing(true);
@@ -3891,7 +3891,7 @@ const About = () => (
         // Notify subscribers
         const subscribers = JSON.parse(localStorage.getItem('pmorySubscribers') || '[]');
         if (subscribers.length > 0) {
-            await fetch('https://wkndwo73luez66sxx636udqiwu0dkodi.lambda-url.us-east-1.on.aws/notify', {
+            await fetch(`${EMAIL_LAMBDA_URL}/notify`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
