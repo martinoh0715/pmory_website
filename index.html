@@ -7,6 +7,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <title>PMory - Product Management Hub for Emory Students</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='30' cy='35' r='20' fill='none' stroke='%234f46e5' stroke-width='8'/><circle cx='50' cy='35' r='20' fill='none' stroke='%234f46e5' stroke-width='8'/><circle cx='40' cy='55' r='20' fill='none' stroke='%230d9488' stroke-width='8'/></svg>">
+    <script>
+      (function () {
+        var theme = localStorage.getItem('pmory-theme');
+        if (theme === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+      })();
+    </script>
     
     <!-- Google Analytics - ADD THIS PART -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-M6EM7WHZPE"></script>
@@ -2371,6 +2378,35 @@ body {
 @media (prefers-reduced-motion: reduce) {
     .page-transition, .hero-typing-cursor, .roadmap-item, .sticky-note, .ship-card { animation: none !important; transition: none !important; }
 }
+
+/* Dark mode — legacy class overrides */
+[data-theme="dark"] .features-section,
+[data-theme="dark"] .skill-card,
+[data-theme="dark"] .resource-card,
+[data-theme="dark"] .category-tab,
+[data-theme="dark"] .filter-toggle,
+[data-theme="dark"] .chat-messages-modern,
+[data-theme="dark"] .message-content,
+[data-theme="dark"] .admin-job-item {
+    background: var(--bg-elevated) !important;
+    color: var(--text) !important;
+    border-color: var(--border) !important;
+}
+[data-theme="dark"] .skill-card p,
+[data-theme="dark"] .resource-link,
+[data-theme="dark"] .posted-date,
+[data-theme="dark"] .job-meta p {
+    color: var(--text-muted) !important;
+}
+[data-theme="dark"] .chat-input-modern {
+    background: var(--bg-elevated) !important;
+    border-color: var(--border) !important;
+}
+[data-theme="dark"] .input-modern {
+    background: var(--bg) !important;
+    color: var(--text) !important;
+    border-color: var(--border) !important;
+}
     </style>
 </head>
 <body>
@@ -2405,7 +2441,7 @@ body {
                             <li><a className={`nav-link ${currentPage === 'job-alert' ? 'active' : ''}`} onClick={() => setCurrentPage('job-alert')}>Job Alert</a></li>
                             <li><a className={`nav-link ${currentPage === 'about' ? 'active' : ''}`} onClick={() => setCurrentPage('about')}>About</a></li>
                             <li>
-                                <button className="theme-toggle" onClick={() => setDarkMode(!darkMode)} aria-label="Toggle dark mode">
+                                <button type="button" className="theme-toggle" onClick={() => setDarkMode(!darkMode)} aria-label="Toggle dark mode" aria-pressed={darkMode}>
                                     {darkMode ? '☀️ Light' : '🌙 Night Shift'}
                                 </button>
                             </li>
@@ -3784,7 +3820,8 @@ useEffect(() => {
         };
 
         // Render the app
-        ReactDOM.render(<App />, document.getElementById('root'));
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
     </script>
 </body>
 </html>
