@@ -2407,6 +2407,450 @@ body {
     color: var(--text) !important;
     border-color: var(--border) !important;
 }
+
+/* ——— Inner pages redesign ——— */
+.section-header-block {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.page-block {
+    margin-bottom: 3.5rem;
+}
+
+/* Core Responsibilities */
+.resp-layout {
+    display: grid;
+    grid-template-columns: minmax(240px, 320px) 1fr;
+    gap: 1.25rem;
+    max-width: 920px;
+    margin: 0 auto;
+    align-items: stretch;
+}
+.resp-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.resp-item {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    width: 100%;
+    text-align: left;
+    padding: 0.9rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg-elevated);
+    color: var(--text);
+    cursor: pointer;
+    transition: all var(--transition);
+    font-family: var(--font-body);
+    font-size: 0.92rem;
+}
+.resp-item:hover {
+    border-color: var(--primary);
+    box-shadow: var(--shadow);
+}
+.resp-item.active {
+    background: var(--gradient);
+    border-color: transparent;
+    color: white;
+}
+.resp-index {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    opacity: 0.7;
+    min-width: 1.5rem;
+}
+.resp-name { font-weight: 600; line-height: 1.3; }
+.resp-detail-panel {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 280px;
+}
+.resp-detail-panel h3 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--text);
+    margin-bottom: 1rem;
+}
+.resp-detail-panel p {
+    color: var(--text-muted);
+    line-height: 1.75;
+    font-size: 1rem;
+}
+
+/* Learning Resources hub */
+.resources-hub {
+    max-width: 920px;
+    margin: 0 auto;
+}
+.resources-board {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+.resource-row {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 1.5rem;
+    padding: 1.5rem 1.75rem;
+    border-bottom: 1px solid var(--border);
+    align-items: start;
+}
+.resource-row:last-child { border-bottom: none; }
+.resource-type-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--primary);
+    padding-top: 0.2rem;
+}
+.resource-link-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+}
+.resource-link-list a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 500;
+    transition: all var(--transition);
+}
+.resource-link-list a:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    transform: translateX(4px);
+}
+.resource-link-list a::after {
+    content: '→';
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+.resource-link-list a:hover::after { color: var(--primary); }
+
+/* Skillsets v2 */
+.skills-page-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+.skills-filter-bar {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+}
+.skills-filter-btn {
+    padding: 0.6rem 1.25rem;
+    border-radius: 50px;
+    border: 1px solid var(--border);
+    background: var(--bg-elevated);
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 0.88rem;
+    cursor: pointer;
+    transition: all var(--transition);
+    font-family: var(--font-body);
+}
+.skills-filter-btn:hover { border-color: var(--primary); color: var(--primary); }
+.skills-filter-btn.active {
+    background: var(--gradient);
+    color: white;
+    border-color: transparent;
+}
+.skills-grid-v2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+    max-width: 960px;
+    margin: 0 auto 3rem;
+}
+.skill-card-v2 {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.35rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    transition: all var(--transition);
+    border-left: 3px solid var(--primary);
+}
+.skill-card-v2:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-3px);
+}
+.skill-card-v2[data-cat="soft"] { border-left-color: #8b5cf6; }
+.skill-card-v2[data-cat="hard"] { border-left-color: #0d9488; }
+.skill-card-v2[data-cat="tools"] { border-left-color: #f59e0b; }
+.skill-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+.skill-card-v2 h3 {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    color: var(--text);
+    line-height: 1.3;
+}
+.skill-badge {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.25rem 0.5rem;
+    border-radius: 6px;
+    white-space: nowrap;
+}
+.skill-badge.beginner { background: #dcfce7; color: #166534; }
+.skill-badge.intermediate { background: #dbeafe; color: #1e40af; }
+.skill-badge.advanced { background: #fce7f3; color: #9d174d; }
+.skill-card-v2 p {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    flex: 1;
+}
+.skill-link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--primary);
+    text-decoration: none;
+    margin-top: auto;
+}
+.skill-link-btn:hover { text-decoration: underline; }
+.skill-link-muted {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+.journey-section {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+.journey-section h3 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    margin-bottom: 1.75rem;
+    color: var(--text);
+}
+.journey-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    text-align: left;
+    position: relative;
+    padding-left: 2rem;
+}
+.journey-timeline::before {
+    content: '';
+    position: absolute;
+    left: 0.55rem;
+    top: 0.5rem;
+    bottom: 0.5rem;
+    width: 2px;
+    background: var(--border);
+}
+.journey-step {
+    position: relative;
+    padding: 0 0 1.75rem 1.25rem;
+}
+.journey-step::before {
+    content: '';
+    position: absolute;
+    left: -1.45rem;
+    top: 0.35rem;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--primary);
+    border: 2px solid var(--bg-elevated);
+    box-shadow: 0 0 0 2px var(--primary);
+}
+.journey-step h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.2rem;
+}
+.journey-step p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+/* About v2 */
+.about-v2-hero {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: var(--gradient);
+    border-radius: var(--radius-lg);
+    color: white;
+    margin-bottom: 2.5rem;
+}
+.about-v2-hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    margin-bottom: 0.75rem;
+}
+.about-v2-hero p {
+    max-width: 520px;
+    margin: 0 auto;
+    opacity: 0.92;
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+.about-story {
+    max-width: 680px;
+    margin: 0 auto 3rem;
+    text-align: center;
+}
+.about-story h2 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--text);
+}
+.about-story p {
+    color: var(--text-muted);
+    line-height: 1.75;
+    margin-bottom: 1rem;
+}
+.about-pillars {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    max-width: 960px;
+    margin: 0 auto 2.5rem;
+}
+.about-pillar {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    text-align: center;
+}
+.about-pillar-num {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--primary);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+.about-pillar h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+}
+.about-pillar p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.55;
+}
+.about-offer-panel {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    max-width: 720px;
+    margin: 0 auto 2rem;
+    box-shadow: var(--shadow);
+}
+.about-offer-panel h2 {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    text-align: center;
+    margin-bottom: 1.25rem;
+    color: var(--text);
+}
+.about-offer-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+}
+.about-offer-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.92rem;
+    color: var(--text);
+    padding: 0.65rem 0.85rem;
+    background: var(--bg);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+}
+.about-offer-list li::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+}
+.about-contact-bar {
+    text-align: center;
+    padding: 2rem;
+    border: 1px dashed var(--border);
+    border-radius: var(--radius-lg);
+    max-width: 560px;
+    margin: 0 auto;
+}
+.about-contact-bar h2 {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+}
+.about-contact-bar p {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    margin-bottom: 0.35rem;
+}
+.about-contact-bar a {
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+}
+.about-contact-bar a:hover { text-decoration: underline; }
+
+@media (max-width: 768px) {
+    .resp-layout { grid-template-columns: 1fr; }
+    .resource-row { grid-template-columns: 1fr; gap: 0.75rem; }
+    .about-pillars { grid-template-columns: 1fr; }
+    .about-offer-list { grid-template-columns: 1fr; }
+}
+
     </style>
 </head>
 <body>
@@ -2550,7 +2994,7 @@ body {
                     </div>
                     <div className="hero-v2-right">
                         <div className="hero-ai-demo">
-                            <div className="hero-ai-header">✨ PMory AI — try a question</div>
+                            <div className="hero-ai-header">PMory AI — try a question</div>
                             <div className="hero-ai-body">
                                 {demoReply ? (
                                     <div className="hero-ai-bubble">{demoReply}</div>
@@ -2578,25 +3022,21 @@ body {
                 <div className="bento-grid">
                     <div className="bento-card" onClick={() => setCurrentPage('what-is-pm')}>
                         <div className="bento-card-bg" style={{backgroundImage: 'url(./images/pm-fundamentals.jpg)'}} />
-                        <span className="bento-icon">📚</span>
                         <h4>What is PM?</h4>
                         <p>Fundamentals & responsibilities</p>
                     </div>
                     <div className="bento-card" onClick={() => setCurrentPage('skillsets')}>
                         <div className="bento-card-bg" style={{backgroundImage: 'url(./images/pm-skills.jpg)'}} />
-                        <span className="bento-icon">🎯</span>
                         <h4>Skillsets</h4>
                         <p>Hard & soft skills</p>
                     </div>
                     <div className="bento-card" onClick={() => setCurrentPage('ai-assistant')}>
                         <div className="bento-card-bg" style={{backgroundImage: 'url(./images/ai-assistant.jpg)'}} />
-                        <span className="bento-icon">🤖</span>
                         <h4>AI Assistant</h4>
                         <p>Interview prep & guidance</p>
                     </div>
                     <div className="bento-card" onClick={() => setCurrentPage('job-alert')}>
                         <div className="bento-card-bg" style={{backgroundImage: 'url(./images/job-opportunities.jpg)'}} />
-                        <span className="bento-icon">💼</span>
                         <h4>Job Alert</h4>
                         <p>Latest PM openings</p>
                     </div>
@@ -2642,12 +3082,12 @@ body {
 
             return (
                 <section className="playground-section">
-                    <h3>📋 Prioritization Board</h3>
+                    <h3>Prioritization Board</h3>
                     <p className="hint">Drag cards between columns — or tap to cycle Now → Next → Later</p>
                     <div className="prio-board">
-                        <Column id="now" title="🔴 Now" cls="now" />
-                        <Column id="next" title="🟡 Next" cls="next" />
-                        <Column id="later" title="🔵 Later" cls="later" />
+                        <Column id="now" title="Now" cls="now" />
+                        <Column id="next" title="Next" cls="next" />
+                        <Column id="later" title="Later" cls="later" />
                     </div>
                 </section>
             );
@@ -2671,7 +3111,7 @@ body {
 
             return (
                 <section className="playground-section">
-                    <h3>📝 Brainstorm Wall</h3>
+                    <h3>Brainstorm Wall</h3>
                     <p className="hint">Add your product ideas — just like a real PM workshop</p>
                     <div className="sticky-wall">
                         {notes.map((n, i) => (
@@ -2699,7 +3139,7 @@ body {
             ];
             return (
                 <section className="playground-section" ref={ref}>
-                    <h3>🗺️ Product Roadmap</h3>
+                    <h3>Product Roadmap</h3>
                     <p className="hint">The journey every great product takes</p>
                     <div className="roadmap">
                         <div className="roadmap-progress" style={{ width: visible ? '90%' : '0%' }} />
@@ -2734,7 +3174,7 @@ body {
 
             return (
                 <section className="playground-section">
-                    <h3>🚢 Ship or Kill?</h3>
+                    <h3>Ship or Kill?</h3>
                     <p className="hint">Vote on mock feature ideas — would you ship them?</p>
                     <div className="ship-grid">
                         {features.map(f => (
@@ -2743,12 +3183,12 @@ body {
                                 <p>{f.desc}</p>
                                 {!votes[f.id] && (
                                     <div className="ship-actions">
-                                        <button className="ship-btn ship" onClick={() => handleVote(f.id, 'ship')}>🚢 Ship</button>
-                                        <button className="ship-btn kill" onClick={() => handleVote(f.id, 'kill')}>💀 Kill</button>
+                                        <button className="ship-btn ship" onClick={() => handleVote(f.id, 'ship')}>Ship</button>
+                                        <button className="ship-btn kill" onClick={() => handleVote(f.id, 'kill')}>Kill</button>
                                     </div>
                                 )}
                                 {votes[f.id] && <div style={{fontWeight: 600, color: votes[f.id] === 'ship' ? '#166534' : '#991b1b'}}>
-                                    You voted: {votes[f.id] === 'ship' ? '🚢 Ship!' : '💀 Killed'}
+                                    You voted: {votes[f.id] === 'ship' ? 'Ship' : 'Killed'}
                                 </div>}
                             </div>
                         ))}
@@ -2776,22 +3216,34 @@ body {
             </div>
         );
 
-        // WhatIsPM Component
         const WhatIsPM = () => {
-            const [selectedResponsibility, setSelectedResponsibility] = useState(null);
-            
-            const responsibilities = {
-                "Strategic Planning": "Define product vision, roadmap, and long-term strategy. Product Managers create comprehensive plans that align business objectives with user needs, setting clear goals and milestones for product development.",
-                "Market Research": "Analyze market trends, competition, and user needs. Conduct user interviews, surveys, and competitive analysis to understand market opportunities and validate product hypotheses.",
-                "Feature Prioritization": "Decide what features to build and when based on impact, effort, and strategic value. Use frameworks like RICE scoring to make data-driven prioritization decisions.",
-                "Cross-functional Leadership": "Coordinate and align engineering, design, marketing, and sales teams. Lead without authority by building consensus and driving collaboration across departments.",
-                "Data Analysis": "Make data-driven decisions using metrics, user feedback, and performance analytics. Track KPIs, conduct A/B tests, and derive insights to optimize product performance.",
-                "User Advocacy": "Ensure the product solves real customer problems and delivers exceptional user experience. Champion user needs throughout the development process."
-            };
+            const responsibilities = [
+                { title: "Strategic Planning", desc: "Define product vision, roadmap, and long-term strategy. Product Managers create comprehensive plans that align business objectives with user needs, setting clear goals and milestones for product development." },
+                { title: "Market Research", desc: "Analyze market trends, competition, and user needs. Conduct user interviews, surveys, and competitive analysis to understand market opportunities and validate product hypotheses." },
+                { title: "Feature Prioritization", desc: "Decide what features to build and when based on impact, effort, and strategic value. Use frameworks like RICE scoring to make data-driven prioritization decisions." },
+                { title: "Cross-functional Leadership", desc: "Coordinate and align engineering, design, marketing, and sales teams. Lead without authority by building consensus and driving collaboration across departments." },
+                { title: "Data Analysis", desc: "Make data-driven decisions using metrics, user feedback, and performance analytics. Track KPIs, conduct A/B tests, and derive insights to optimize product performance." },
+                { title: "User Advocacy", desc: "Ensure the product solves real customer problems and delivers exceptional user experience. Champion user needs throughout the development process." }
+            ];
+            const [selected, setSelected] = useState(responsibilities[0].title);
+            const active = responsibilities.find(r => r.title === selected) || responsibilities[0];
 
-            const handleResponsibilityClick = (responsibility) => {
-                setSelectedResponsibility(selectedResponsibility === responsibility ? null : responsibility);
-            };
+            const resourceGroups = [
+                { label: 'Videos', links: [
+                    { name: 'Product Management 101', url: 'https://www.youtube.com/watch?v=jDgW5HVqb4I' },
+                    { name: 'Product School Channel', url: 'https://www.youtube.com/channel/UC6hlQ0x6kPbAGjYkoz53cvA' }
+                ]},
+                { label: 'Blogs', links: [
+                    { name: 'ProductPlan Learning', url: 'https://www.productplan.com/learn/' }
+                ]},
+                { label: 'Courses', links: [
+                    { name: 'Coursera PM Course', url: 'https://www.coursera.org/learn/uva-darden-digital-product-management' },
+                    { name: 'Udemy PM Bootcamp', url: 'https://www.udemy.com/course/become-a-product-manager-learn-the-skills-get-a-job/' }
+                ]},
+                { label: 'Podcasts', links: [
+                    { name: "Lenny's Podcast", url: 'https://www.lennyspodcast.com/' }
+                ]}
+            ];
 
             return (
                 <div className="main page-transition">
@@ -2799,119 +3251,81 @@ body {
                         <div className="pm-hero">
                             <h1>What is Product Management?</h1>
                             <p className="pm-definition">
-                                Product Management is the strategic practice of guiding a product's journey from conception to market success, 
+                                Product Management is the strategic practice of guiding a product's journey from conception to market success,
                                 bridging business objectives, user needs, and technical possibilities.
                             </p>
                         </div>
 
                         <div className="pm-definition-section">
                             <div className="pm-definition-image">
-                                <img 
-                                    src="./images/PM.jpg" 
-                                    alt="Product Manager at work in modern office environment"
-                                />
+                                <img src="./images/PM.jpg" alt="Product Manager at work in modern office environment" />
                             </div>
                             <div className="pm-definition-content">
                                 <h2>The Role of a Product Manager</h2>
                                 <p>
-                                    Product Managers serve as the central hub connecting various stakeholders, from engineering teams 
-                                    to customers, ensuring everyone works toward a shared vision. They are responsible for defining 
+                                    Product Managers serve as the central hub connecting various stakeholders, from engineering teams
+                                    to customers, ensuring everyone works toward a shared vision. They are responsible for defining
                                     the product roadmap, prioritizing features, and making data-driven decisions.
                                 </p>
                                 <p>
-                                    At its core, Product Management involves understanding market needs, identifying opportunities, 
-                                    and translating complex requirements into actionable plans. PMs must balance competing priorities 
+                                    At its core, Product Management involves understanding market needs, identifying opportunities,
+                                    and translating complex requirements into actionable plans. PMs must balance competing priorities
                                     while maintaining focus on delivering value to both users and the business.
                                 </p>
                                 <p>
-                                    Modern Product Management combines analytical thinking with creative problem-solving, requiring 
-                                    a deep understanding of technology, user experience, and business strategy to drive successful 
+                                    Modern Product Management combines analytical thinking with creative problem-solving, requiring
+                                    a deep understanding of technology, user experience, and business strategy to drive successful
                                     product outcomes.
                                 </p>
                             </div>
                         </div>
 
-                        <div className="section">
-                            <h2 className="section-title">Core Responsibilities</h2>
-                            <div className="mindmap-section">
-                                <div className={`mindmap-container ${selectedResponsibility ? 'shifted' : ''}`}>
-                                    <div className="mindmap">
-                                        <div className="mindmap-center">
-                                            <span>Product Manager</span>
-                                        </div>
-                                        <div className="mindmap-node node-1" onClick={() => handleResponsibilityClick("Strategic Planning")}>
-                                            <span>Strategic Planning</span>
-                                        </div>
-                                        <div className="mindmap-node node-2" onClick={() => handleResponsibilityClick("Market Research")}>
-                                            <span>Market Research</span>
-                                        </div>
-                                        <div className="mindmap-node node-3" onClick={() => handleResponsibilityClick("Feature Prioritization")}>
-                                            <span>Feature Prioritization</span>
-                                        </div>
-                                        <div className="mindmap-node node-4" onClick={() => handleResponsibilityClick("Cross-functional Leadership")}>
-                                            <span>Cross-functional Leadership</span>
-                                        </div>
-                                        <div className="mindmap-node node-5" onClick={() => handleResponsibilityClick("Data Analysis")}>
-                                            <span>Data Analysis</span>
-                                        </div>
-                                        <div className="mindmap-node node-6" onClick={() => handleResponsibilityClick("User Advocacy")}>
-                                            <span>User Advocacy</span>
-                                        </div>
-                                        <svg className="mindmap-connections">
-                                            <line x1="50%" y1="50%" x2="15%" y2="20%" stroke="#6366f1" strokeWidth="2"/>
-                                            <line x1="50%" y1="50%" x2="85%" y2="20%" stroke="#06b6d4" strokeWidth="2"/>
-                                            <line x1="50%" y1="50%" x2="90%" y2="60%" stroke="#10b981" strokeWidth="2"/>
-                                            <line x1="50%" y1="50%" x2="70%" y2="90%" stroke="#f59e0b" strokeWidth="2"/>
-                                            <line x1="50%" y1="50%" x2="30%" y2="90%" stroke="#ef4444" strokeWidth="2"/>
-                                            <line x1="50%" y1="50%" x2="10%" y2="60%" stroke="#8b5cf6" strokeWidth="2"/>
-                                        </svg>
-                                    </div>
+                        <div className="page-block">
+                            <div className="section-header-block">
+                                <span className="section-eyebrow">The PM Role</span>
+                                <h2 className="section-title-v2">Core Responsibilities</h2>
+                            </div>
+                            <div className="resp-layout">
+                                <div className="resp-list">
+                                    {responsibilities.map((item, i) => (
+                                        <button
+                                            key={item.title}
+                                            type="button"
+                                            className={`resp-item ${selected === item.title ? 'active' : ''}`}
+                                            onClick={() => setSelected(item.title)}
+                                        >
+                                            <span className="resp-index">{String(i + 1).padStart(2, '0')}</span>
+                                            <span className="resp-name">{item.title}</span>
+                                        </button>
+                                    ))}
                                 </div>
-                                {selectedResponsibility && (
-                                    <div className="responsibility-detail">
-                                        <h3>{selectedResponsibility}</h3>
-                                        <p>{responsibilities[selectedResponsibility]}</p>
-                                        <button className="close-btn" onClick={() => setSelectedResponsibility(null)}>×</button>
-                                    </div>
-                                )}
+                                <div className="resp-detail-panel">
+                                    <h3>{active.title}</h3>
+                                    <p>{active.desc}</p>
+                                </div>
                             </div>
                         </div>
 
-                        <div className="section">
-                            <h2 className="section-title">Learning Resources</h2>
-                            <div className="resources-grid">
-                                <div className="resource-card video">
-                                    <div className="resource-icon">📺</div>
-                                    <h4>Videos</h4>
-                                    <div className="resource-links">
-                                        <a href="https://www.youtube.com/watch?v=jDgW5HVqb4I" target="_blank" className="resource-link">Product Management 101</a>
-                                        <a href="https://www.youtube.com/channel/UC6hlQ0x6kPbAGjYkoz53cvA" target="_blank" className="resource-link">Product School Channel</a>
-                                    </div>
-                                </div>
-                                
-                                <div className="resource-card blog">
-                                    <div className="resource-icon">📖</div>
-                                    <h4>Blogs</h4>
-                                    <div className="resource-links">
-                                        <a href="https://www.productplan.com/learn/" target="_blank" className="resource-link">ProductPlan Learning</a>
-                                    </div>
-                                </div>
-                                
-                                <div className="resource-card course">
-                                    <div className="resource-icon">🎓</div>
-                                    <h4>Courses</h4>
-                                    <div className="resource-links">
-                                        <a href="https://www.coursera.org/learn/uva-darden-digital-product-management" target="_blank" className="resource-link">Coursera PM Course</a>
-                                        <a href="https://www.udemy.com/course/become-a-product-manager-learn-the-skills-get-a-job/" target="_blank" className="resource-link">Udemy PM Bootcamp</a>
-                                    </div>
-                                </div>
-                                
-                                <div className="resource-card podcast">
-                                    <div className="resource-icon">🎧</div>
-                                    <h4>Podcasts</h4>
-                                    <div className="resource-links">
-                                        <a href="https://www.lennyspodcast.com/" target="_blank" className="resource-link">Lenny's Podcast</a>
-                                    </div>
+                        <div className="page-block">
+                            <div className="section-header-block">
+                                <span className="section-eyebrow">Keep Learning</span>
+                                <h2 className="section-title-v2">Learning Resources</h2>
+                                <p className="section-subtitle-v2">Curated links to help you go deeper into product management.</p>
+                            </div>
+                            <div className="resources-hub">
+                                <div className="resources-board">
+                                    {resourceGroups.map(group => (
+                                        <div key={group.label} className="resource-row">
+                                            <div className="resource-type-label">{group.label}</div>
+                                            <ul className="resource-link-list">
+                                                {group.links.map(link => (
+                                                    <li key={link.url}>
+                                                        <a href={link.url} target="_blank" rel="noopener noreferrer">{link.name}</a>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
                         </div>
@@ -2920,138 +3334,33 @@ body {
             );
         };
 
-        // Skillsets Component - FIXED VERSION
         const Skillsets = () => {
             const [selectedCategory, setSelectedCategory] = useState('soft');
 
             const skillsData = {
                 soft: [
-                    { 
-                        name: "Leadership & Influence", 
-                        desc: "Lead cross-functional teams without direct authority. Build consensus and drive collaboration across engineering, design, marketing, and sales teams.", 
-                        icon: "👥", 
-                        link: "https://www.zingtrain.com/article/servant-leadership/",
-                        difficulty: "intermediate"
-                    },
-                    { 
-                        name: "Communication", 
-                        desc: "Master clear, persuasive communication across all organizational levels. Present complex ideas simply to both technical and non-technical stakeholders.", 
-                        icon: "💬", 
-                        difficulty: "beginner"
-                    },
-                    { 
-                        name: "Empathy & User Focus", 
-                        desc: "Deeply understand user needs, pain points, and team perspectives. Champion the user voice throughout the product development process.", 
-                        icon: "❤️", 
-                        link: "https://medium.com/@yujdesigns23/understanding-user-needs-the-role-of-empathy-in-design-thinking-8caafce53abe",
-                        difficulty: "beginner"
-                    },
-                    { 
-                        name: "Strategic Thinking", 
-                        desc: "Think long-term and see the bigger picture. Connect day-to-day decisions to business objectives and market opportunities.", 
-                        icon: "🧠", 
-                        difficulty: "advanced"
-                    },
-                    { 
-                        name: "Problem-Solving", 
-                        desc: "Break down complex challenges into manageable components. Use structured frameworks to analyze and solve ambiguous problems.", 
-                        icon: "🧩",
-                        difficulty: "intermediate"
-                    },
-                    { 
-                        name: "Negotiation", 
-                        desc: "Balance competing priorities and interests across stakeholders. Find win-win solutions in resource-constrained environments.", 
-                        icon: "🤝", 
-                        link: "https://www.pon.harvard.edu/",
-                        difficulty: "intermediate"
-                    }
+                    { name: "Leadership & Influence", desc: "Lead cross-functional teams without direct authority. Build consensus and drive collaboration across engineering, design, marketing, and sales teams.", link: "https://www.zingtrain.com/article/servant-leadership/", difficulty: "intermediate" },
+                    { name: "Communication", desc: "Master clear, persuasive communication across all organizational levels. Present complex ideas simply to both technical and non-technical stakeholders.", difficulty: "beginner" },
+                    { name: "Empathy & User Focus", desc: "Deeply understand user needs, pain points, and team perspectives. Champion the user voice throughout the product development process.", link: "https://medium.com/@yujdesigns23/understanding-user-needs-the-role-of-empathy-in-design-thinking-8caafce53abe", difficulty: "beginner" },
+                    { name: "Strategic Thinking", desc: "Think long-term and see the bigger picture. Connect day-to-day decisions to business objectives and market opportunities.", difficulty: "advanced" },
+                    { name: "Problem-Solving", desc: "Break down complex challenges into manageable components. Use structured frameworks to analyze and solve ambiguous problems.", difficulty: "intermediate" },
+                    { name: "Negotiation", desc: "Balance competing priorities and interests across stakeholders. Find win-win solutions in resource-constrained environments.", link: "https://www.pon.harvard.edu/", difficulty: "intermediate" }
                 ],
                 hard: [
-                    { 
-                        name: "Data Analysis", 
-                        desc: "Extract insights from user behavior data, A/B test results, and product metrics. Make data-driven decisions using SQL and analytics tools.", 
-                        icon: "📊", 
-                        link: "https://www.kaggle.com/learn",
-                        difficulty: "intermediate"
-                    },
-                    { 
-                        name: "Market Research", 
-                        desc: "Conduct user interviews, surveys, and competitive analysis. Validate product hypotheses through systematic research methodologies.", 
-                        icon: "🔍", 
-                        link: "https://www.nngroup.com/",
-                        difficulty: "beginner"
-                    },
-                    { 
-                        name: "Technical Understanding", 
-                        desc: "Grasp software development processes, system architecture, and technical constraints. Communicate effectively with engineering teams.", 
-                        icon: "⚙️", 
-                        link: "https://www.codecademy.com/",
-                        difficulty: "intermediate"
-                    },
-                    { 
-                        name: "UX/UI Design", 
-                        desc: "Apply user experience principles, create wireframes, and understand design thinking methodologies. Collaborate effectively with designers.", 
-                        icon: "🎨", 
-                        link: "https://www.interaction-design.org/",
-                        difficulty: "intermediate"
-                    },
-                    { 
-                        name: "Project Management", 
-                        desc: "Master Agile/Scrum methodologies, roadmap planning, and sprint management. Coordinate complex projects across multiple teams.", 
-                        icon: "📋", 
-                        link: "https://www.scrum.org/",
-                        difficulty: "beginner"
-                    },
-                    { 
-                        name: "Financial Modeling", 
-                        desc: "Calculate ROI, LTV, CAC, and other key business metrics. Build financial models to support product investment decisions.", 
-                        icon: "💰",
-                        difficulty: "advanced"
-                    }
+                    { name: "Data Analysis", desc: "Extract insights from user behavior data, A/B test results, and product metrics. Make data-driven decisions using SQL and analytics tools.", link: "https://www.kaggle.com/learn", difficulty: "intermediate" },
+                    { name: "Market Research", desc: "Conduct user interviews, surveys, and competitive analysis. Validate product hypotheses through systematic research methodologies.", link: "https://www.nngroup.com/", difficulty: "beginner" },
+                    { name: "Technical Understanding", desc: "Grasp software development processes, system architecture, and technical constraints. Communicate effectively with engineering teams.", link: "https://www.codecademy.com/", difficulty: "intermediate" },
+                    { name: "UX/UI Design", desc: "Apply user experience principles, create wireframes, and understand design thinking methodologies. Collaborate effectively with designers.", link: "https://www.interaction-design.org/", difficulty: "intermediate" },
+                    { name: "Project Management", desc: "Master Agile/Scrum methodologies, roadmap planning, and sprint management. Coordinate complex projects across multiple teams.", link: "https://www.scrum.org/", difficulty: "beginner" },
+                    { name: "Financial Modeling", desc: "Calculate ROI, LTV, CAC, and other key business metrics. Build financial models to support product investment decisions.", difficulty: "advanced" }
                 ],
                 tools: [
-                    { 
-                        name: "Figma", 
-                        desc: "Industry-standard design and prototyping tool. Create wireframes, mockups, and interactive prototypes for user testing.", 
-                        icon: "🎯", 
-                        link: "https://www.figma.com/",
-                        difficulty: "beginner"
-                    },
-                    { 
-                        name: "Jira", 
-                        desc: "Agile project management and issue tracking. Manage backlogs, sprints, and collaborate with engineering teams.", 
-                        icon: "🛠️", 
-                        link: "https://www.atlassian.com/software/jira",
-                        difficulty: "beginner"
-                    },
-                    { 
-                        name: "Google Analytics", 
-                        desc: "Web analytics platform for tracking user behavior, conversion funnels, and product performance metrics.", 
-                        icon: "📈", 
-                        link: "https://analytics.google.com/",
-                        difficulty: "intermediate"
-                    },
-                    { 
-                        name: "Mixpanel", 
-                        desc: "Advanced product analytics for tracking user actions, cohort analysis, and behavioral insights.", 
-                        icon: "📊", 
-                        link: "https://mixpanel.com/",
-                        difficulty: "intermediate"
-                    },
-                    { 
-                        name: "Notion", 
-                        desc: "All-in-one workspace for documentation, knowledge management, and team collaboration.", 
-                        icon: "📝", 
-                        link: "https://www.notion.so/",
-                        difficulty: "beginner"
-                    },
-                    { 
-                        name: "SQL", 
-                        desc: "Database query language essential for data analysis and extracting insights from product databases.", 
-                        icon: "🗄️", 
-                        link: "https://www.w3schools.com/sql/",
-                        difficulty: "intermediate"
-                    }
+                    { name: "Figma", desc: "Industry-standard design and prototyping tool. Create wireframes, mockups, and interactive prototypes for user testing.", link: "https://www.figma.com/", difficulty: "beginner" },
+                    { name: "Jira", desc: "Agile project management and issue tracking. Manage backlogs, sprints, and collaborate with engineering teams.", link: "https://www.atlassian.com/software/jira", difficulty: "beginner" },
+                    { name: "Google Analytics", desc: "Web analytics platform for tracking user behavior, conversion funnels, and product performance metrics.", link: "https://analytics.google.com/", difficulty: "intermediate" },
+                    { name: "Mixpanel", desc: "Advanced product analytics for tracking user actions, cohort analysis, and behavioral insights.", link: "https://mixpanel.com/", difficulty: "intermediate" },
+                    { name: "Notion", desc: "All-in-one workspace for documentation, knowledge management, and team collaboration.", link: "https://www.notion.so/", difficulty: "beginner" },
+                    { name: "SQL", desc: "Database query language essential for data analysis and extracting insights from product databases.", link: "https://www.w3schools.com/sql/", difficulty: "intermediate" }
                 ]
             };
 
@@ -3072,69 +3381,55 @@ body {
             return (
                 <div className="main page-transition">
                     <div className="container">
-                        <div className="skillsets-hero">
-                            <h1>Master PM Skills</h1>
-                            <p>Develop the essential skills needed to excel as a Product Manager in today's competitive tech landscape</p>
+                        <div className="skills-page-header">
+                            <span className="section-eyebrow">Build Your Toolkit</span>
+                            <h1 className="section-title-v2">Master PM Skills</h1>
+                            <p className="section-subtitle-v2">Develop the essential skills needed to excel as a Product Manager in today's competitive tech landscape.</p>
                         </div>
 
-                        <div className="skillset-categories">
+                        <div className="skills-filter-bar">
                             {categories.map((category) => (
                                 <button
                                     key={category.key}
+                                    type="button"
                                     onClick={() => setSelectedCategory(category.key)}
-                                    className={`category-tab ${selectedCategory === category.key ? 'active' : ''}`}
+                                    className={`skills-filter-btn ${selectedCategory === category.key ? 'active' : ''}`}
                                 >
                                     {category.label}
                                 </button>
                             ))}
                         </div>
 
-                        <div className="skills-masonry">
-                            {skillsData[selectedCategory].map((skill, index) => (
-                                <div key={index} className="skill-card-new">
-                                    <div className="skill-header">
-                                        <div className="skill-icon-modern">{skill.icon}</div>
-                                        <h3 className="skill-title">{skill.name}</h3>
-                                    </div>
-                                    <p className="skill-description">{skill.desc}</p>
-                                    <div className="skill-actions">
-                                        {skill.link ? (
-                                            <a 
-                                                href={skill.link} 
-                                                target="_blank" 
-                                                rel="noopener noreferrer"
-                                                className="skill-learn-btn"
-                                            >
-                                                Learn More
-                                            </a>
-                                        ) : (
-                                            <div className="skill-learn-btn" style={{background: '#6b7280', cursor: 'default'}}>
-                                                Coming Soon
-                                            </div>
-                                        )}
+                        <div className="skills-grid-v2">
+                            {skillsData[selectedCategory].map((skill) => (
+                                <article key={skill.name} className="skill-card-v2" data-cat={selectedCategory}>
+                                    <div className="skill-card-top">
+                                        <h3>{skill.name}</h3>
                                         {skill.difficulty && (
-                                            <span className={`skill-difficulty ${skill.difficulty}`}>
+                                            <span className={`skill-badge ${skill.difficulty}`}>
                                                 {skill.difficulty.charAt(0).toUpperCase() + skill.difficulty.slice(1)}
                                             </span>
                                         )}
                                     </div>
-                                </div>
+                                    <p>{skill.desc}</p>
+                                    {skill.link ? (
+                                        <a href={skill.link} target="_blank" rel="noopener noreferrer" className="skill-link-btn">
+                                            Learn more →
+                                        </a>
+                                    ) : (
+                                        <span className="skill-link-muted">Coming soon</span>
+                                    )}
+                                </article>
                             ))}
                         </div>
 
-                        <div className="learning-path">
+                        <div className="journey-section">
                             <h3>Your PM Learning Journey</h3>
-                            <div className="path-steps">
-                                {learningPath.map((step, index) => (
-                                    <div key={step.step}>
-                                        <div className="path-step">
-                                            <div className="step-number">{step.step}</div>
-                                            <div className="step-title">{step.title}</div>
-                                            <div className="step-desc">{step.desc}</div>
-                                        </div>
-                                        {index < learningPath.length - 1 && (
-                                            <div className="path-arrow">→</div>
-                                        )}
+                            <div className="journey-timeline">
+                                {learningPath.map((step) => (
+                                    <div key={step.step} className="journey-step">
+                                        <h4>{step.title}</h4>
+                                        <p>{step.desc}</p>
                                     </div>
                                 ))}
                             </div>
@@ -3503,72 +3798,61 @@ return (
     </div>
 );
 };
-        // About Component
-        // About Component
-// About Component
 const About = () => (
     <div className="main page-transition">
         <div className="container">
-            <div className="about-hero">
+            <div className="about-v2-hero">
                 <h1>About PMory</h1>
-                <p className="hero-subtitle">Empowering Emory students to launch successful Product Management careers</p>
+                <p>Empowering Emory students to launch successful Product Management careers through resources, practice, and community.</p>
             </div>
 
-            <div className="about-grid">
-                <div className="about-card mission">
-                    <div className="card-icon">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <path d="M12 2L2 7L12 12L22 7L12 2Z"/>
-                            <path d="M2 17L12 22L22 17"/>
-                            <path d="M2 12L12 17L22 12"/>
-                        </svg>
-                    </div>
-                    <h2>Our Mission</h2>
-                    <p>Bridge the gap between academic excellence and industry requirements by providing Emory students with tailored PM resources, real interview preparation, and direct access to opportunities.</p>
-                </div>
+            <div className="about-story">
+                <h2>Built for Emory, by Emory</h2>
+                <p>
+                    PMory started with a simple observation: Emory students have the analytical rigor and business acumen
+                    that top tech companies look for in Product Managers — but the path from campus to PM role is rarely clear.
+                </p>
+                <p>
+                    We built PMory to close that gap with practical frameworks, interview preparation, job alerts,
+                    and an AI mentor tailored to the Emory experience.
+                </p>
+            </div>
 
-                <div className="about-card vision">
-                    <div className="card-icon">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <circle cx="12" cy="12" r="10"/>
-                            <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
-                            <line x1="9" y1="9" x2="9.01" y2="9"/>
-                            <line x1="15" y1="9" x2="15.01" y2="9"/>
-                        </svg>
-                    </div>
-                    <h2>Why PMory?</h2>
-                    <p>Emory students possess unique analytical and business skills perfect for PM roles. We provide the specific guidance to transform that potential into offers from top tech companies.</p>
+            <div className="about-pillars">
+                <div className="about-pillar">
+                    <div className="about-pillar-num">01</div>
+                    <h3>Learn</h3>
+                    <p>PM fundamentals, skillsets, and frameworks you can apply from day one.</p>
                 </div>
+                <div className="about-pillar">
+                    <div className="about-pillar-num">02</div>
+                    <h3>Practice</h3>
+                    <p>AI-powered interview prep and real-world exercises to build confidence.</p>
+                </div>
+                <div className="about-pillar">
+                    <div className="about-pillar-num">03</div>
+                    <h3>Launch</h3>
+                    <p>Curated job alerts and career guidance to land your first PM role.</p>
+                </div>
+            </div>
 
-                <div className="about-card features">
-                    <div className="card-icon">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                        </svg>
-                    </div>
-                    <h2>What We Offer</h2>
-                    <ul className="feature-list">
-                        <li>AI-powered interview coaching</li>
-                        <li>Curated job opportunities</li>
-                        <li>PM skillset assessments</li>
-                        <li>Email alerts for new positions</li>
-                    </ul>
-                </div>
+            <div className="about-offer-panel">
+                <h2>What We Offer</h2>
+                <ul className="about-offer-list">
+                    <li>AI-powered interview coaching</li>
+                    <li>Curated PM job opportunities</li>
+                    <li>Skillset guides and learning paths</li>
+                    <li>Email alerts for new positions</li>
+                    <li>PM fundamentals and frameworks</li>
+                    <li>Resources built for Emory students</li>
+                </ul>
+            </div>
 
-                <div className="about-card contact">
-                    <div className="card-icon">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                            <polyline points="22,6 12,13 2,6"/>
-                        </svg>
-                    </div>
-                    <h2>Contact & Support</h2>
-                    <div className="contact-info">
-                        <p><strong>Creator:</strong> Martin Oh </p>
-                        <p><strong>Email:</strong> <a href="mailto:martinoh0715@gmail.com">martinoh0715@gmail.com</a></p>
-                        <p className="contact-note">Questions, feedback, or partnership inquiries welcome</p>
-                    </div>
-                </div>
+            <div className="about-contact-bar">
+                <h2>Get in Touch</h2>
+                <p><strong>Creator:</strong> Martin Oh</p>
+                <p><a href="mailto:martinoh0715@gmail.com">martinoh0715@gmail.com</a></p>
+                <p style={{marginTop: '0.75rem', fontSize: '0.85rem'}}>Questions, feedback, or partnership inquiries welcome.</p>
             </div>
         </div>
     </div>
