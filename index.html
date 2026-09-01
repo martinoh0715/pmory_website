@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <title>PMory - Product Management Hub for Emory Students</title>
     
     <!-- Google Analytics - ADD THIS PART -->
@@ -1818,13 +1821,586 @@
                 grid-template-columns: 1fr;
             }
         }
+
+/* PMory Homepage V2 — Design System & Interactive Sections */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=DM+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+    --bg: #f6ece2;
+    --bg-elevated: #fffdf9;
+    --bg-muted: #efe3d4;
+    --text: #1e293b;
+    --text-muted: #64748b;
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --accent: #f59e0b;
+    --accent-soft: #fef3c7;
+    --border: rgba(30, 41, 59, 0.1);
+    --shadow: 0 8px 32px rgba(30, 41, 59, 0.08);
+    --shadow-lg: 0 20px 60px rgba(30, 41, 59, 0.12);
+    --radius: 16px;
+    --radius-lg: 24px;
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --transition: 200ms ease-out;
+}
+
+[data-theme="dark"] {
+    --bg: #0f172a;
+    --bg-elevated: #1e293b;
+    --bg-muted: #334155;
+    --text: #f1f5f9;
+    --text-muted: #94a3b8;
+    --primary: #60a5fa;
+    --primary-dark: #3b82f6;
+    --accent: #fbbf24;
+    --accent-soft: #422006;
+    --border: rgba(241, 245, 249, 0.1);
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--bg);
+    color: var(--text);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.header {
+    background: color-mix(in srgb, var(--bg) 85%, transparent);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+}
+
+.header .logo { color: var(--primary); }
+.nav-link { color: var(--text-muted); }
+.nav-link:hover, .nav-link.active { color: var(--primary); }
+
+.theme-toggle {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text);
+    transition: all var(--transition);
+    margin-left: 1rem;
+}
+.theme-toggle:hover { transform: scale(1.05); box-shadow: var(--shadow); }
+
+.page-transition {
+    animation: pageIn 0.35s ease-out;
+}
+@keyframes pageIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .page-transition, .reveal, .hero-typing-cursor, .stat-number, .roadmap-item, .framework-card, .sticky-note, .ship-card { animation: none !important; transition: none !important; }
+}
+
+/* Hero V2 */
+.hero-v2 {
+    position: relative;
+    min-height: 88vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: center;
+    padding: 4rem 0 3rem;
+    overflow: hidden;
+}
+.hero-v2::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at var(--spot-x, 50%) var(--spot-y, 30%), rgba(37, 99, 235, 0.15), transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+}
+.hero-v2-left, .hero-v2-right { position: relative; z-index: 1; }
+.hero-eyebrow {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 0.35rem 0.75rem;
+    border-radius: 50px;
+    margin-bottom: 1rem;
+}
+.hero-v2 h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+}
+.hero-typing {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 600;
+    color: var(--primary);
+    min-height: 2.5rem;
+    margin-bottom: 1.25rem;
+}
+.hero-typing-cursor {
+    display: inline-block;
+    width: 3px;
+    height: 1em;
+    background: var(--primary);
+    margin-left: 4px;
+    animation: blink 1s step-end infinite;
+    vertical-align: text-bottom;
+}
+@keyframes blink { 50% { opacity: 0; } }
+.hero-v2-desc {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    max-width: 480px;
+    margin-bottom: 2rem;
+    line-height: 1.7;
+}
+.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+.magnetic-btn {
+    position: relative;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: box-shadow var(--transition), transform 0.1s;
+    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.35);
+}
+.magnetic-btn:hover { box-shadow: 0 12px 32px rgba(37, 99, 235, 0.45); }
+.magnetic-btn:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; }
+.magnetic-btn:active { transform: scale(0.97); }
+.magnetic-btn.secondary {
+    background: var(--bg-elevated);
+    color: var(--text);
+    border: 2px solid var(--border);
+    box-shadow: var(--shadow);
+}
+.hero-ai-demo {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+}
+.hero-ai-header {
+    padding: 1rem 1.25rem;
+    background: linear-gradient(135deg, var(--primary), #7c3aed);
+    color: white;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.hero-ai-body { padding: 1.25rem; }
+.hero-ai-bubble {
+    background: var(--bg-muted);
+    padding: 0.875rem 1rem;
+    border-radius: 12px 12px 12px 4px;
+    font-size: 0.9rem;
+    margin-bottom: 0.75rem;
+    color: var(--text);
+}
+.hero-ai-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.hero-ai-chip {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 0.5rem 0.875rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all var(--transition);
+    color: var(--text-muted);
+}
+.hero-ai-chip:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); }
+
+/* Stats */
+.stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin: 3rem 0;
+}
+.stat-card-v2 {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: transform var(--transition);
+}
+.stat-card-v2:hover { transform: translateY(-4px); }
+.stat-number {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--primary);
+    line-height: 1;
+    margin-bottom: 0.35rem;
+}
+.stat-label { font-size: 0.85rem; color: var(--text-muted); font-weight: 500; }
+
+/* Bento Grid */
+.bento-section { margin: 4rem 0; }
+.section-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+.section-title-v2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+}
+.section-subtitle-v2 {
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+    max-width: 560px;
+}
+.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 200px);
+    gap: 1rem;
+}
+.bento-card {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+.bento-card:hover { transform: translateY(-6px) scale(1.01); box-shadow: var(--shadow-lg); border-color: var(--primary); }
+.bento-card.span-2 { grid-column: span 2; }
+.bento-card.tall { grid-row: span 2; }
+.bento-card-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.25;
+    transition: opacity 0.3s;
+}
+.bento-card:hover .bento-card-bg { opacity: 0.4; }
+.bento-card h4 { font-family: var(--font-display); font-size: 1.25rem; position: relative; z-index: 1; }
+.bento-card p { font-size: 0.85rem; color: var(--text-muted); position: relative; z-index: 1; margin-top: 0.25rem; }
+.bento-icon { font-size: 2rem; margin-bottom: auto; position: relative; z-index: 1; }
+
+/* Interactive Sections shared */
+.playground-section {
+    margin: 5rem 0;
+    padding: 3rem;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+}
+.playground-section h3 {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
+}
+.playground-section .hint { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
+
+/* Prioritization Board */
+.prio-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+.prio-column {
+    background: var(--bg);
+    border: 2px dashed var(--border);
+    border-radius: var(--radius);
+    padding: 1rem;
+    min-height: 220px;
+}
+.prio-column h4 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+    text-align: center;
+}
+.prio-column.now { border-color: #ef4444; }
+.prio-column.next { border-color: var(--accent); }
+.prio-column.later { border-color: var(--primary); }
+.prio-item {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.5rem;
+    cursor: grab;
+    font-size: 0.9rem;
+    transition: all var(--transition);
+    user-select: none;
+}
+.prio-item:hover { box-shadow: var(--shadow); transform: scale(1.02); }
+.prio-item:active { cursor: grabbing; }
+
+/* RICE Calculator */
+.rice-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    align-items: start;
+}
+.rice-sliders label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+.rice-sliders input[type="range"] {
+    width: 100%;
+    accent-color: var(--primary);
+    margin-bottom: 1rem;
+}
+.rice-result {
+    background: linear-gradient(135deg, var(--primary), #7c3aed);
+    color: white;
+    border-radius: var(--radius);
+    padding: 2rem;
+    text-align: center;
+}
+.rice-score {
+    font-family: var(--font-display);
+    font-size: 4rem;
+    font-weight: 800;
+    line-height: 1;
+}
+.rice-verdict { font-size: 1rem; opacity: 0.9; margin-top: 0.5rem; }
+
+/* Sticky Notes */
+.sticky-wall {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    min-height: 200px;
+    padding: 1rem;
+    background: var(--bg);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+}
+.sticky-note {
+    width: 140px;
+    min-height: 120px;
+    padding: 1rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    box-shadow: 2px 4px 12px rgba(0,0,0,0.15);
+    animation: notePop 0.4s ease-out;
+    cursor: default;
+    position: relative;
+}
+@keyframes notePop {
+    from { opacity: 0; transform: scale(0.5) rotate(-10deg); }
+    to { opacity: 1; transform: scale(1) rotate(var(--rot, -2deg)); }
+}
+.sticky-note.yellow { background: #fef08a; color: #713f12; --rot: -3deg; transform: rotate(-3deg); }
+.sticky-note.pink { background: #fbcfe8; color: #831843; --rot: 2deg; transform: rotate(2deg); }
+.sticky-note.blue { background: #bfdbfe; color: #1e3a8a; --rot: -1deg; transform: rotate(-1deg); }
+.sticky-note.green { background: #bbf7d0; color: #14532d; --rot: 3deg; transform: rotate(3deg); }
+.sticky-input-row { display: flex; gap: 0.75rem; margin-top: 1rem; }
+.sticky-input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    background: var(--bg-elevated);
+    color: var(--text);
+    font-size: 0.95rem;
+}
+.sticky-input:focus { outline: none; border-color: var(--primary); }
+
+/* Roadmap Timeline */
+.roadmap {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    padding: 2rem 0;
+}
+.roadmap::before {
+    content: '';
+    position: absolute;
+    top: 2.5rem;
+    left: 5%;
+    right: 5%;
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+}
+.roadmap-progress {
+    position: absolute;
+    top: 2.5rem;
+    left: 5%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    border-radius: 2px;
+    transition: width 0.6s ease-out;
+}
+.roadmap-item {
+    flex: 1;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    opacity: 0.4;
+    transform: translateY(20px);
+    transition: all 0.5s ease-out;
+}
+.roadmap-item.visible { opacity: 1; transform: translateY(0); }
+.roadmap-dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--bg-elevated);
+    border: 3px solid var(--border);
+    margin: 0 auto 1rem;
+    transition: all 0.3s;
+}
+.roadmap-item.visible .roadmap-dot {
+    border-color: var(--primary);
+    background: var(--primary);
+    box-shadow: 0 0 0 6px rgba(37, 99, 235, 0.2);
+}
+.roadmap-item h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.25rem; }
+.roadmap-item p { font-size: 0.8rem; color: var(--text-muted); }
+
+/* Ship or Kill */
+.ship-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+}
+.ship-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    transition: all 0.3s;
+}
+.ship-card h4 { font-size: 1rem; margin-bottom: 0.35rem; }
+.ship-card p { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem; }
+.ship-actions { display: flex; gap: 0.5rem; }
+.ship-btn {
+    flex: 1;
+    padding: 0.6rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all var(--transition);
+}
+.ship-btn.ship { background: #dcfce7; color: #166534; }
+.ship-btn.ship:hover { background: #22c55e; color: white; }
+.ship-btn.kill { background: #fee2e2; color: #991b1b; }
+.ship-btn.kill:hover { background: #ef4444; color: white; }
+.ship-card.voted-ship { border-color: #22c55e; background: #f0fdf4; }
+.ship-card.voted-kill { border-color: #ef4444; background: #fef2f2; opacity: 0.7; }
+.ship-score { text-align: center; margin-top: 1rem; font-size: 0.9rem; color: var(--text-muted); }
+
+/* Framework Carousel */
+.framework-carousel {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 1rem 0 1.5rem;
+    -webkit-overflow-scrolling: touch;
+}
+.framework-carousel::-webkit-scrollbar { height: 6px; }
+.framework-carousel::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+.framework-card {
+    flex: 0 0 280px;
+    scroll-snap-align: start;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+.framework-card:hover, .framework-card.active {
+    border-color: var(--primary);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+}
+.framework-card .fw-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+.framework-card h4 { font-family: var(--font-display); margin-bottom: 0.5rem; }
+.framework-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; }
+.framework-detail {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin-top: 1rem;
+    animation: pageIn 0.3s ease-out;
+}
+
+/* Confetti canvas */
+#confetti-canvas {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .hero-v2 { grid-template-columns: 1fr; min-height: auto; padding: 2rem 0; }
+    .bento-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto; }
+    .bento-card.span-2, .bento-card.tall { grid-column: span 1; grid-row: span 1; }
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+    .rice-grid { grid-template-columns: 1fr; }
+    .prio-board { grid-template-columns: 1fr; }
+    .roadmap { flex-direction: column; gap: 1.5rem; }
+    .roadmap::before, .roadmap-progress { display: none; }
+}
+@media (max-width: 640px) {
+    .stats-row { grid-template-columns: 1fr 1fr; }
+    .bento-grid { grid-template-columns: 1fr; }
+    .playground-section { padding: 1.5rem; }
+    .nav-links { display: none; }
+}
+
     </style>
 </head>
 <body>
     <div id="root"></div>
 
     <script type="text/babel">
-        const { useState, useEffect } = React;
+        const { useState, useEffect, useRef } = React;
 
         // Logo Component
         const Logo = () => (
@@ -1836,7 +2412,7 @@
         );
 
         // Header Component
-        const Header = ({ currentPage, setCurrentPage }) => (
+        const Header = ({ currentPage, setCurrentPage, darkMode, setDarkMode }) => (
             <header className="header">
                 <div className="container">
                     <nav className="nav">
@@ -1851,70 +2427,490 @@
                             <li><a className={`nav-link ${currentPage === 'ai-assistant' ? 'active' : ''}`} onClick={() => setCurrentPage('ai-assistant')}>AI Assistant</a></li>
                             <li><a className={`nav-link ${currentPage === 'job-alert' ? 'active' : ''}`} onClick={() => setCurrentPage('job-alert')}>Job Alert</a></li>
                             <li><a className={`nav-link ${currentPage === 'about' ? 'active' : ''}`} onClick={() => setCurrentPage('about')}>About</a></li>
+                            <li>
+                                <button className="theme-toggle" onClick={() => setDarkMode(!darkMode)} aria-label="Toggle dark mode">
+                                    {darkMode ? '☀️ Light' : '🌙 Night Shift'}
+                                </button>
+                            </li>
                         </ul>
                     </nav>
                 </div>
             </header>
         );
 
-        // HomePage Component
+// ========== HOMEPAGE V2 UTILITIES & COMPONENTS ==========
+
+        const useTypingEffect = (words, speed = 80, pause = 2000) => {
+            const [text, setText] = useState('');
+            const [wordIndex, setWordIndex] = useState(0);
+            const [charIndex, setCharIndex] = useState(0);
+            const [deleting, setDeleting] = useState(false);
+
+            useEffect(() => {
+                const current = words[wordIndex % words.length];
+                const timeout = setTimeout(() => {
+                    if (!deleting) {
+                        setText(current.slice(0, charIndex + 1));
+                        if (charIndex + 1 === current.length) {
+                            setTimeout(() => setDeleting(true), pause);
+                        } else {
+                            setCharIndex(charIndex + 1);
+                        }
+                    } else {
+                        setText(current.slice(0, charIndex - 1));
+                        if (charIndex === 0) {
+                            setDeleting(false);
+                            setWordIndex((wordIndex + 1) % words.length);
+                        } else {
+                            setCharIndex(charIndex - 1);
+                        }
+                    }
+                }, deleting ? speed / 2 : speed);
+                return () => clearTimeout(timeout);
+            }, [charIndex, deleting, wordIndex, words, speed, pause]);
+
+            return text;
+        };
+
+        const useCountUp = (target, duration = 1500, start = false) => {
+            const [value, setValue] = useState(0);
+            useEffect(() => {
+                if (!start) return;
+                let startTime = null;
+                const step = (timestamp) => {
+                    if (!startTime) startTime = timestamp;
+                    const progress = Math.min((timestamp - startTime) / duration, 1);
+                    setValue(Math.floor(progress * target));
+                    if (progress < 1) requestAnimationFrame(step);
+                };
+                requestAnimationFrame(step);
+            }, [target, duration, start]);
+            return value;
+        };
+
+        const useInView = (threshold = 0.2) => {
+            const ref = React.useRef(null);
+            const [visible, setVisible] = useState(false);
+            useEffect(() => {
+                const el = ref.current;
+                if (!el) return;
+                const obs = new IntersectionObserver(([e]) => {
+                    if (e.isIntersecting) { setVisible(true); obs.disconnect(); }
+                }, { threshold });
+                obs.observe(el);
+                return () => obs.disconnect();
+            }, [threshold]);
+            return [ref, visible];
+        };
+
+        const fireConfetti = () => {
+            const canvas = document.getElementById('confetti-canvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            const colors = ['#2563eb', '#f59e0b', '#22c55e', '#ec4899', '#8b5cf6'];
+            const particles = Array.from({ length: 120 }, () => ({
+                x: canvas.width / 2,
+                y: canvas.height / 2,
+                vx: (Math.random() - 0.5) * 14,
+                vy: (Math.random() - 1) * 14,
+                color: colors[Math.floor(Math.random() * colors.length)],
+                size: Math.random() * 8 + 4,
+                life: 1
+            }));
+            let frame = 0;
+            const animate = () => {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach(p => {
+                    p.x += p.vx; p.y += p.vy; p.vy += 0.3; p.life -= 0.012;
+                    ctx.globalAlpha = Math.max(p.life, 0);
+                    ctx.fillStyle = p.color;
+                    ctx.fillRect(p.x, p.y, p.size, p.size * 0.6);
+                });
+                frame++;
+                if (frame < 90) requestAnimationFrame(animate);
+                else ctx.clearRect(0, 0, canvas.width, canvas.height);
+            };
+            animate();
+        };
+
+        const MagneticButton = ({ children, className = '', onClick, secondary }) => {
+            const btnRef = React.useRef(null);
+            const handleMove = (e) => {
+                const btn = btnRef.current;
+                if (!btn) return;
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                btn.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
+            };
+            const handleLeave = () => {
+                if (btnRef.current) btnRef.current.style.transform = '';
+            };
+            return (
+                <button
+                    ref={btnRef}
+                    className={`magnetic-btn ${secondary ? 'secondary' : ''} ${className}`}
+                    onMouseMove={handleMove}
+                    onMouseLeave={handleLeave}
+                    onClick={onClick}
+                >{children}</button>
+            );
+        };
+
+        const HeroSection = ({ setCurrentPage }) => {
+            const typed = useTypingEffect(['Prioritize.', 'Ship.', 'Learn.', 'Lead.', 'Iterate.'], 90, 1800);
+            const heroRef = React.useRef(null);
+            const [demoReply, setDemoReply] = useState(null);
+
+            const demoResponses = {
+                'How do I break into PM?': 'Start with customer empathy, learn to prioritize ruthlessly, and ship small projects that show impact. PMory has frameworks to guide you!',
+                'What is RICE scoring?': 'RICE = (Reach × Impact × Confidence) / Effort. It helps you compare features objectively. Try our calculator below!',
+                'Prep me for interviews': 'Practice product sense, estimation, and behavioral questions. Head to our AI Assistant for mock interviews tailored to Emory students.'
+            };
+
+            useEffect(() => {
+                const hero = heroRef.current;
+                if (!hero) return;
+                const move = (e) => {
+                    const rect = hero.getBoundingClientRect();
+                    const x = ((e.clientX - rect.left) / rect.width) * 100;
+                    const y = ((e.clientY - rect.top) / rect.height) * 100;
+                    hero.style.setProperty('--spot-x', x + '%');
+                    hero.style.setProperty('--spot-y', y + '%');
+                };
+                hero.addEventListener('mousemove', move);
+                return () => hero.removeEventListener('mousemove', move);
+            }, []);
+
+            const handleCTA = () => {
+                fireConfetti();
+                setCurrentPage('ai-assistant');
+            };
+
+            return (
+                <section className="hero-v2 container" ref={heroRef}>
+                    <div className="hero-v2-left">
+                        <span className="hero-eyebrow">Emory Product Management</span>
+                        <h1>PMory</h1>
+                        <div className="hero-typing">{typed}<span className="hero-typing-cursor" /></div>
+                        <p className="hero-v2-desc">Your interactive hub for PM fundamentals, frameworks, and career growth — built by Emory students, for Emory students.</p>
+                        <div className="hero-actions">
+                            <MagneticButton onClick={handleCTA}>Start Your PM Journey</MagneticButton>
+                            <MagneticButton secondary onClick={() => setCurrentPage('what-is-pm')}>Explore PM Basics</MagneticButton>
+                        </div>
+                    </div>
+                    <div className="hero-v2-right">
+                        <div className="hero-ai-demo">
+                            <div className="hero-ai-header">✨ PMory AI — try a question</div>
+                            <div className="hero-ai-body">
+                                {demoReply ? (
+                                    <div className="hero-ai-bubble">{demoReply}</div>
+                                ) : (
+                                    <div className="hero-ai-bubble">Hey! I'm your PM career copilot. Tap a question to see how I can help.</div>
+                                )}
+                                <div className="hero-ai-chips">
+                                    {Object.keys(demoResponses).map(q => (
+                                        <button key={q} className="hero-ai-chip" onClick={() => setDemoReply(demoResponses[q])}>{q}</button>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        const StatsSection = () => {
+            const [ref, visible] = useInView(0.3);
+            const students = useCountUp(500, 1500, visible);
+            const frameworks = useCountUp(12, 1200, visible);
+            const resources = useCountUp(40, 1300, visible);
+            const partners = useCountUp(8, 1100, visible);
+            return (
+                <section className="stats-row container" ref={ref}>
+                    <div className="stat-card-v2"><div className="stat-number">{students}+</div><div className="stat-label">Students Reached</div></div>
+                    <div className="stat-card-v2"><div className="stat-number">{frameworks}</div><div className="stat-label">PM Frameworks</div></div>
+                    <div className="stat-card-v2"><div className="stat-number">{resources}+</div><div className="stat-label">Learning Resources</div></div>
+                    <div className="stat-card-v2"><div className="stat-number">{partners}</div><div className="stat-label">Campus Partners</div></div>
+                </section>
+            );
+        };
+
+        const BentoGrid = ({ setCurrentPage }) => (
+            <section className="bento-section container">
+                <div className="section-eyebrow">Explore PMory</div>
+                <h2 className="section-title-v2">Everything you need to become a PM</h2>
+                <p className="section-subtitle-v2">Tap any tile to dive in — fundamentals, skills, AI guidance, and job alerts.</p>
+                <div className="bento-grid">
+                    <div className="bento-card span-2 tall" onClick={() => setCurrentPage('what-is-pm')}>
+                        <div className="bento-card-bg" style={{backgroundImage: 'url(./images/pm-fundamentals.jpg)'}} />
+                        <span className="bento-icon">📚</span>
+                        <h4>What is PM?</h4>
+                        <p>Fundamentals, responsibilities & mindmaps</p>
+                    </div>
+                    <div className="bento-card" onClick={() => setCurrentPage('skillsets')}>
+                        <div className="bento-card-bg" style={{backgroundImage: 'url(./images/pm-skills.jpg)'}} />
+                        <span className="bento-icon">🎯</span>
+                        <h4>Skillsets</h4>
+                        <p>Hard & soft skills</p>
+                    </div>
+                    <div className="bento-card" onClick={() => setCurrentPage('ai-assistant')}>
+                        <div className="bento-card-bg" style={{backgroundImage: 'url(./images/ai-assistant.jpg)'}} />
+                        <span className="bento-icon">🤖</span>
+                        <h4>AI Assistant</h4>
+                        <p>Interview prep & guidance</p>
+                    </div>
+                    <div className="bento-card" onClick={() => setCurrentPage('job-alert')}>
+                        <div className="bento-card-bg" style={{backgroundImage: 'url(./images/job-opportunities.jpg)'}} />
+                        <span className="bento-icon">💼</span>
+                        <h4>Job Alert</h4>
+                        <p>Latest PM openings</p>
+                    </div>
+                    <div className="bento-card span-2" onClick={() => document.getElementById('rice-section')?.scrollIntoView({behavior: 'smooth'})}>
+                        <span className="bento-icon">🧮</span>
+                        <h4>RICE Calculator</h4>
+                        <p>Score and prioritize features like a real PM</p>
+                    </div>
+                </div>
+            </section>
+        );
+
+        const PrioritizationBoard = () => {
+            const initial = {
+                now: ['Fix onboarding drop-off', 'Launch MVP dashboard'],
+                next: ['Add push notifications', 'User research sprint'],
+                later: ['Dark mode themes', 'Social sharing', 'Gamification']
+            };
+            const [columns, setColumns] = useState(initial);
+            const [dragItem, setDragItem] = useState(null);
+
+            const moveItem = (fromCol, item, toCol) => {
+                if (fromCol === toCol) return;
+                setColumns(prev => ({
+                    ...prev,
+                    [fromCol]: prev[fromCol].filter(i => i !== item),
+                    [toCol]: [...prev[toCol], item]
+                }));
+            };
+
+            const Column = ({ id, title, cls }) => (
+                <div className={`prio-column ${cls}`}
+                    onDragOver={e => e.preventDefault()}
+                    onDrop={() => { if (dragItem) { moveItem(dragItem.col, dragItem.item, id); setDragItem(null); } }}>
+                    <h4>{title}</h4>
+                    {columns[id].map(item => (
+                        <div key={item} className="prio-item" draggable
+                            onDragStart={() => setDragItem({ col: id, item })}
+                            onClick={() => {
+                                const order = ['now', 'next', 'later'];
+                                const next = order[(order.indexOf(id) + 1) % 3];
+                                moveItem(id, item, next);
+                            }}
+                        >{item}</div>
+                    ))}
+                </div>
+            );
+
+            return (
+                <section className="playground-section container">
+                    <h3>📋 Prioritization Board</h3>
+                    <p className="hint">Drag cards between columns — or tap to cycle Now → Next → Later</p>
+                    <div className="prio-board">
+                        <Column id="now" title="🔴 Now" cls="now" />
+                        <Column id="next" title="🟡 Next" cls="next" />
+                        <Column id="later" title="🔵 Later" cls="later" />
+                    </div>
+                </section>
+            );
+        };
+
+        const RICECalculator = () => {
+            const [reach, setReach] = useState(50);
+            const [impact, setImpact] = useState(3);
+            const [confidence, setConfidence] = useState(80);
+            const [effort, setEffort] = useState(5);
+            const score = ((reach * impact * (confidence / 100)) / effort).toFixed(1);
+            const verdict = score >= 50 ? '🚀 Ship it!' : score >= 20 ? '⚖️ Worth discussing' : '🛑 Needs more data';
+
+            return (
+                <section className="playground-section container" id="rice-section">
+                    <h3>🧮 RICE Score Calculator</h3>
+                    <p className="hint">Adjust the sliders to see if your feature makes the cut</p>
+                    <div className="rice-grid">
+                        <div className="rice-sliders">
+                            <label><span>Reach (users/quarter)</span><span>{reach}</span></label>
+                            <input type="range" min="1" max="100" value={reach} onChange={e => setReach(+e.target.value)} />
+                            <label><span>Impact (0–3)</span><span>{impact}</span></label>
+                            <input type="range" min="0" max="3" step="0.5" value={impact} onChange={e => setImpact(+e.target.value)} />
+                            <label><span>Confidence (%)</span><span>{confidence}%</span></label>
+                            <input type="range" min="10" max="100" value={confidence} onChange={e => setConfidence(+e.target.value)} />
+                            <label><span>Effort (person-months)</span><span>{effort}</span></label>
+                            <input type="range" min="1" max="20" value={effort} onChange={e => setEffort(+e.target.value)} />
+                        </div>
+                        <div className="rice-result">
+                            <div style={{fontSize: '0.9rem', opacity: 0.85, marginBottom: '0.5rem'}}>Your RICE Score</div>
+                            <div className="rice-score">{score}</div>
+                            <div className="rice-verdict">{verdict}</div>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        const StickyNoteWall = () => {
+            const [notes, setNotes] = useState([
+                { text: 'Talk to 5 users this week', color: 'yellow' },
+                { text: 'Ship the MVP!', color: 'pink' },
+                { text: 'What problem are we solving?', color: 'blue' }
+            ]);
+            const [input, setInput] = useState('');
+            const colors = ['yellow', 'pink', 'blue', 'green'];
+
+            const addNote = () => {
+                if (!input.trim()) return;
+                setNotes(prev => [...prev, { text: input.trim(), color: colors[prev.length % colors.length] }]);
+                setInput('');
+            };
+
+            return (
+                <section className="playground-section container">
+                    <h3>📝 Brainstorm Wall</h3>
+                    <p className="hint">Add your product ideas — just like a real PM workshop</p>
+                    <div className="sticky-wall">
+                        {notes.map((n, i) => (
+                            <div key={i} className={`sticky-note ${n.color}`}>{n.text}</div>
+                        ))}
+                    </div>
+                    <div className="sticky-input-row">
+                        <input className="sticky-input" placeholder="Add an idea…" value={input}
+                            onChange={e => setInput(e.target.value)}
+                            onKeyDown={e => e.key === 'Enter' && addNote()} />
+                        <MagneticButton onClick={addNote}>Add Note</MagneticButton>
+                    </div>
+                </section>
+            );
+        };
+
+        const RoadmapTimeline = () => {
+            const [ref, visible] = useInView(0.3);
+            const steps = [
+                { title: 'Discover', desc: 'Research users & market' },
+                { title: 'Define', desc: 'Shape the problem' },
+                { title: 'Design', desc: 'Prototype solutions' },
+                { title: 'Deliver', desc: 'Ship & measure' },
+                { title: 'Iterate', desc: 'Learn & improve' }
+            ];
+            return (
+                <section className="playground-section container" ref={ref}>
+                    <h3>🗺️ Product Roadmap</h3>
+                    <p className="hint">The journey every great product takes</p>
+                    <div className="roadmap">
+                        <div className="roadmap-progress" style={{ width: visible ? '90%' : '0%' }} />
+                        {steps.map((s, i) => (
+                            <div key={s.title} className={`roadmap-item ${visible ? 'visible' : ''}`}
+                                style={{ transitionDelay: `${i * 0.15}s` }}>
+                                <div className="roadmap-dot" />
+                                <h4>{s.title}</h4>
+                                <p>{s.desc}</p>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+            );
+        };
+
+        const ShipOrKill = () => {
+            const features = [
+                { id: 1, name: 'AI Resume Reviewer', desc: 'Auto-score PM resumes with feedback' },
+                { id: 2, name: 'Campus PM Map', desc: 'Find PM clubs & events at Emory' },
+                { id: 3, name: 'Daily PM Quiz', desc: '5-minute product sense challenge' },
+                { id: 4, name: 'Mentor Matching', desc: 'Connect with alumni PMs' }
+            ];
+            const [votes, setVotes] = useState({});
+
+            const handleVote = (id, type) => {
+                setVotes(prev => ({ ...prev, [id]: type }));
+            };
+
+            const shipCount = Object.values(votes).filter(v => v === 'ship').length;
+            const killCount = Object.values(votes).filter(v => v === 'kill').length;
+
+            return (
+                <section className="playground-section container">
+                    <h3>🚢 Ship or Kill?</h3>
+                    <p className="hint">Vote on mock feature ideas — would you ship them?</p>
+                    <div className="ship-grid">
+                        {features.map(f => (
+                            <div key={f.id} className={`ship-card ${votes[f.id] ? 'voted-' + votes[f.id] : ''}`}>
+                                <h4>{f.name}</h4>
+                                <p>{f.desc}</p>
+                                {!votes[f.id] && (
+                                    <div className="ship-actions">
+                                        <button className="ship-btn ship" onClick={() => handleVote(f.id, 'ship')}>🚢 Ship</button>
+                                        <button className="ship-btn kill" onClick={() => handleVote(f.id, 'kill')}>💀 Kill</button>
+                                    </div>
+                                )}
+                                {votes[f.id] && <div style={{fontWeight: 600, color: votes[f.id] === 'ship' ? '#166534' : '#991b1b'}}>
+                                    You voted: {votes[f.id] === 'ship' ? '🚢 Ship!' : '💀 Killed'}
+                                </div>}
+                            </div>
+                        ))}
+                    </div>
+                    {Object.keys(votes).length > 0 && (
+                        <div className="ship-score">Community pulse: {shipCount} shipped, {killCount} killed</div>
+                    )}
+                </section>
+            );
+        };
+
+        const FrameworkCarousel = () => {
+            const frameworks = [
+                { id: 'rice', icon: '🧮', name: 'RICE', desc: 'Prioritize features by Reach, Impact, Confidence, and Effort.', detail: 'Score = (R × I × C) / E. Use when comparing multiple features with limited engineering bandwidth.' },
+                { id: 'jtbd', icon: '🎯', name: 'Jobs to Be Done', desc: 'Understand what job customers hire your product to do.', detail: 'Focus on the progress users want to make, not demographics. "When I ___, I want to ___, so I can ___."' },
+                { id: 'okr', icon: '📊', name: 'OKRs', desc: 'Set Objectives and Key Results to align teams.', detail: 'Objective = qualitative goal. Key Results = 3-5 measurable outcomes. Review quarterly.' },
+                { id: 'moscow', icon: '🔺', name: 'MoSCoW', desc: 'Categorize features as Must, Should, Could, Won\'t.', detail: 'Great for scope negotiation with stakeholders. Must-haves are non-negotiable for launch.' },
+                { id: 'kano', icon: '😊', name: 'Kano Model', desc: 'Classify features by customer satisfaction impact.', detail: 'Basic needs, performance needs, and delighters. Not all features are created equal.' }
+            ];
+            const [active, setActive] = useState('rice');
+            const activeFw = frameworks.find(f => f.id === active);
+
+            return (
+                <section className="playground-section container">
+                    <h3>🔄 PM Frameworks</h3>
+                    <p className="hint">Scroll through essential frameworks every PM should know</p>
+                    <div className="framework-carousel">
+                        {frameworks.map(f => (
+                            <div key={f.id} className={`framework-card ${active === f.id ? 'active' : ''}`}
+                                onClick={() => setActive(f.id)}>
+                                <div className="fw-icon">{f.icon}</div>
+                                <h4>{f.name}</h4>
+                                <p>{f.desc}</p>
+                            </div>
+                        ))}
+                    </div>
+                    {activeFw && (
+                        <div className="framework-detail">
+                            <strong>{activeFw.icon} {activeFw.name}:</strong> {activeFw.detail}
+                        </div>
+                    )}
+                </section>
+            );
+        };
+
         const HomePage = ({ setCurrentPage }) => (
-            <div className="main">
-                {/* Hero Section with Background Video */}
-                <div className="hero-modern">
-                    <div className="hero-background"></div>
-                    <video className="hero-video" autoPlay muted loop> <source src="./videos/hero-video.mp4" type="video/mp4" /> </video>
-                    <div className="hero-overlay"></div>
-                    <div className="hero-content">
-                        <div className="hero-text">
-                            <h1>PMory</h1>
-                            <h2>Product Management Hub for Emory Students</h2>
-                            <p>Master PM fundamentals, develop essential skills, and accelerate your career with AI-powered guidance tailored specifically for Emory University students.</p>
-                            <button className="hero-cta" onClick={() => setCurrentPage('ai-assistant')}>
-                                Start Your PM Journey
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="container">
-                    <div className="features-section">
-                        <h3>Explore PMory's Features</h3>
-                        <div className="feature-grid">
-                            <div className="feature-card" onClick={() => setCurrentPage('what-is-pm')}>
-                                <div className="feature-image fundamentals"></div>
-                                <div className="feature-content">
-                                    <h4>What is PM?</h4>
-                                    <p>Learn fundamentals & essential skills</p>
-                                </div>
-                            </div>
-
-                            <div className="feature-card" onClick={() => setCurrentPage('skillsets')}>
-                                <div className="feature-image skills"></div>
-                                <div className="feature-content">
-                                    <h4>Skillsets</h4>
-                                    <p>Master soft & hard skills for PM success</p>
-                                </div>
-                            </div>
-
-                            <div className="feature-card" onClick={() => setCurrentPage('ai-assistant')}>
-                                <div className="feature-image ai"></div>
-                                <div className="feature-content">
-                                    <h4>AI Assistant</h4>
-                                    <p>Personalized career guidance & interview prep</p>
-                                </div>
-                            </div>
-
-                            <div className="feature-card" onClick={() => setCurrentPage('job-alert')}>
-                                <div className="feature-image jobs"></div>
-                                <div className="feature-content">
-                                    <h4>Job Alert</h4>
-                                    <p>Latest PM opportunities & notifications</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div className="main page-transition">
+                <canvas id="confetti-canvas" />
+                <HeroSection setCurrentPage={setCurrentPage} />
+                <StatsSection />
+                <BentoGrid setCurrentPage={setCurrentPage} />
+                <PrioritizationBoard />
+                <RICECalculator />
+                <StickyNoteWall />
+                <RoadmapTimeline />
+                <ShipOrKill />
+                <FrameworkCarousel />
             </div>
         );
 
@@ -2893,6 +3889,12 @@ const About = () => (
         // Main App Component
         const App = () => {
             const [currentPage, setCurrentPage] = useState('home');
+            const [darkMode, setDarkMode] = useState(() => localStorage.getItem('pmory-theme') === 'dark');
+
+            useEffect(() => {
+                document.documentElement.setAttribute('data-theme', darkMode ? 'dark' : 'light');
+                localStorage.setItem('pmory-theme', darkMode ? 'dark' : 'light');
+            }, [darkMode]);
 
             // Handle browser history
 useEffect(() => {
@@ -2946,8 +3948,10 @@ useEffect(() => {
 
             return (
                 <div>
-                    <Header currentPage={currentPage} setCurrentPage={setCurrentPage} />
-                    {renderPage()}
+                    <Header currentPage={currentPage} setCurrentPage={setCurrentPage} darkMode={darkMode} setDarkMode={setDarkMode} />
+                    <div key={currentPage} className={currentPage !== 'home' ? 'page-transition' : ''}>
+                        {renderPage()}
+                    </div>
                     <Footer setCurrentPage={setCurrentPage}/>
                 </div>
             );
