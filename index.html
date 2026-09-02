@@ -828,7 +828,7 @@
 }
 
 .job-filters {
-    margin-bottom: 2rem;
+    margin-bottom: 1.25rem;
     text-align: center;
 }
 
@@ -836,7 +836,7 @@
     background: var(--bg-elevated);
     border: 2px solid #e5e7eb;
     padding: 0.75rem 1.5rem;
-    border-radius: 50px;
+    border-radius: 12px;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -848,10 +848,214 @@
     border-color: var(--primary);
 }
 
+.job-toolbar {
+    display: grid;
+    grid-template-columns: 1.4fr repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    align-items: stretch;
+}
+
+.job-search,
+.job-select {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--bg-elevated);
+    color: var(--text);
+    font-size: 0.95rem;
+    font-family: inherit;
+}
+
+.job-search:focus,
+.job-select:focus {
+    outline: 2px solid color-mix(in srgb, var(--primary) 35%, transparent);
+    outline-offset: 1px;
+}
+
+.job-view-toggle {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.job-view-toggle .view-mode {
+    display: inline-flex;
+    gap: 0.35rem;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 0.25rem;
+}
+
+.job-view-toggle .view-mode button {
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    padding: 0.55rem 0.9rem;
+    border-radius: 9px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    font-family: inherit;
+}
+
+.job-view-toggle .view-mode button.active {
+    background: var(--primary);
+    color: #fff;
+}
+
+.job-results-meta {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
 .jobs-grid {
     display: grid;
-    gap: 1.5rem;
-    margin-bottom: 4rem;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.job-company-list {
+    display: grid;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.job-company-group {
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: var(--bg-elevated);
+    overflow: hidden;
+}
+
+.job-company-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 1rem 1.15rem;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    text-align: left;
+    font-family: inherit;
+    color: var(--text);
+}
+
+.job-company-header:hover {
+    background: color-mix(in srgb, var(--primary) 6%, transparent);
+}
+
+.job-company-header .company-logo {
+    width: 42px;
+    height: 42px;
+    font-size: 1.15rem;
+    flex-shrink: 0;
+}
+
+.job-company-header .company-copy {
+    flex: 1;
+    min-width: 0;
+}
+
+.job-company-header .company-copy strong {
+    display: block;
+    font-size: 1.05rem;
+    font-weight: 650;
+}
+
+.job-company-header .company-copy span {
+    color: var(--text-muted);
+    font-size: 0.88rem;
+}
+
+.job-company-count {
+    font-size: 0.85rem;
+    font-weight: 650;
+    color: var(--primary);
+    background: color-mix(in srgb, var(--primary) 12%, transparent);
+    padding: 0.35rem 0.7rem;
+    border-radius: 999px;
+    white-space: nowrap;
+}
+
+.job-company-chevron {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    transition: transform 0.2s ease;
+}
+
+.job-company-group.open .job-company-chevron {
+    transform: rotate(180deg);
+}
+
+.job-company-body {
+    border-top: 1px solid var(--border);
+    padding: 0.75rem 1rem 1rem;
+    display: grid;
+    gap: 0.75rem;
+}
+
+.job-company-body .job-card-modern {
+    margin: 0;
+}
+
+.job-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin: 0 0 3.5rem;
+    flex-wrap: wrap;
+}
+
+.job-pagination button {
+    border: 1px solid var(--border);
+    background: var(--bg-elevated);
+    color: var(--text);
+    border-radius: 10px;
+    padding: 0.65rem 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.job-pagination button:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.job-pagination .page-status {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    min-width: 7rem;
+    text-align: center;
+}
+
+@media (max-width: 900px) {
+    .job-toolbar {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .job-toolbar {
+        grid-template-columns: 1fr;
+    }
+
+    .job-stats {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .job-company-header {
+        flex-wrap: wrap;
+    }
 }
 
 .job-card-modern {
@@ -3723,6 +3927,7 @@ const formatMessage = (text) => {
 
         // Job Alert Component
 const JobAlert = () => {
+    const PAGE_SIZE = 10;
     const [email, setEmail] = useState('');
     const [subscriptionStatus, setSubscriptionStatus] = useState('');
     const [showOnlyOpen, setShowOnlyOpen] = useState(true);
@@ -3731,6 +3936,13 @@ const JobAlert = () => {
     const [jobsUpdatedAt, setJobsUpdatedAt] = useState(null);
     const [jobsLoading, setJobsLoading] = useState(true);
     const [jobsError, setJobsError] = useState('');
+    const [query, setQuery] = useState('');
+    const [companyFilter, setCompanyFilter] = useState('all');
+    const [locationFilter, setLocationFilter] = useState('all');
+    const [sortBy, setSortBy] = useState('newest');
+    const [viewMode, setViewMode] = useState('company'); // company | list
+    const [expandedCompany, setExpandedCompany] = useState(null);
+    const [page, setPage] = useState(1);
 
     useEffect(() => {
         let cancelled = false;
@@ -3763,7 +3975,6 @@ const JobAlert = () => {
             } catch (err) {
                 console.error('Failed to load live jobs', err);
                 if (cancelled) return;
-                // Static snapshot shipped with the site (works before Lambda redeploy)
                 try {
                     const snap = await fetch(JOBS_SNAPSHOT_URL, { cache: 'no-store' });
                     if (snap.ok) {
@@ -3778,7 +3989,6 @@ const JobAlert = () => {
                 if (cancelled) return;
                 const cached = JSON.parse(localStorage.getItem('pmoryJobs') || '[]');
                 const cachedAt = localStorage.getItem('pmoryJobsUpdatedAt');
-                // Ignore tiny stale admin/demo caches when we expect a full board sync
                 if (cached.length >= 5) {
                     applyJobs(cached, cachedAt);
                     setJobsError('Could not reach job API — showing your cached list.');
@@ -3793,6 +4003,11 @@ const JobAlert = () => {
         load();
         return () => { cancelled = true; };
     }, [showOnlyOpen]);
+
+    useEffect(() => {
+        setPage(1);
+        setExpandedCompany(null);
+    }, [query, companyFilter, locationFilter, sortBy, viewMode, showOnlyOpen, allJobOpenings]);
 
 const handleEmailSubmit = async (e) => {
     e.preventDefault();
@@ -3831,18 +4046,80 @@ const handleEmailSubmit = async (e) => {
     setTimeout(() => setSubscriptionStatus(''), 5000);
 };
 
-const displayedJobs = allJobOpenings;
+const isRemote = (loc = '') => /remote|distributed|anywhere/i.test(loc);
+const companyOptions = Array.from(new Set(allJobOpenings.map((j) => j.company).filter(Boolean))).sort();
+
+const filteredJobs = allJobOpenings
+    .filter((job) => {
+        const hay = `${job.title || ''} ${job.company || ''} ${job.location || ''}`.toLowerCase();
+        if (query.trim() && !hay.includes(query.trim().toLowerCase())) return false;
+        if (companyFilter !== 'all' && job.company !== companyFilter) return false;
+        if (locationFilter === 'remote' && !isRemote(job.location || '')) return false;
+        if (locationFilter === 'onsite' && isRemote(job.location || '')) return false;
+        return true;
+    })
+    .sort((a, b) => {
+        if (sortBy === 'company') {
+            return (a.company || '').localeCompare(b.company || '') || (a.title || '').localeCompare(b.title || '');
+        }
+        if (sortBy === 'title') {
+            return (a.title || '').localeCompare(b.title || '');
+        }
+        // newest
+        return (b.postedDate || '').localeCompare(a.postedDate || '') || (a.company || '').localeCompare(b.company || '');
+    });
+
+const jobsByCompany = filteredJobs.reduce((acc, job) => {
+    const key = job.company || 'Other';
+    if (!acc[key]) acc[key] = [];
+    acc[key].push(job);
+    return acc;
+}, {});
+const companyGroups = Object.keys(jobsByCompany).sort((a, b) => {
+    const diff = jobsByCompany[b].length - jobsByCompany[a].length;
+    return diff !== 0 ? diff : a.localeCompare(b);
+});
+
+const totalPages = Math.max(1, Math.ceil(filteredJobs.length / PAGE_SIZE));
+const currentPage = Math.min(page, totalPages);
+const pagedJobs = filteredJobs.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
+
 const openCount = allJobOpenings.filter(j => (j.status || 'open') === 'open').length;
 const updatedLabel = jobsUpdatedAt
     ? new Date(jobsUpdatedAt).toLocaleString(undefined, { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })
     : '—';
+
+const renderJobCard = (job) => (
+    <div key={job.id} className={`job-card-modern ${job.status || 'open'}`}>
+        <div className="job-card-header">
+            <div className="company-logo">
+                {(job.company || '?').charAt(0)}
+            </div>
+            <div className="job-meta">
+                <h3>{job.title}</h3>
+                <p>{job.company} • {job.location || 'See posting'}</p>
+            </div>
+            <span className={`job-badge ${job.status || 'open'}`}>
+                {(job.status || 'open') === 'open' ? 'Open' : 'Closed'}
+            </span>
+        </div>
+        <div className="job-card-footer">
+            <span className="posted-date">
+                {job.source ? `${job.source} · ` : ''}Posted {job.postedDate || '—'}
+            </span>
+            <a href={job.link} target="_blank" rel="noopener noreferrer" className="apply-btn">
+                View Position →
+            </a>
+        </div>
+    </div>
+);
 
 return (
     <div className="main page-transition">
         <div className="container">
             <div className="job-hero">
                 <h1>PM Job Opportunities</h1>
-                <p>Live openings from Greenhouse &amp; Lever boards — filtered for product roles</p>
+                <p>Live openings from Greenhouse &amp; Lever boards — browse by company or search the full list</p>
             </div>
 
             <div className="job-stats">
@@ -3851,8 +4128,8 @@ return (
                     <div className="stat-label">Open Positions</div>
                 </div>
                 <div className="stat-card">
-                    <div className="stat-number">{jobsLoading ? '…' : allJobOpenings.length}</div>
-                    <div className="stat-label">Listed Now</div>
+                    <div className="stat-number">{jobsLoading ? '…' : companyOptions.length}</div>
+                    <div className="stat-label">Companies</div>
                 </div>
                 <div className="stat-card">
                     <div className="stat-number" style={{fontSize: '1.1rem'}}>{updatedLabel}</div>
@@ -3869,42 +4146,142 @@ return (
                 </button>
             </div>
 
+            <div className="job-toolbar">
+                <input
+                    type="search"
+                    className="job-search"
+                    placeholder="Search title, company, or location"
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    aria-label="Search jobs"
+                />
+                <select
+                    className="job-select"
+                    value={companyFilter}
+                    onChange={(e) => setCompanyFilter(e.target.value)}
+                    aria-label="Filter by company"
+                >
+                    <option value="all">All companies</option>
+                    {companyOptions.map((c) => (
+                        <option key={c} value={c}>{c}</option>
+                    ))}
+                </select>
+                <select
+                    className="job-select"
+                    value={locationFilter}
+                    onChange={(e) => setLocationFilter(e.target.value)}
+                    aria-label="Filter by location"
+                >
+                    <option value="all">Any location</option>
+                    <option value="remote">Remote</option>
+                    <option value="onsite">On-site / hybrid</option>
+                </select>
+                <select
+                    className="job-select"
+                    value={sortBy}
+                    onChange={(e) => setSortBy(e.target.value)}
+                    aria-label="Sort jobs"
+                >
+                    <option value="newest">Newest first</option>
+                    <option value="company">Company A–Z</option>
+                    <option value="title">Title A–Z</option>
+                </select>
+            </div>
+
+            <div className="job-view-toggle">
+                <div className="view-mode" role="group" aria-label="Browse mode">
+                    <button
+                        type="button"
+                        className={viewMode === 'company' ? 'active' : ''}
+                        onClick={() => setViewMode('company')}
+                    >
+                        By company
+                    </button>
+                    <button
+                        type="button"
+                        className={viewMode === 'list' ? 'active' : ''}
+                        onClick={() => setViewMode('list')}
+                    >
+                        All listings
+                    </button>
+                </div>
+                <div className="job-results-meta">
+                    {jobsLoading
+                        ? 'Loading…'
+                        : `${filteredJobs.length} role${filteredJobs.length === 1 ? '' : 's'}${viewMode === 'company' ? ` · ${companyGroups.length} compan${companyGroups.length === 1 ? 'y' : 'ies'}` : ''}`}
+                </div>
+            </div>
+
             {jobsError && (
                 <p style={{textAlign:'center', color:'var(--text-muted)', marginBottom:'1rem'}}>{jobsError}</p>
             )}
 
-            <div className="jobs-grid">
-                {jobsLoading && (
-                    <p style={{gridColumn:'1/-1', textAlign:'center', color:'var(--text-muted)'}}>Loading openings…</p>
-                )}
-                {!jobsLoading && displayedJobs.length === 0 && (
-                    <p style={{gridColumn:'1/-1', textAlign:'center', color:'var(--text-muted)'}}>No matching PM roles right now. Check back after the next sync.</p>
-                )}
-                {!jobsLoading && displayedJobs.map((job) => (
-                    <div key={job.id} className={`job-card-modern ${job.status || 'open'}`}>
-                        <div className="job-card-header">
-                            <div className="company-logo">
-                                {(job.company || '?').charAt(0)}
+            {jobsLoading && (
+                <p style={{textAlign:'center', color:'var(--text-muted)', marginBottom:'2rem'}}>Loading openings…</p>
+            )}
+
+            {!jobsLoading && filteredJobs.length === 0 && (
+                <p style={{textAlign:'center', color:'var(--text-muted)', marginBottom:'2rem'}}>
+                    No matching PM roles. Try clearing search or filters.
+                </p>
+            )}
+
+            {!jobsLoading && viewMode === 'company' && filteredJobs.length > 0 && (
+                <div className="job-company-list">
+                    {companyGroups.map((company) => {
+                        const roles = jobsByCompany[company];
+                        const open = expandedCompany === company;
+                        return (
+                            <div key={company} className={`job-company-group ${open ? 'open' : ''}`}>
+                                <button
+                                    type="button"
+                                    className="job-company-header"
+                                    aria-expanded={open}
+                                    onClick={() => setExpandedCompany(open ? null : company)}
+                                >
+                                    <div className="company-logo">{company.charAt(0)}</div>
+                                    <div className="company-copy">
+                                        <strong>{company}</strong>
+                                        <span>{open ? 'Hide roles' : 'Show roles'}</span>
+                                    </div>
+                                    <span className="job-company-count">{roles.length} open</span>
+                                    <span className="job-company-chevron" aria-hidden="true">▾</span>
+                                </button>
+                                {open && (
+                                    <div className="job-company-body">
+                                        {roles.map(renderJobCard)}
+                                    </div>
+                                )}
                             </div>
-                            <div className="job-meta">
-                                <h3>{job.title}</h3>
-                                <p>{job.company} • {job.location || 'See posting'}</p>
-                            </div>
-                            <span className={`job-badge ${job.status || 'open'}`}>
-                                {(job.status || 'open') === 'open' ? 'Open' : 'Closed'}
-                            </span>
-                        </div>
-                        <div className="job-card-footer">
-                            <span className="posted-date">
-                                {job.source ? `${job.source} · ` : ''}Posted {job.postedDate || '—'}
-                            </span>
-                            <a href={job.link} target="_blank" rel="noopener noreferrer" className="apply-btn">
-                                View Position →
-                            </a>
-                        </div>
+                        );
+                    })}
+                </div>
+            )}
+
+            {!jobsLoading && viewMode === 'list' && filteredJobs.length > 0 && (
+                <>
+                    <div className="jobs-grid">
+                        {pagedJobs.map(renderJobCard)}
                     </div>
-                ))}
-            </div>
+                    <div className="job-pagination">
+                        <button
+                            type="button"
+                            disabled={currentPage <= 1}
+                            onClick={() => setPage((p) => Math.max(1, p - 1))}
+                        >
+                            ← Previous
+                        </button>
+                        <span className="page-status">Page {currentPage} of {totalPages}</span>
+                        <button
+                            type="button"
+                            disabled={currentPage >= totalPages}
+                            onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                        >
+                            Next →
+                        </button>
+                    </div>
+                </>
+            )}
 
             <div className="email-subscription">
                 <div className="subscription-content">
