@@ -1,6 +1,6 @@
 # PMory Website
 
-Product Management hub for Emory students — a single-page React app served as static HTML.
+Product Management hub for Emory students.
 
 ## Run locally
 
@@ -8,29 +8,26 @@ Product Management hub for Emory students — a single-page React app served as 
 python3 -m http.server 4317
 ```
 
-Open http://localhost:4317
+## Design
 
-## Homepage features
+- **Palette:** Cool indigo (`#4f46e5`) + teal accent (`#0d9488`) on a soft slate background — replaces the old warm cream theme
+- **Dark mode:** Night Shift toggle in the nav (persists in localStorage)
+- **Typography:** Fraunces (headings) + DM Sans (body)
 
-The homepage includes interactive PM learning tools:
+## Homepage interactives
 
-- Typing hero with cursor spotlight and magnetic CTA buttons
-- Mini AI demo bubble with preset questions
-- Animated stat counters
-- Bento grid navigation
-- Drag-and-drop prioritization board
-- RICE score calculator
+- Typing hero + AI demo bubble
+- Bento grid navigation (4 tiles)
+- Prioritization board
 - Sticky-note brainstorm wall
-- Scroll-triggered product roadmap timeline
-- Ship or Kill feature voting
-- PM frameworks carousel
-- Dark mode (Night Shift theme)
-- Confetti celebration on primary CTA
+- Product roadmap timeline
+- Ship or Kill voting
 
-## Structure
+## Pages
 
-- `index.html` — full app (React via CDN + inline Babel)
-- `homepage-styles.css` — homepage v2 design system (also inlined in index.html)
-- `homepage-components.jsx` — homepage React components (reference copy; components are inlined in index.html)
-- `images/` — site images
-- `videos/` — hero background video
+All pages share the same design system: Home, What is PM, Skillsets, AI Assistant, Job Alert, About, Admin.
+
+## Job Alert
+
+The Job Alert page loads openings from the backend `GET /api/jobs` endpoint (Greenhouse / Lever sync). If the API is unreachable, it falls back to the committed snapshot in `jobs/openings.json`.
+

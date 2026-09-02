@@ -2954,6 +2954,7 @@ body {
 
         // PMory backend — update if Lambda Function URL changes after deploy
         const CHAT_API_URL = 'https://cjrhfzkkxxi6qvhwbt7pc2wosm0azgfk.lambda-url.us-east-1.on.aws/api/chat';
+        const JOBS_API_URL = 'https://cjrhfzkkxxi6qvhwbt7pc2wosm0azgfk.lambda-url.us-east-1.on.aws/api/jobs';
         const EMAIL_LAMBDA_URL = 'https://wkndwo73luez66sxx636udqiwu0dkodi.lambda-url.us-east-1.on.aws';
 
         // Logo Component
@@ -3722,8 +3723,69 @@ const JobAlert = () => {
     const [email, setEmail] = useState('');
     const [subscriptionStatus, setSubscriptionStatus] = useState('');
     const [showOnlyOpen, setShowOnlyOpen] = useState(true);
-    const [isSubscribing, setIsSubscribing] = useState(false); // Add this line
-    const [subscribers, setSubscribers] = useState([]);
+    const [isSubscribing, setIsSubscribing] = useState(false);
+    const [allJobOpenings, setAllJobOpenings] = useState([]);
+    const [jobsUpdatedAt, setJobsUpdatedAt] = useState(null);
+    const [jobsLoading, setJobsLoading] = useState(true);
+    const [jobsError, setJobsError] = useState('');
+
+    useEffect(() => {
+        let cancelled = false;
+        const applyJobs = (jobs, updatedAt) => {
+            let list = Array.isArray(jobs) ? jobs : [];
+            if (showOnlyOpen) {
+                list = list.filter((j) => (j.status || 'open') === 'open');
+            }
+            setAllJobOpenings(list);
+            setJobsUpdatedAt(updatedAt || null);
+        };
+
+        const load = async () => {
+            setJobsLoading(true);
+            setJobsError('');
+            try {
+                const statusParam = showOnlyOpen ? 'open' : 'all';
+                const response = await fetch(`${JOBS_API_URL}?status=${statusParam}`);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                const data = await response.json();
+                if (!cancelled) {
+                    applyJobs(data.jobs, data.updatedAt);
+                    try {
+                        localStorage.setItem('pmoryJobs', JSON.stringify(data.jobs || []));
+                        if (data.updatedAt) localStorage.setItem('pmoryJobsUpdatedAt', data.updatedAt);
+                    } catch (_) { /* ignore quota */ }
+                }
+            } catch (err) {
+                console.error('Failed to load live jobs', err);
+                // Static snapshot shipped with the site (works before Lambda redeploy)
+                try {
+                    const snap = await fetch('./jobs/openings.json');
+                    if (snap.ok) {
+                        const data = await snap.json();
+                        if (!cancelled) {
+                            applyJobs(data.jobs, data.updatedAt);
+                            setJobsError('Live API offline — showing last synced board snapshot.');
+                            return;
+                        }
+                    }
+                } catch (_) { /* fall through */ }
+                if (!cancelled) {
+                    const cached = JSON.parse(localStorage.getItem('pmoryJobs') || '[]');
+                    const cachedAt = localStorage.getItem('pmoryJobsUpdatedAt');
+                    if (cached.length) {
+                        applyJobs(cached, cachedAt);
+                        setJobsError('Could not reach job API — showing your cached list.');
+                    } else {
+                        setJobsError('Could not load openings. Try again after the next sync.');
+                    }
+                }
+            } finally {
+                if (!cancelled) setJobsLoading(false);
+            }
+        };
+        load();
+        return () => { cancelled = true; };
+    }, [showOnlyOpen]);
 
 const handleEmailSubmit = async (e) => {
     e.preventDefault();
@@ -3737,12 +3799,10 @@ const handleEmailSubmit = async (e) => {
         });
         
         if (response.ok) {
-            // Also store locally for admin purposes
             const subs = JSON.parse(localStorage.getItem('pmorySubscribers') || '[]');
             subs.push(email);
             localStorage.setItem('pmorySubscribers', JSON.stringify(subs));
             
-            // Track successful email signup
             if (window.gtag) {
                 window.gtag('event', 'sign_up', {
                     'event_category': 'email_alerts',
@@ -3764,51 +3824,32 @@ const handleEmailSubmit = async (e) => {
     setTimeout(() => setSubscriptionStatus(''), 5000);
 };
 
-// Admin function to notify subscribers about new jobs
-const notifySubscribers = async (newJob) => {
-    const subs = JSON.parse(localStorage.getItem('pmorySubscribers') || '[]');
-    
-    await fetch(`${EMAIL_LAMBDA_URL}/notify`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            emails: subs,
-            jobData: newJob
-        })
-    });
-};
-
-// Real job data - you can update this or fetch from a database
-const storedJobs = JSON.parse(localStorage.getItem('pmoryJobs') || '[]');
-const allJobOpenings = storedJobs.length > 0 ? storedJobs : [
-    { id: 1, company: 'Microsoft', title: 'Associate Product Manager', status: 'open', link: 'https://careers.microsoft.com', postedDate: '2024-08-15', location: 'Seattle, WA' },
-    // ... keep your default jobs as fallback
-];
-
-const displayedJobs = showOnlyOpen 
-    ? allJobOpenings.filter(job => job.status === 'open')
-    : allJobOpenings;
+const displayedJobs = allJobOpenings;
+const openCount = allJobOpenings.filter(j => (j.status || 'open') === 'open').length;
+const updatedLabel = jobsUpdatedAt
+    ? new Date(jobsUpdatedAt).toLocaleString(undefined, { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })
+    : '—';
 
 return (
     <div className="main page-transition">
         <div className="container">
             <div className="job-hero">
                 <h1>PM Job Opportunities</h1>
-                <p>Curated product management positions for Emory students</p>
+                <p>Live openings from Greenhouse &amp; Lever boards — filtered for product roles</p>
             </div>
 
             <div className="job-stats">
                 <div className="stat-card">
-                    <div className="stat-number">{allJobOpenings.filter(j => j.status === 'open').length}</div>
+                    <div className="stat-number">{jobsLoading ? '…' : openCount}</div>
                     <div className="stat-label">Open Positions</div>
                 </div>
                 <div className="stat-card">
-                    <div className="stat-number">{allJobOpenings.length}</div>
-                    <div className="stat-label">Total Listed</div>
+                    <div className="stat-number">{jobsLoading ? '…' : allJobOpenings.length}</div>
+                    <div className="stat-label">Listed Now</div>
                 </div>
                 <div className="stat-card">
-                    <div className="stat-number">24h</div>
-                    <div className="stat-label">Updated Daily</div>
+                    <div className="stat-number" style={{fontSize: '1.1rem'}}>{updatedLabel}</div>
+                    <div className="stat-label">Last Synced</div>
                 </div>
             </div>
 
@@ -3821,24 +3862,36 @@ return (
                 </button>
             </div>
 
+            {jobsError && (
+                <p style={{textAlign:'center', color:'var(--text-muted)', marginBottom:'1rem'}}>{jobsError}</p>
+            )}
+
             <div className="jobs-grid">
-                {displayedJobs.map((job) => (
-                    <div key={job.id} className={`job-card-modern ${job.status}`}>
+                {jobsLoading && (
+                    <p style={{gridColumn:'1/-1', textAlign:'center', color:'var(--text-muted)'}}>Loading openings…</p>
+                )}
+                {!jobsLoading && displayedJobs.length === 0 && (
+                    <p style={{gridColumn:'1/-1', textAlign:'center', color:'var(--text-muted)'}}>No matching PM roles right now. Check back after the next sync.</p>
+                )}
+                {!jobsLoading && displayedJobs.map((job) => (
+                    <div key={job.id} className={`job-card-modern ${job.status || 'open'}`}>
                         <div className="job-card-header">
                             <div className="company-logo">
-                                {job.company.charAt(0)}
+                                {(job.company || '?').charAt(0)}
                             </div>
                             <div className="job-meta">
                                 <h3>{job.title}</h3>
-                                <p>{job.company} • {job.location}</p>
+                                <p>{job.company} • {job.location || 'See posting'}</p>
                             </div>
-                            <span className={`job-badge ${job.status}`}>
-                                {job.status === 'open' ? 'Open' : 'Closed'}
+                            <span className={`job-badge ${job.status || 'open'}`}>
+                                {(job.status || 'open') === 'open' ? 'Open' : 'Closed'}
                             </span>
                         </div>
                         <div className="job-card-footer">
-                            <span className="posted-date">Posted {job.postedDate}</span>
-                            <a href={job.link} target="_blank" className="apply-btn">
+                            <span className="posted-date">
+                                {job.source ? `${job.source} · ` : ''}Posted {job.postedDate || '—'}
+                            </span>
+                            <a href={job.link} target="_blank" rel="noopener noreferrer" className="apply-btn">
                                 View Position →
                             </a>
                         </div>
