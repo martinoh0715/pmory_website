@@ -3742,49 +3742,49 @@ const JobAlert = () => {
             setAllJobOpenings(list);
             setJobsUpdatedAt(updatedAt || null);
         };
+        const cacheJobs = (jobs, updatedAt) => {
+            try {
+                localStorage.setItem('pmoryJobs', JSON.stringify(jobs || []));
+                if (updatedAt) localStorage.setItem('pmoryJobsUpdatedAt', updatedAt);
+            } catch (_) { /* ignore quota */ }
+        };
 
         const load = async () => {
             setJobsLoading(true);
             setJobsError('');
             try {
                 const statusParam = showOnlyOpen ? 'open' : 'all';
-                const response = await fetch(`${JOBS_API_URL}?status=${statusParam}`);
+                const response = await fetch(`${JOBS_API_URL}?status=${statusParam}`, { cache: 'no-store' });
                 if (!response.ok) throw new Error(`HTTP ${response.status}`);
                 const data = await response.json();
-                if (!cancelled) {
-                    applyJobs(data.jobs, data.updatedAt);
-                    try {
-                        localStorage.setItem('pmoryJobs', JSON.stringify(data.jobs || []));
-                        if (data.updatedAt) localStorage.setItem('pmoryJobsUpdatedAt', data.updatedAt);
-                    } catch (_) { /* ignore quota */ }
-                }
+                if (cancelled) return;
+                applyJobs(data.jobs, data.updatedAt);
+                cacheJobs(data.jobs, data.updatedAt);
             } catch (err) {
                 console.error('Failed to load live jobs', err);
+                if (cancelled) return;
                 // Static snapshot shipped with the site (works before Lambda redeploy)
                 try {
                     const snap = await fetch(JOBS_SNAPSHOT_URL, { cache: 'no-store' });
                     if (snap.ok) {
                         const data = await snap.json();
-                        if (!cancelled) {
-                            applyJobs(data.jobs, data.updatedAt);
-                            try {
-                                localStorage.setItem('pmoryJobs', JSON.stringify(data.jobs || []));
-                                if (data.updatedAt) localStorage.setItem('pmoryJobsUpdatedAt', data.updatedAt);
-                            } catch (_) { /* ignore */ }
-                            setJobsError('Live API offline — showing last synced board snapshot.');
-                            return;
-                        }
+                        if (cancelled) return;
+                        applyJobs(data.jobs, data.updatedAt);
+                        cacheJobs(data.jobs, data.updatedAt);
+                        setJobsError('Live API offline — showing last synced board snapshot.');
+                        return;
                     }
                 } catch (_) { /* fall through */ }
-                if (!cancelled) {
-                    const cached = JSON.parse(localStorage.getItem('pmoryJobs') || '[]');
-                    const cachedAt = localStorage.getItem('pmoryJobsUpdatedAt');
-                    if (cached.length) {
-                        applyJobs(cached, cachedAt);
-                        setJobsError('Could not reach job API — showing your cached list.');
-                    } else {
-                        setJobsError('Could not load openings. Try again after the next sync.');
-                    }
+                if (cancelled) return;
+                const cached = JSON.parse(localStorage.getItem('pmoryJobs') || '[]');
+                const cachedAt = localStorage.getItem('pmoryJobsUpdatedAt');
+                // Ignore tiny stale admin/demo caches when we expect a full board sync
+                if (cached.length >= 5) {
+                    applyJobs(cached, cachedAt);
+                    setJobsError('Could not reach job API — showing your cached list.');
+                } else {
+                    setAllJobOpenings([]);
+                    setJobsError('Could not load openings. Try again after the next sync.');
                 }
             } finally {
                 if (!cancelled) setJobsLoading(false);
