@@ -3168,12 +3168,13 @@ body {
         const { useState, useEffect, useRef } = React;
 
         // PMory backend — update if Lambda Function URL changes after deploy
-        const CHAT_API_URL = 'https://cjrhfzkkxxi6qvhwbt7pc2wosm0azgfk.lambda-url.us-east-1.on.aws/api/chat';
-        const JOBS_API_URL = (typeof location !== 'undefined' && /^(localhost|127\.0\.0\.1)$/.test(location.hostname))
-            ? 'http://127.0.0.1:8765/api/jobs'
-            : 'https://cjrhfzkkxxi6qvhwbt7pc2wosm0azgfk.lambda-url.us-east-1.on.aws/api/jobs';
+        const API_BASE = (typeof location !== 'undefined' && /^(localhost|127\.0\.0\.1)$/.test(location.hostname))
+            ? 'http://127.0.0.1:8765'
+            : 'https://cjrhfzkkxxi6qvhwbt7pc2wosm0azgfk.lambda-url.us-east-1.on.aws';
+        const CHAT_API_URL = `${API_BASE}/api/chat`;
+        const JOBS_API_URL = `${API_BASE}/api/jobs`;
+        const SUBSCRIBE_API_URL = `${API_BASE}/api/subscribe`;
         const JOBS_SNAPSHOT_URL = new URL('jobs/openings.json', window.location.href.split('#')[0]).href;
-        const EMAIL_LAMBDA_URL = 'https://wkndwo73luez66sxx636udqiwu0dkodi.lambda-url.us-east-1.on.aws';
 
         // Logo Component
         const Logo = () => (
@@ -3940,7 +3941,9 @@ const formatMessage = (text) => {
 const JobAlert = () => {
     const PAGE_SIZE = 10;
     const [email, setEmail] = useState('');
+    const [wantJobAlerts, setWantJobAlerts] = useState(false);
     const [subscriptionStatus, setSubscriptionStatus] = useState('');
+    const [subscriptionMessage, setSubscriptionMessage] = useState('');
     const [showOnlyOpen, setShowOnlyOpen] = useState(true);
     const [isSubscribing, setIsSubscribing] = useState(false);
     const [allJobOpenings, setAllJobOpenings] = useState([]);
@@ -4028,38 +4031,51 @@ const JobAlert = () => {
 const handleEmailSubmit = async (e) => {
     e.preventDefault();
     setIsSubscribing(true);
+    setSubscriptionMessage('');
     
     try {
-        const response = await fetch(`${EMAIL_LAMBDA_URL}/subscribe`, {
+        const response = await fetch(SUBSCRIBE_API_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email })
+            body: JSON.stringify({ email, jobAlerts: wantJobAlerts })
         });
+        const data = await response.json().catch(() => ({}));
         
         if (response.ok) {
             const subs = JSON.parse(localStorage.getItem('pmorySubscribers') || '[]');
-            subs.push(email);
+            if (!subs.includes(email)) subs.push(email);
             localStorage.setItem('pmorySubscribers', JSON.stringify(subs));
+            localStorage.setItem('pmoryJobAlertsPref', wantJobAlerts ? '1' : '0');
             
             if (window.gtag) {
                 window.gtag('event', 'sign_up', {
                     'event_category': 'email_alerts',
-                    'event_label': 'newsletter_subscription',
+                    'event_label': wantJobAlerts ? 'welcome_and_jobs' : 'welcome_only',
                     'value': 1
                 });
             }
             
             setSubscriptionStatus('success');
+            setSubscriptionMessage(
+                data.warning
+                    ? `${data.message}. Note: ${data.warning}`
+                    : (wantJobAlerts
+                        ? 'Subscribed — check your inbox for a welcome email. We\'ll also email you about new openings.'
+                        : 'Subscribed — check your inbox for a welcome email. You opted out of new-job emails.')
+            );
             setEmail('');
+            setWantJobAlerts(false);
         } else {
             setSubscriptionStatus('error');
+            setSubscriptionMessage(data.detail || 'Something went wrong. Please try again.');
         }
     } catch (error) {
         setSubscriptionStatus('error');
+        setSubscriptionMessage('Could not reach the subscribe service. Please try again.');
     }
     
     setIsSubscribing(false);
-    setTimeout(() => setSubscriptionStatus(''), 5000);
+    setTimeout(() => { setSubscriptionStatus(''); setSubscriptionMessage(''); }, 8000);
 };
 
 const isRemote = (loc = '') => /remote|distributed|anywhere/i.test(loc);
@@ -4303,42 +4319,51 @@ return (
 
             <div className="email-subscription">
                 <div className="subscription-content">
-                    <h2>Never Miss an Opportunity</h2>
-                    <p>Get instant notifications when new PM positions open up</p>
+                    <h2>Stay in the loop</h2>
+                    <p>Get a welcome email now. Optionally opt in to alerts when new PM roles are posted.</p>
                     
                     {subscriptionStatus === 'success' && (
                         <div className="alert success">
-                            ✓ Successfully subscribed!
-                        </div>
-                    )}
-                    {subscriptionStatus === 'already_subscribed' && (
-                        <div className="alert info">
-                            This email is already subscribed to alerts
+                            ✓ {subscriptionMessage || 'Successfully subscribed!'}
                         </div>
                     )}
                     {subscriptionStatus === 'error' && (
                         <div className="alert error">
-                            Something went wrong. Please try again.
+                            {subscriptionMessage || 'Something went wrong. Please try again.'}
                         </div>
                     )}
 
-                    <form onSubmit={handleEmailSubmit} className="subscription-form">
-                        <input
-                            type="email"
-                            className="email-input"
-                            placeholder="your.email@emory.edu"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                        />
-                        <button type="submit" className="subscribe-btn" disabled={isSubscribing}>
-                            {isSubscribing ? 'Subscribing...' : 'Subscribe to Alerts'}
-                        </button>
+                    <form onSubmit={handleEmailSubmit} className="subscription-form" style={{flexDirection:'column', alignItems:'stretch'}}>
+                        <div style={{display:'flex', gap:'1rem', flexWrap:'wrap'}}>
+                            <input
+                                type="email"
+                                className="email-input"
+                                placeholder="your.email@emory.edu"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
+                            />
+                            <button type="submit" className="subscribe-btn" disabled={isSubscribing}>
+                                {isSubscribing ? 'Subscribing...' : 'Subscribe'}
+                            </button>
+                        </div>
+                        <label className="job-alert-optin" style={{display:'flex', gap:'0.65rem', alignItems:'flex-start', textAlign:'left', marginTop:'0.85rem', fontSize:'0.95rem', opacity:0.95}}>
+                            <input
+                                type="checkbox"
+                                checked={wantJobAlerts}
+                                onChange={(e) => setWantJobAlerts(e.target.checked)}
+                                style={{marginTop:'0.25rem'}}
+                            />
+                            <span>
+                                Email me when <strong>new PM job openings</strong> appear.
+                                Leave unchecked if you only want the welcome email.
+                            </span>
+                        </label>
                     </form>
 
                     <div className="subscription-features">
-                        <div className="feature">✓ Instant notifications</div>
-                        <div className="feature">✓ Weekly digest</div>
+                        <div className="feature">✓ Welcome email on subscribe</div>
+                        <div className="feature">✓ Opt-in job alerts</div>
                         <div className="feature">✓ Unsubscribe anytime</div>
                     </div>
                 </div>
@@ -4437,17 +4462,10 @@ const About = () => (
         setJobs(updatedJobs);
         localStorage.setItem('pmoryJobs', JSON.stringify(updatedJobs));
         
-        // Notify subscribers
+        // Notify opted-in subscribers (best-effort; requires deployed /api/jobs/refresh notify path)
         const subscribers = JSON.parse(localStorage.getItem('pmorySubscribers') || '[]');
-        if (subscribers.length > 0) {
-            await fetch(`${EMAIL_LAMBDA_URL}/notify`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    emails: subscribers,
-                    jobData: newJob
-                })
-            });
+        if (subscribers.length > 0 && localStorage.getItem('pmoryJobAlertsPref') === '1') {
+            await fetch(`${API_BASE}/api/jobs/refresh?notify=true`, { method: 'POST' }).catch(() => {});
         }
         
         setNewJob({ company: '', title: '', location: '', link: '' });
