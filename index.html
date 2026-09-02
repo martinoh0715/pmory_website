@@ -896,17 +896,19 @@
     border: none;
     background: transparent;
     color: var(--text-muted);
-    padding: 0.55rem 0.9rem;
+    padding: 0.65rem 1.1rem;
     border-radius: 9px;
     cursor: pointer;
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.92rem;
     font-family: inherit;
+    min-width: 7.5rem;
 }
 
 .job-view-toggle .view-mode button.active {
     background: var(--primary);
     color: #fff;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.08);
 }
 
 .job-results-meta {
@@ -4018,6 +4020,11 @@ const JobAlert = () => {
         setExpandedCompany(null);
     }, [query, companyFilter, locationFilter, sortBy, viewMode, showOnlyOpen, allJobOpenings]);
 
+    // Searching is clearer in the paginated list than in collapsed company rows
+    useEffect(() => {
+        if (query.trim()) setViewMode('list');
+    }, [query]);
+
 const handleEmailSubmit = async (e) => {
     e.preventDefault();
     setIsSubscribing(true);
@@ -4202,14 +4209,14 @@ return (
                     <button
                         type="button"
                         className={viewMode === 'company' ? 'active' : ''}
-                        onClick={() => setViewMode('company')}
+                        onClick={(e) => { e.preventDefault(); setViewMode('company'); }}
                     >
                         By company
                     </button>
                     <button
                         type="button"
                         className={viewMode === 'list' ? 'active' : ''}
-                        onClick={() => setViewMode('list')}
+                        onClick={(e) => { e.preventDefault(); setViewMode('list'); }}
                     >
                         All listings
                     </button>
@@ -4217,7 +4224,9 @@ return (
                 <div className="job-results-meta">
                     {jobsLoading
                         ? 'Loading…'
-                        : `${filteredJobs.length} role${filteredJobs.length === 1 ? '' : 's'}${viewMode === 'company' ? ` · ${companyGroups.length} compan${companyGroups.length === 1 ? 'y' : 'ies'}` : ''}`}
+                        : viewMode === 'list'
+                            ? `${filteredJobs.length} role${filteredJobs.length === 1 ? '' : 's'} · page ${currentPage} of ${totalPages}`
+                            : `${filteredJobs.length} role${filteredJobs.length === 1 ? '' : 's'} · ${companyGroups.length} compan${companyGroups.length === 1 ? 'y' : 'ies'}`}
                 </div>
             </div>
 
