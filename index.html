@@ -2954,7 +2954,10 @@ body {
 
         // PMory backend — update if Lambda Function URL changes after deploy
         const CHAT_API_URL = 'https://cjrhfzkkxxi6qvhwbt7pc2wosm0azgfk.lambda-url.us-east-1.on.aws/api/chat';
-        const JOBS_API_URL = 'https://cjrhfzkkxxi6qvhwbt7pc2wosm0azgfk.lambda-url.us-east-1.on.aws/api/jobs';
+        const JOBS_API_URL = (typeof location !== 'undefined' && /^(localhost|127\.0\.0\.1)$/.test(location.hostname))
+            ? 'http://127.0.0.1:8765/api/jobs'
+            : 'https://cjrhfzkkxxi6qvhwbt7pc2wosm0azgfk.lambda-url.us-east-1.on.aws/api/jobs';
+        const JOBS_SNAPSHOT_URL = new URL('jobs/openings.json', window.location.href.split('#')[0]).href;
         const EMAIL_LAMBDA_URL = 'https://wkndwo73luez66sxx636udqiwu0dkodi.lambda-url.us-east-1.on.aws';
 
         // Logo Component
@@ -3759,11 +3762,15 @@ const JobAlert = () => {
                 console.error('Failed to load live jobs', err);
                 // Static snapshot shipped with the site (works before Lambda redeploy)
                 try {
-                    const snap = await fetch('./jobs/openings.json');
+                    const snap = await fetch(JOBS_SNAPSHOT_URL, { cache: 'no-store' });
                     if (snap.ok) {
                         const data = await snap.json();
                         if (!cancelled) {
                             applyJobs(data.jobs, data.updatedAt);
+                            try {
+                                localStorage.setItem('pmoryJobs', JSON.stringify(data.jobs || []));
+                                if (data.updatedAt) localStorage.setItem('pmoryJobsUpdatedAt', data.updatedAt);
+                            } catch (_) { /* ignore */ }
                             setJobsError('Live API offline — showing last synced board snapshot.');
                             return;
                         }
