@@ -4097,8 +4097,8 @@ const companyGroups = Object.keys(jobsByCompany).sort((a, b) => {
 });
 
 const totalPages = Math.max(1, Math.ceil(filteredJobs.length / PAGE_SIZE));
-const currentPage = Math.min(page, totalPages);
-const pagedJobs = filteredJobs.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
+const jobsPage = Math.min(page, totalPages);
+const pagedJobs = filteredJobs.slice((jobsPage - 1) * PAGE_SIZE, jobsPage * PAGE_SIZE);
 
 const openCount = allJobOpenings.filter(j => (j.status || 'open') === 'open').length;
 const updatedLabel = jobsUpdatedAt
@@ -4225,7 +4225,7 @@ return (
                     {jobsLoading
                         ? 'Loading…'
                         : viewMode === 'list'
-                            ? `${filteredJobs.length} role${filteredJobs.length === 1 ? '' : 's'} · page ${currentPage} of ${totalPages}`
+                            ? `${filteredJobs.length} role${filteredJobs.length === 1 ? '' : 's'} · page ${jobsPage} of ${totalPages}`
                             : `${filteredJobs.length} role${filteredJobs.length === 1 ? '' : 's'} · ${companyGroups.length} compan${companyGroups.length === 1 ? 'y' : 'ies'}`}
                 </div>
             </div>
@@ -4284,15 +4284,15 @@ return (
                     <div className="job-pagination">
                         <button
                             type="button"
-                            disabled={currentPage <= 1}
+                            disabled={jobsPage <= 1}
                             onClick={() => setPage((p) => Math.max(1, p - 1))}
                         >
                             ← Previous
                         </button>
-                        <span className="page-status">Page {currentPage} of {totalPages}</span>
+                        <span className="page-status">Page {jobsPage} of {totalPages}</span>
                         <button
                             type="button"
-                            disabled={currentPage >= totalPages}
+                            disabled={jobsPage >= totalPages}
                             onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
                         >
                             Next →
@@ -4583,7 +4583,10 @@ const About = () => (
 
         // Main App Component
         const App = () => {
-            const [currentPage, setCurrentPage] = useState('home');
+            const [currentPage, setCurrentPage] = useState(() => {
+                const hash = (window.location.hash || '').slice(1);
+                return hash || 'home';
+            });
             const [darkMode, setDarkMode] = useState(() => localStorage.getItem('pmory-theme') === 'dark');
 
             useEffect(() => {
@@ -4591,34 +4594,24 @@ const About = () => (
                 localStorage.setItem('pmory-theme', darkMode ? 'dark' : 'light');
             }, [darkMode]);
 
-            // Handle browser history
-useEffect(() => {
-    // Only push state if it's different from current state
-    if (window.location.hash !== `#${currentPage}`) {
-        window.history.pushState({ page: currentPage }, '', `#${currentPage}`);
-    }
-    
-    // Handle browser back/forward buttons
-    const handlePopState = (event) => {
-        if (event.state && event.state.page) {
-            setCurrentPage(event.state.page);
-        } else {
-            // Handle initial page load from URL hash
-            const hash = window.location.hash.slice(1) || 'home';
-            setCurrentPage(hash);
-        }
-    };
-    
-    window.addEventListener('popstate', handlePopState);
-    
-    return () => window.removeEventListener('popstate', handlePopState);
-}, [currentPage]);
+            // Keep URL hash in sync (state already initialized from hash above)
+            useEffect(() => {
+                if (window.location.hash !== `#${currentPage}`) {
+                    window.history.pushState({ page: currentPage }, '', `#${currentPage}`);
+                }
 
-    // Initialize from URL on first load
-    useEffect(() => {
-        const hash = window.location.hash.slice(1) || 'home';
-        setCurrentPage(hash);
-    }, []);
+                const handlePopState = (event) => {
+                    if (event.state && event.state.page) {
+                        setCurrentPage(event.state.page);
+                    } else {
+                        const hash = window.location.hash.slice(1) || 'home';
+                        setCurrentPage(hash);
+                    }
+                };
+
+                window.addEventListener('popstate', handlePopState);
+                return () => window.removeEventListener('popstate', handlePopState);
+            }, [currentPage]);
 
             const renderPage = () => {
                 switch(currentPage) {
